@@ -1,0 +1,67 @@
+\documentclass[11pt]{ctexbook}
+
+\usepackage[paper=a4paper,twoside=true]{geometry}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage[shortlabels]{enumitem}
+\usepackage[affil-it]{authblk}
+\usepackage{indentfirst}
+
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+
+\renewcommand{\proofname}{{\bfseries 证明}}
+\theoremstyle{definition}
+\newtheorem{defn}{定义}[section]
+\newtheorem{sym}[defn]{记号}
+\newtheorem{eg}[defn]{例}
+\theoremstyle{plain}
+\newtheorem{thm}[defn]{定理}
+\newtheorem{lem}[defn]{引理}
+\newtheorem{col}[defn]{推论}
+\newtheorem*{pro}{问题}
+\theoremstyle{remark}
+\newtheorem{rem}[defn]{评注}
+\newtheorem{ex}[defn]{习题}
+
+\usepackage{fontspec}
+\setmainfont{TeX Gyre Termes}
+\usepackage[bold-style=ISO]{unicode-math}
+\setmathfont{TeX Gyre Termes Math}
+
+\usepackage{titlesec}
+\titleformat{\chapter}[frame]{\Huge\bfseries}{第\,\thechapter\,章}{1em}{}{}
+
+\usepackage[style=caspervector,sorting=ecnyt,utf8,seconds=true]{biblatex}
+\addbibresource{biblio.bib}
+
+\usepackage{xcolor}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=green]{hyperref}
+
+\title{曲面曲线论笔记}
+\author{魔法少女Alkali}
+\affil{北京师范大学数学科学学院}
+\date{2022 年 5 月}
+
+\begin{document}
+    \maketitle
+    \vspace*{15cm}
+    \thispagestyle{empty}
+    \begin{figure}[h]
+        \includegraphics[width=0.4\textwidth]{by-sa.pdf}\hspace{0.05\textwidth}\begin{minipage}[b]{0.55\textwidth}
+        本作品采用 知识共享 署名-相同方式共享 4.0 国际 (CC BY-SA 4.0) 协议进行共享. 您可以访问\url{https://creativecommons.org/licenses/by-sa/4.0/}查看该协议.
+        \end{minipage}
+    \end{figure}
+
+    \frontmatter
+    \input{preface.tex}
+
+    \tableofcontents
+
+    \mainmatter
+    \input{manifolds.tex}
+
+    \appendix
+    \printbibliography[title={参考文献},heading=bibintoc]
+\end{document}
