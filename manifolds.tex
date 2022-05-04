@@ -49,3 +49,267 @@ Leibniz通过密切圆引入了曲线的曲率, Bernoulli与Euler研究了曲面
     微分几何是什么?
 \end{pro}
 接下来我们开始慢慢搭微分几何的舞台.
+
+\section{微分流形}
+由于我们要在一般的几何体上处理问题, 所以我们要先引入\textit{流形}的概念.
+在数学分析的课程中, 我们学习过了$\mathbb{R}^n$的$k$维子流形的概念 (例如在\parencite{Zorich_MathAnal}的第8章).
+$k$维子流形的概念是一个局部长得像$\mathbb{R}^k$的空间.
+这启发我们给出一般流形的定义:
+\begin{defn}
+    一个$n$维\textbf{拓扑流形}$M$是一个第二可数, Haussdorf的拓扑空间, 并且$M$的每一点都有一个邻域同胚于$\mathbb{R}^n$中的一个开集.
+\end{defn}
+\begin{rem}
+    拓扑流形定义中的第二可数与Haussdorf这两个条件目前看不出来有什么作用, 但这两个条件能够保证\textit{单位分解定理}这个重要的工具成立, 之后遇到了我们会再讨论这一点.
+    此外, 给出上述定义之后我们需要证明$n$维拓扑流形是良定义的, 即证明$\mathbb{R}^n$与$\mathbb{R}^m$在$m\neq n$时不同胚, 但这需要用到代数拓扑的工具.
+    不过证明微分流形是良定义的会相对比较简单, 之后我们会处理这件事情.
+\end{rem}
+由于我们不太需要关心流形的拓扑, 所以以上定义对微分几何来说其实并不是特别重要\footnote{也就是你不懂的话也不必深究的意思.}.
+对流形而言, 重要的是它上面的\textit{微分结构}.
+\begin{defn}
+    设$M$是$n$维拓扑流形.
+    设$\{U_\alpha\}_{\alpha\in A}$是$M$的一族开覆盖, 满足其中每个开集都同胚于$\mathbb{R}^n$中的开集.
+    每个开集对应的同胚映射$\varphi_\alpha:U_\alpha\to\mathbb{R}^n$被称为\textbf{坐标卡}.
+    如果两个坐标卡$\varphi_\alpha,\varphi_\beta$满足$\varphi_\alpha\circ\varphi_\beta^{-1},\varphi_\beta\circ\varphi_\alpha^{-1}$在其定义域上是$C^\infty$的, 那么称这两个坐标卡相容.
+    如果这一族开覆盖的任意两个坐标卡相容, 那么这一族开覆盖$\{U_\alpha\}_{\alpha\in A}$便称为$M$的一个\textbf{图册}.
+    如果$M$的一个图册中无法再加入新的相容的坐标卡, 那么称这个图册是\textbf{极大}的.
+    极大的图册构成$M$的一个\textbf{微分结构}.
+    拥有微分结构的拓扑流形被称为\textbf{微分流形}.
+\end{defn}
+有时我们会将$\varphi_\beta\circ\varphi_\alpha^{-1}$称为\textbf{转移函数}.
+我们有一张图可以用来直观地理解转移函数:
+\begin{figure}[H]
+    \centering
+    \input{figures/transistion_function.tex}
+    \caption{转移函数}
+\end{figure}
+
+\begin{eg}我们举几个微分流形的例子.
+    \begin{enumerate}[(1)]
+        \item $\mathbb{R}^n$, 以恒等映射$1_{\mathbb{R}^n}$为坐标卡.
+        我们指出一点, 证明一个流形具有微分结构只需要找出一组图册就可以了, 这组图册对应的微分结构就是所有与图册相容的坐标卡的集合.
+        一般将恒等映射所在的图册称为$\mathbb{R}^n$的\textbf{标准微分结构}.
+        \item $\mathbb{R}$, 以$\varphi:u\mapsto u^3$为坐标卡.
+        注意到$\varphi$是$\mathbb{R}$到自身的同胚, 所以决定了一个微分结构.
+        但是$1_{\mathbb{R}}\circ\varphi^{-1}$在$u=0$处不可导, 所以这个微分结构与标准微分结构不相容.
+        这说明了一个微分流形上的微分结构可以有不止一个.
+        \item 单位球面$\mathbb{S}^n$, 南北两极的球极投影. 两个球极投影$p_N,p_S$分别满足
+        \begin{gather*}
+            p_N(x_1,x_2,\cdots,x_{n+1})=\frac{1}{1-x_{n+1}}(x_1,x_2,\cdots,x_n)\\
+            p_S(x_1,x_2,\cdots,x_{n+1})=\frac{1}{1+x_{n+1}}(x_1,x_2,\cdots,x_n)
+        \end{gather*}
+        在截面上用简单的平面几何可以推出转移函数为$1_{\mathbb{R}^n}/|1_{\mathbb{R}^n}|^2$, 是光滑函数.
+    \end{enumerate}
+\end{eg}
+由于我们主要关心曲线曲面论, 所以我们不在这里再举其他奇怪 (但是有趣) 的流形的例子了.
+而作为流形的曲线与曲面, 我们将在后面子流形的部分讨论它们.
+
+微分结构的一个很重要的作用是可以定义光滑函数.
+\begin{defn}\label{smooth function 1}
+    设$M$是微分流形, 函数$f:M\to\mathbb{R}$被称为是\textbf{光滑}的是指对任意$p\in M$, 都存在一个包含$p$的坐标卡$(U,\varphi)$使得$f\circ\varphi$是$C^\infty$的.
+\end{defn}
+
+\begin{sym}
+    我们用$C^\infty(M)$来表示$M$上全体光滑函数的集合, 在逐点定义的加法与乘法下, 这是一个$\mathbb{R}$-代数 (同时是交换环与$\mathbb{R}$-向量空间).
+\end{sym}
+
+在这一节的最后我们引入流形的定向的概念.
+\begin{defn}
+    设$M$是微分流形, 如果它拥有一组图册满足任意转移函数的Jacobi行列式$\det\mathrm{d}(\varphi_\alpha\circ\varphi_\beta^{-1})>0$, 那么就称$M$为\textbf{可定向流形}, 这样的一组图册称为给出了$M$的一个\textbf{定向}; 否则称$M$为\textbf{不可定向流形}.
+\end{defn}
+
+\begin{eg}
+    \begin{enumerate}[(1)]
+        \item $\mathbb{R}^3$的一组基对应了一个坐标卡, 转移函数的行列式就是过渡矩阵的行列式.
+        我们知道$\mathbb{R}^3$的基有左手系和右手系的区分, 右手系到右手系的过渡矩阵行列式为正, 右手系到左手系的过渡矩阵行列式为负.
+        因此左手系和右手系分别决定了$\mathbb{R}^3$的一种定向, 这也是定向这一概念的来源.
+        \item 如果流形$M$的一个图册中只有两个坐标卡, 那么$M$一定可定向:
+        设这两个坐标卡是$(U_1,\varphi_1)$与$(U_2,\varphi_2)$, 如果$\det\mathrm{d}(\varphi_1\circ\varphi_2^{-1})>0$, 那么已经完成证明;
+        否则我们复合一个$\mathbb{R}^n$上的反射变换$r$, 得到新的坐标卡$\varphi_3=r\circ\varphi_2:U_2\to\mathbb{R}^n$, 那么新的图册$\{(U_1,\varphi_1),(U_2,\varphi_3)\}$就满足$\det\mathrm{d}(\varphi_1\circ\varphi_3^{-1})=\det\mathrm{d}(\varphi_1\circ\varphi_2^{-1})\det{r^{-1}}>0$, 从而$M$可定向.
+        \item 按照上面的判别法, 单位球面$\mathbb{S}^n$拥有两个球极投影构成的图册, 所以是可定向的.
+    \end{enumerate}
+\end{eg}
+
+关于流形的定向有一个基础的结论:
+
+\begin{prop}
+    一个连通的可定向流形恰好有两个定向.
+\end{prop}
+
+\begin{proof}
+    证明这个命题需要一些拓扑论证, 但我们不希望在这份笔记里出现太多的拓扑, 所以我们直接引用~\parencite[引理1.1.2]{Mei_Manifold}.
+\end{proof}
+
+事实上确实存在不可定向的流形, 比如大家熟悉的M\"{o}bius带, 我们在之后再来讨论这个例子.
+
+\section{切空间与微分映射}
+用``切''的手段来研究流形是微分几何学的基本想法, 我们在这一节建立有关切的几个概念.
+首先我们使用内蕴的方法定义切向量, 并定义切空间与切丛.
+然后我们讨论切空间之间的微分映射, 以及通过链式法则得到的重要推论, 即维度的微分同胚不变性.
+最后, 我们讨论流形上的向量场的定义与基本性质.
+
+\subsection*{切向量与切空间}
+在数学分析课程中, 我们会考虑由函数图像给定的曲面, 并使用这个函数的微分映射的像来定义切平面.
+但是在一般的微分流形中, 我们没有办法先验地给坐标卡定义微分, 所以我们要寻找其他的办法来定义流形的切向量.
+
+\begin{figure}[H]
+    \centering
+    \input{figures/tangent_vector.tex}
+    \caption{曲面上的切向量}
+\end{figure}
+
+对于曲面$S$上$p$点处的一个切向量$v$, 我们可以找到一条曲线$c:I\to S$使得$p=c(0),v=c'(0)$ (这里的导数定义为逐分量求导).
+为了去掉全空间, 我们考虑一个函数$f:S\to\mathbb{R}$, 那么由链式法则有
+\[(f\circ c)'(0)=\langle\grad{f}(p),c'(0)\rangle\]
+我们熟悉右侧是由切向量决定的方向导数.
+由梯度与内积的线性性可知
+\begin{equation}
+    ((\lambda f+\mu g)\circ c)'(0)=\lambda(f\circ c)'(0)+\mu(g\circ c)'(0)\label{linearity}
+\end{equation}
+又由乘积函数的求导法则, 可以得到
+\begin{equation}
+    ((fg)\circ c)'(0)=(f\circ c)(0)(g\circ c)'(0)+(g\circ c)(0)(f\circ c)'(0)\label{leibniz}
+\end{equation}
+通过以上式子, 我们可以看出方向导数可以被$S$上的曲线决定, 从而并不需要全空间.
+事实上, \eqref{linearity}~和~\eqref{leibniz}~两个性质就足够给出方向导数的定义了.
+
+\begin{defn}
+    对$n$维微分流形$M$与$p\in M$, 点$p$处的一个\textbf{切向量}$v$是一个$C^\infty(M)$到$\mathbb{R}$的$\mathbb{R}$-线性映射, 并且满足\textit{Leibniz法则}: 对任意$f,g\in C^\infty(M)$有$v(fg)=f(p)v(g)+g(p)v(f)$.
+    $p$处所有的切向量的集合构成$p$处的\textbf{切空间}$T_pM$.
+\end{defn}
+
+通过显然定义的加法与数乘, $T_pM$构成一个$\mathbb{R}$-向量空间.
+我们接下来讨论一下$T_pM$的维度.
+
+首先我们考虑一个包含$p$的坐标卡$(U,\varphi)$, 定义$n$个切向量$\left.\dfrac{\partial}{\partial x^i}\right|_p(i=1,2,\cdots,n)$, 满足
+\[\left.\frac{\partial f}{\partial x^i}\right|_p=\frac{\partial (f\circ\varphi^{-1})}{\partial u^i}(\varphi(p))\]
+等式右侧是$\varphi(U)\subset\mathbb{R}^n$上的函数对$u^i$分量的偏导数\footnote{虽然后面我们会看出$\partial/\partial x^i$表现得确实很像偏导数, 但是请仔细区分偏导数与切向量: 偏导数是定义在$\mathbb{R}^n$里的.}.
+为了简洁起见, 之后在$p$点确定的时候我们会省略这个脚标.
+按照我们前面的讨论, 它们确实满足线性性和Leibniz法则, 所以是切向量 (用古典微分几何的语言来说, $\dfrac{\partial f}{\partial x^i}$相当于$f$复合一个\textit{坐标曲线}之后再求导).
+我们期望它们刚好就是$T_pM$的一组基.
+为此我们建立以下引理:
+
+\begin{lem}\label{lem_indep}
+    切向量$\dfrac{\partial}{\partial x^i}(i=1,2,\cdots,n)$线性无关.
+\end{lem}
+\begin{proof}
+    记函数$x^i=\pi^i\circ\varphi^{-1}$, 其中$\pi^i$为向第$i$个分量的投影.
+    设有线性关系
+    \begin{equation}
+        \sum_ic_i\frac{\partial}{\partial x^i}=0\label{independence}
+    \end{equation}
+    用~\eqref{independence}~两端作用在$x^i$上, 可以得到$c_i=0$.
+    由$i$的任意性可知$\dfrac{\partial}{\partial x^i}(i=1,2,\cdots,n)$线性无关.
+\end{proof}
+
+\begin{sym}
+    我们第一次遇到了求和式.
+    以后如果遇到的是有限求和, 我们会省略求和上下限, 并且此时如果有多个指标, 可以交换求和顺序, 我们会把指标写在一个求和号底下.
+    不过我们永远不会使用Einstein求和约定.
+\end{sym}
+
+我们接下来说明$T_pM$可以被$\dfrac{\partial}{\partial x^i}(i=1,2,\cdots,n)$生成.
+
+\begin{lem}\label{locally homogeneous}
+    设$U$是$\mathbb{R}^n$中$0$的一个邻域, $f\in C^\infty(U)$.
+    那么存在$f_1,\cdots,f_n\in C^\infty(U)$使得
+    \[f(u)=f(0)+\sum_iu^if_i(u)\]
+    且$f_i(0)=\dfrac{\partial f}{\partial u^i}(0)$.
+\end{lem}
+\begin{proof}
+    固定$u\in U$, 考虑关于$t$的函数$f(tu)$, 我们有
+    \begin{align*}
+        f(u)-f(0)=&\int_0^1\frac{\mathrm{d}}{\mathrm{d}t}f(tu)\ \mathrm{d}t\\
+        =&\int_0^1\sum_{i}\frac{\partial f(tu)}{\partial u^i}u^i\ \mathrm{d}t\quad\text{(链式法则)}\\
+        =&\sum_iu^i\int_0^1\frac{\partial f(tu)}{\partial u^i}\ \mathrm{d}t
+    \end{align*}
+    取$\displaystyle f_i(u)=\int_0^1\frac{\partial f(tu)}{\partial u^i}\ \mathrm{d}t$即可 (光滑性容易验证).
+\end{proof}
+
+\begin{prop}
+    $T_pM$可以被$\dfrac{\partial}{\partial x^i}(i=1,2,\cdots,n)$生成.
+\end{prop}
+\begin{proof}
+    设$v\in T_pM$, 不妨设$\varphi(p)=0$.
+    对任意一个$f\in C^\infty(M)$, 由引理~\ref{locally homogeneous}, 可以将$(f\circ\varphi^{-1})(u)$写成
+    \begin{equation}
+        (f\circ\varphi^{-1})(0)+\sum_iu^i(f_i\circ\varphi^{-1})(u)\label{lo_ho_eq_1}
+    \end{equation}
+    设$x^i$定义如引理~\ref{lem_indep}, 那么可以将~\eqref{lo_ho_eq_1}~写成
+    \begin{equation}
+        f(p)+\sum_ix^if_i\label{lo_ho_eq_2}
+    \end{equation}
+    注意到对常函数$c$总有
+    \[v(c)=v(1\cdot c)=1\cdot v(c)+cv(1)=2v(c)\]
+    从而$v(c)=0$, 那么将$v$作用在~\eqref{lo_ho_eq_2}~有
+    \begin{align*}
+        v(f)&=\sum_iv\left(x^if_i\right)\\
+        &=\sum_i\left(x^i(p)v(f_i)+f_i(p)v(x^i)\right)
+    \end{align*}
+    注意到$x^i(p)=\pi^i\circ\varphi(p)=0$, 且由引理~\ref{locally homogeneous}~可知
+    \[f_i(p)=(f_i\circ\varphi^{-1})(0)=\dfrac{\partial(f\circ\varphi^{-1})}{\partial u^i}(0)=\left.\dfrac{\partial f}{\partial x^i}\right|_p\]
+    所以有
+    \[v(f)=\sum_iv(x^i)\frac{\partial f}{\partial x^i}\]
+    注意到上式对所有$f$均成立, 所以有
+    \[v=\sum_iv(x^i)\left.\frac{\partial}{\partial x^i}\right|_p\qedhere\]
+\end{proof}
+
+\begin{col}
+    $n$维流形上任意一点处的切空间维度为$n$.
+\end{col}
+
+\begin{rem}
+    在一些文献中坐标卡的逆映射$\varphi^{-1}$会被称为\textbf{局部坐标系}, 而
+    \[c^i(t)=\varphi^{-1}(0,\cdots,\stackrel{{\text{第}i\text{个分量}}}{t},\cdots,0)\]
+    被称为\textbf{坐标曲线}, 尤其是古典微分几何教材喜欢用这个术语.
+    那么就有
+    \[\dfrac{\partial f}{\partial x^i}(p)=(f\circ c^i)'(0)\]
+    (依然假设$\varphi(p)=0$).
+    当局部坐标系成为$\mathbb{R}^n$的恒等映射时, 坐标曲线变成了坐标轴, $(f\circ c^i)'$刚好就是对第$i$个分量的偏导数, $\dfrac{\partial}{\partial x^i}$与数学分析中使用的偏导记号便一致了.
+    因此我们便选择了这样一个记号来表示切空间的基.
+\end{rem}
+
+我们给出一个很重要的构造.
+
+\begin{defn}
+    定义$TM:=\{(p,v)|p\in M,v\in T_pM\}$, 或者用不交并这个更代数的记号写作$\displaystyle TM:=\bigsqcup_{p\in M}T_pM$, 称为$M$的\textbf{切丛}.
+\end{defn}
+
+\begin{prop}
+    $n$维流形$M$的切丛$TM$是一个$2n$维流形.
+\end{prop}
+\begin{proof}
+    我们承认$TM$是一个拓扑流形.
+    设$M$有微分结构$\{(U_\alpha,\varphi_\alpha)\}_{\alpha\in A}$, 我们按照如下方式赋予$TM$微分结构:
+    对一个坐标卡$(U,\varphi)$, 
+\end{proof}
+
+这应该是我们遇到的第一个与常见的曲线曲面相去甚远的流形.
+
+\subsection*{微分映射}
+
+我们把光滑性推广到任意两个流形间的映射上.
+
+\begin{defn}\label{smooth function 2}
+    设$f$是微分流形$M,N$间的映射$f:M\to N$, 如果对$M,N$的微分结构$\{(U_\alpha,\varphi_\alpha)\}_{\alpha\in A}$, $\{(V_\beta,\psi_\beta)\}_{\beta\in B}$中任意两个坐标卡$\varphi,\psi$有$\psi\circ f\circ\varphi^{-1}$是$C^\infty$的, 那么称$f$是光滑的.
+\end{defn}
+
+显然定义~\ref{smooth function 2}~与定义~\ref{smooth function 1}~是相容的.
+
+对流形间的光滑映射, 我们没有办法像数学分析中那样把微分定义为最佳逼近的线性映射.
+不过我们可以像上一小节那样考察一下切向量的行为.
+设$f:\mathbb{R}^n\to\mathbb{R}^m$, $f$在$x$点处的微分是$\mathbb{R}^n$到$\mathbb{R}^m$的一个线性映射, 在各自的标准正交基下可以表示为一个$m\times n$矩阵$L_x$.
+$L_x$把一个$v\in\mathbb{R}^n$映到一个$L_xv\in\mathbb{R}^m$.
+考虑一个$\mathbb{R}^m$上的光滑函数$g:\mathbb{R}^m\to\mathbb{R}$, 设它的梯度表示为行向量$N$, 那么$g$在$f(x)$点处沿$L_xv$方向的方向导数为
+\[\langle\grad{g(f(x))},L_xv\rangle=gL_xv\]
+由链式法则可知$gL_x$是$g\circ f$在$x$点处的微分, 因此$L_xv$在一个函数上的作用相当于$v$在这个函数复合$f$之后的函数上作用.
+把这个过程整理一下, 我们可以类比地给出流形间光滑映射的微分:
+
+\begin{defn}
+    设$f:M\to N$是光滑映射, 那么$f$在$p\in M$点处的微分$f_*|_p:T_pM\to T_{f(p)}N$将$v\in T_pM$映为$f_*|_p(v)$, $f_*|_p(v)$在$C^\infty(N)$上的作用为$f_*|_p(v)(g)=v(g\circ f)$.
+\end{defn}
+
+\begin{sym}
+    微分映射传统的记号是$df_p$或者$df(p)$, 但现在更多会写成我们定义的这个形式.
+    具体为什么我们留到后面再讲.
+    和之前一样, 如果$p$点是明确的, 我们就不会写脚标.
+\end{sym}

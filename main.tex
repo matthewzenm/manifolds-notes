@@ -3,15 +3,25 @@
 \usepackage[paper=a4paper,twoside=true]{geometry}
 \usepackage{float}
 \usepackage{graphicx}
-\usepackage[shortlabels]{enumitem}
 \usepackage[affil-it]{authblk}
 \usepackage{indentfirst}
+
+\usepackage[shortlabels]{enumitem}
+\setlist{nosep}
+
+\usepackage{tikz}
+\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt
 
 \usepackage{amsmath}
 \usepackage{amsthm}
 \usepackage{amssymb}
+\numberwithin{equation}{section}
+\allowdisplaybreaks
 
-\renewcommand{\proofname}{{\bfseries 证明}}
+\DeclareMathOperator*{\grad}{grad}
+\DeclareMathOperator*{\Hom}{Hom}
+
+\renewcommand{\proofname}{{\bf 证明}}
 \theoremstyle{definition}
 \newtheorem{defn}{定义}[section]
 \newtheorem{sym}[defn]{记号}
@@ -20,18 +30,18 @@
 \newtheorem{thm}[defn]{定理}
 \newtheorem{lem}[defn]{引理}
 \newtheorem{col}[defn]{推论}
+\newtheorem{prop}[defn]{命题}
 \newtheorem*{pro}{问题}
 \theoremstyle{remark}
 \newtheorem{rem}[defn]{评注}
 \newtheorem{ex}[defn]{习题}
 
-\usepackage{fontspec}
-\setmainfont{TeX Gyre Termes}
-\usepackage[bold-style=ISO]{unicode-math}
-\setmathfont{TeX Gyre Termes Math}
+\usepackage{newtxtext}
+\usepackage{newtxmath}
 
 \usepackage{titlesec}
 \titleformat{\chapter}[frame]{\Huge\bfseries}{第\,\thechapter\,章}{1em}{}{}
+\titleformat*{\subsection}{\Large\itshape}
 
 \usepackage[style=caspervector,sorting=ecnyt,utf8,seconds=true]{biblatex}
 \addbibresource{biblio.bib}
