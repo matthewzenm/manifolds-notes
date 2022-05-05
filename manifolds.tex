@@ -145,7 +145,6 @@ $k$维子流形的概念是一个局部长得像$\mathbb{R}^k$的空间.
 用``切''的手段来研究流形是微分几何学的基本想法, 我们在这一节建立有关切的几个概念.
 首先我们使用内蕴的方法定义切向量, 并定义切空间与切丛.
 然后我们讨论切空间之间的微分映射, 以及通过链式法则得到的重要推论, 即维度的微分同胚不变性.
-最后, 我们讨论流形上的向量场的定义与基本性质.
 
 \subsection*{切向量与切空间}
 在数学分析课程中, 我们会考虑由函数图像给定的曲面, 并使用这个函数的微分映射的像来定义切平面.
@@ -226,7 +225,7 @@ $k$维子流形的概念是一个局部长得像$\mathbb{R}^k$的空间.
 \end{proof}
 
 \begin{prop}
-    $T_pM$可以被$\dfrac{\partial}{\partial x^i}(i=1,2,\cdots,n)$生成.
+    $T_pM$可以被$\dfrac{\partial}{\partial x^i}(i=1,2,\cdots,n)$生成, 这组基称为关于坐标卡$\varphi$的{\bf 坐标基}.
 \end{prop}
 \begin{proof}
     设$v\in T_pM$, 不妨设$\varphi(p)=0$.
@@ -250,7 +249,9 @@ $k$维子流形的概念是一个局部长得像$\mathbb{R}^k$的空间.
     所以有
     \[v(f)=\sum_iv(x^i)\frac{\partial f}{\partial x^i}\]
     注意到上式对所有$f$均成立, 所以有
-    \[v=\sum_iv(x^i)\left.\frac{\partial}{\partial x^i}\right|_p\qedhere\]
+    \begin{equation}
+        v=\sum_iv(x^i)\left.\frac{\partial}{\partial x^i}\right|_p\label{tangent vector}
+    \end{equation}
 \end{proof}
 
 \begin{col}
@@ -272,18 +273,52 @@ $k$维子流形的概念是一个局部长得像$\mathbb{R}^k$的空间.
 
 \begin{defn}
     定义$TM:=\{(p,v)|p\in M,v\in T_pM\}$, 或者用不交并这个更代数的记号写作$\displaystyle TM:=\bigsqcup_{p\in M}T_pM$, 称为$M$的\textbf{切丛}.
+    切丛的\textbf{自然投影映射}$\pi:TM\to M$将每个$(p,v)$映为$p$.
 \end{defn}
 
-\begin{prop}
+\begin{prop}\label{diff_stru_TM}
     $n$维流形$M$的切丛$TM$是一个$2n$维流形.
 \end{prop}
 \begin{proof}
     我们承认$TM$是一个拓扑流形.
     设$M$有微分结构$\{(U_\alpha,\varphi_\alpha)\}_{\alpha\in A}$, 我们按照如下方式赋予$TM$微分结构:
-    对一个坐标卡$(U,\varphi)$, 
+    对一个坐标卡$(U,\varphi)$, $\varphi$的坐标基诱导了一个$T_pM$到$\mathbb{R}^n$的向量空间同构$I_\varphi:T_pM\to\mathbb{R}^n$.
+    取开覆盖$\{(U_\alpha\times\mathbb{R}^n,\varphi_\alpha\times I_{\varphi_\alpha})\}_{\alpha\in A}$, 我们证明它是相容的, 从而给出了$TM$的一个微分结构.
+    对$(U_1\times\mathbb{R}^n,\varphi_1\times I_{\varphi_1})$与$(U_2\times\mathbb{R}^n,\varphi_2\times I_{\varphi_2})$, 容易验证
+    \[(\varphi_1\times I_{\varphi_1})^{-1}=\varphi_1^{-1}\times I_{\varphi_1}^{-1}\]
+    从而转移函数为
+    \[(\varphi_2\times I_{\varphi_2})\circ(\varphi_1\times I_{\varphi_1})^{-1}=(\varphi_2\circ\varphi_1^{-1})\times(I_{\varphi_2}\circ I_{\varphi_1}^{-1})\]
+    这显然是光滑的, 因此$\varphi_1,\varphi_2$是相容的.
+    由$\varphi_1,\varphi_2$的任意性可知命题成立.
+    
+    因此$\varphi_1,\varphi_2$是相容的.
+    由$\varphi_1,\varphi_2$的任意性可知命题成立.
 \end{proof}
 
 这应该是我们遇到的第一个与常见的曲线曲面相去甚远的流形.
+
+\begin{rem}
+    命题~\ref{diff_stru_TM}~中给出的坐标卡$\varphi\times I_\varphi$使得$TM$在局部同胚于$V\times\mathbb{R}^n$, 这叫做$TM$的\textbf{局部平凡化}.
+    实际上这也是我们对切丛的直观: 每一点处长出了一根由切空间构成的\textit{纤维}.
+\end{rem}
+
+关于切丛的一个简单的性质是:
+\begin{prop}
+    无论$M$是否可定向, 切丛总是可定向的.
+\end{prop}
+\begin{proof}
+    我们考虑命题~\ref{diff_stru_TM}~证明中的转移函数的行列式, 有
+    \[\det\mathrm{d}((\varphi_2\times I_{\varphi_2})\circ(\varphi_1\times I_{\varphi_1})^{-1})=\det\mathrm{d}(\varphi_2\circ\varphi_1^{-1})\det\mathrm{d}(I_{\varphi_2}\circ I_{\varphi_1}^{-1})\]
+    而对$(u^1,u^2,\cdots,u^n)$, 我们有$\displaystyle I_{\varphi_1^{-1}}(u^1,u^2,\cdots,u^n)=\left.\sum_{j}u^j\frac{\partial}{\partial x^j}\right|_p$, 而由~\eqref{tangent vector}~可知
+    \[\displaystyle I_{\varphi_2}^i\circ I_{\varphi_1^{-1}}(u^1,u^2,\cdots,u^n)=\left.\sum_{i}u^j\frac{\partial y^i}{\partial x^j}\right|_p\]
+    所以有
+    \[\frac{\partial}{\partial u^j}I_{\varphi_2}^i\circ I_{\varphi_1^{-1}}=\frac{\partial y^i}{\partial x^j}\]
+    那么$\det\mathrm{d}(I_{\varphi_2}\circ I_{\varphi_1}^{-1})=\det\left[\dfrac{\partial y^i}{\partial x^j}\right]_{i,j}$.
+    又注意到
+    \[\frac{\partial y^i}{\partial x^i}=\frac{\partial(\pi^i\circ\varphi_2\circ\varphi_1)}{\partial u^j}\]
+    所以$\left[\dfrac{\partial y^i}{\partial x^j}\right]_{i,j}=\mathrm{d}(\varphi_2\circ\varphi_1^{-1})$, 因此
+    \[\det\mathrm{d}((\varphi_2\times I_{\varphi_2})\circ(\varphi_1\times I_{\varphi_1})^{-1})=(\det\mathrm{d}(\varphi_2\circ\varphi_1^{-1}))^2>0\]
+\end{proof}
 
 \subsection*{微分映射}
 
@@ -308,8 +343,75 @@ $L_x$把一个$v\in\mathbb{R}^n$映到一个$L_xv\in\mathbb{R}^m$.
     设$f:M\to N$是光滑映射, 那么$f$在$p\in M$点处的微分$f_*|_p:T_pM\to T_{f(p)}N$将$v\in T_pM$映为$f_*|_p(v)$, $f_*|_p(v)$在$C^\infty(N)$上的作用为$f_*|_p(v)(g)=v(g\circ f)$.
 \end{defn}
 
+显然微分映射是线性映射.
+
 \begin{sym}
     微分映射传统的记号是$df_p$或者$df(p)$, 但现在更多会写成我们定义的这个形式.
     具体为什么我们留到后面再讲.
     和之前一样, 如果$p$点是明确的, 我们就不会写脚标.
 \end{sym}
+
+我们接下来证明关于微分映射最重要的结论:
+
+\begin{thm}[链式法则]设流形$M,N,P$间有光滑映射$f:M\to N,g:N\to P$, $h=g\circ f$.
+    点$p\in M,q\in N,r\in P$满足$f(p)=q,g(q)=r$, 那么一定有$h_*|_p=g_*|_q\circ f_*|_p$.
+    换言之, 图表
+    \[\xymatrix{
+        M \ar[rr]^h \ar[dr]_f & & P\\
+        & N \ar[ur]_g
+    }\]
+    交换蕴含以下图表交换
+    \[\xymatrix{
+        T_pM \ar[rr]^{h_*} \ar[dr]_{f_*} & & T_rP\\
+        & T_qN \ar[ur]_{g_*}
+    }\]
+\end{thm}
+\begin{proof}
+    对$v\in T_pM$与$\psi\in C^\infty(P)$, 我们有
+    \begin{align*}
+        (g_*\circ f_*)(v)(\psi)&=g_*(f_*v)(\psi)\\
+        &=f_*(v)(\psi\circ g)\\
+        &=v(\psi\circ g\circ f)\\
+        &=v(\psi\circ h)\\
+        &=h_*(v)(\psi)
+    \end{align*}
+    由$v$与$\psi$的任意性即知$g_*\circ f_*=h_*$.
+\end{proof}
+
+作为链式法则的第一个应用, 我们来证明之前被搁置的一个问题, 那就是微分流形维度的良定义性.
+\begin{prop}
+    设开集$U\subset\mathbb{R}^m$与开集$V\subset\mathbb{R}^n$微分同胚, 即存在一个双射$\varphi:U\to V$使得$\varphi,\varphi^{-1}$都是$C^\infty$的, 那么一定有$m=n$.
+    特别的, 微分流形的维度是良定义的.
+\end{prop}
+\begin{proof}
+    由于$\varphi^{-1}\circ\varphi=1_{\mathbb{R}^m},\varphi\circ\varphi^{-1}=1_{\mathbb{R}^n}$, 在某一点取微分可以得到
+    \[\varphi^{-1}_*\circ\varphi_*=1_{\mathbb{R}^m},\varphi_*\circ\varphi^{-1}_*=1_{\mathbb{R}^n}\]
+    从而$\varphi_*$同时有左右逆, 是向量空间之间的同构, 那么一定有$m=n$.\\
+    对一个微分流形$M$而言, $M$的维度定义为与微分结构中的一个开集$U$同胚的$\varphi(U)$所在欧式空间的维度.
+    而对两个不同的$\varphi_1(U_1),\varphi_2(U_2)$而言, 两个方向的转移函数构成了它们 (的一部分) 之间的微分同胚, 按照上面的论证, 它们所在的欧式空间维度一定是一样的.
+    所以微分流形的维度是良定义的.
+\end{proof}
+
+\begin{rem}
+    最后我们解释一下$f_*$这个记号.
+    微分对复合映射的作用$(f\circ g)_*=f_*\circ g_*$表现得很像范畴论中的\textit{协变函子}, 而一类很常见的协变函子$\Hom_{\mathcal{C}}(A,\quad):\mathcal{C}\to\mathsf{Set}$作用在$h\in\Hom_{\mathcal{C}}(B,C)$上得到的态射一般会记为$h_*$.
+    选用这个记号可以一定程度上体现\textit{协变性}.
+    此外, $f_*$也会被称为\textit{推前映射}, 也许是因为$f_*$的箭头是向前的.
+    之后我们还会遇到一类与微分对偶的映射, 被称为\textit{拉回映射}, 记作$f^*$, 它的箭头是向后的.
+    拉回映射传统上就一直使用$f^*$作为记号, 所以用$f_*$表示推前映射也是恰当的.
+    如果我们剧透一些张量的知识的话, 我们会把一个\emph{函数}的微分看作余切空间$T_pM^*$中的一个元素, 但是流形间的微分映射却是$T_pM^*\otimes T_pN$中的一个元素, 使用相同的记号会造成一定的混淆.
+
+    最后, 我们必须指出, 虽然我们提到了协变性, 推前, 拉回这些词语, 但是他们和范畴论中一样的词语含义并不一样.
+    它们的相似性只是\textbf{巧合}, 这些巧合让我们采用了相似的记号, 但并不意味着可以把范畴论的观点生搬硬套进来.
+\end{rem}
+
+\section{子流形}
+
+子结构在数学中随处可见, 从最简单的子集 (作为一切基础), 到代数中的子群, 子空间 (先是子集, 并且在大集合的运算下仍然具有相同的代数结构), 大多具有``子集-相同结构''这一模式.
+因此子流形大约就是大流形中一个自己是流形的子集.
+但我们还需要更多的一些限制条件, 以下我们从\textit{浸入, 嵌入}的概念开始介绍.
+
+\begin{defn}
+    映射$f:M\to N$被称为$M$到$N$的一个\textbf{浸入}, 如果对任意$p\in M$都有$f_*|_p$是单射.
+    如果进一步地, $f$是$M$与赋予了$N$的子空间拓扑的$f(M)$之间的微分同胚, 那么$f$被称为是$M$到$N$的一个\textbf{嵌入}.
+\end{defn}

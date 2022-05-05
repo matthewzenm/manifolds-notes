@@ -5,6 +5,7 @@
 \usepackage{graphicx}
 \usepackage[affil-it]{authblk}
 \usepackage{indentfirst}
+\usepackage[all]{xy}
 
 \usepackage[shortlabels]{enumitem}
 \setlist{nosep}
@@ -20,6 +21,7 @@
 
 \DeclareMathOperator*{\grad}{grad}
 \DeclareMathOperator*{\Hom}{Hom}
+\DeclareMathOperator*{\Obj}{Obj} % 我承诺这篇笔记中不会有范畴论
 
 \renewcommand{\proofname}{{\bf 证明}}
 \theoremstyle{definition}
@@ -36,8 +38,11 @@
 \newtheorem{rem}[defn]{评注}
 \newtheorem{ex}[defn]{习题}
 
-\usepackage{newtxtext}
-\usepackage{newtxmath}
+\usepackage{fontspec}
+\setmainfont{XITS}
+\usepackage{unicode-math}
+\setmathfont{XITS Math}
+\setmathfont{TeX Gyre Termes Math}[range=bb]
 
 \usepackage{titlesec}
 \titleformat{\chapter}[frame]{\Huge\bfseries}{第\,\thechapter\,章}{1em}{}{}
