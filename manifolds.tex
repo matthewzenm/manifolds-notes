@@ -217,11 +217,11 @@ $k$维子流形的概念是一个局部长得像$\mathbb{R}^k$的空间.
 \begin{proof}
     固定$u\in U$, 考虑关于$t$的函数$f(tu)$, 我们有
     \begin{align*}
-        f(u)-f(0)=&\int_0^1\frac{\mathrm{d}}{\mathrm{d}t}f(tu)\ \mathrm{d}t\\
-        =&\int_0^1\sum_{i}\frac{\partial f(tu)}{\partial u^i}u^i\ \mathrm{d}t\quad\text{(链式法则)}\\
-        =&\sum_iu^i\int_0^1\frac{\partial f(tu)}{\partial u^i}\ \mathrm{d}t
+        f(u)-f(0)=&\int_0^1\frac{\mathrm{d}}{\mathrm{d}{t}}f(tu)\ \mathrm{d}{t}\\
+        =&\int_0^1\sum_{i}\frac{\partial f(tu)}{\partial u^i}u^i\ \mathrm{d}{t}\quad\text{(链式法则)}\\
+        =&\sum_iu^i\int_0^1\frac{\partial f(tu)}{\partial u^i}\ \mathrm{d}{t}
     \end{align*}
-    取$\displaystyle f_i(u)=\int_0^1\frac{\partial f(tu)}{\partial u^i}\ \mathrm{d}t$即可 (光滑性容易验证).
+    取$\displaystyle f_i(u)=\int_0^1\frac{\partial f(tu)}{\partial u^i}\ \mathrm{d}{t}$即可 (光滑性容易验证).
 \end{proof}
 
 \begin{prop}
