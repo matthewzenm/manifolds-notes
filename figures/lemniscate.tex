@@ -1,0 +1,11 @@
+\begin{tikzpicture}[yscale=0.8,xscale=0.8]
+    %uncomment if require: \path (0,310); %set diagram left start at 0, and has height of 310
+    \begin{axis}[width=6cm,height=4cm,trig format plots=rad,variable=t]
+        \addplot[domain=-pi:pi,samples=200]({2*sin(t)},{sin(2*t)});
+        \draw [thick,->] (-3,0) -- (3,0);
+        \draw [thick,->] (0,-2) -- (0,2);
+    \end{axis}
+    %\draw [thick,->] (-3,0) -- (3,0);
+    %\draw [thick,->] (0,-2) -- (0,2);
+    
+\end{tikzpicture}

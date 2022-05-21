@@ -28,7 +28,7 @@ Euclid所著的\textit{Elements} (汉语中通常称作《几何原本》) 是�
 Leibniz通过密切圆引入了曲线的曲率, Bernoulli与Euler研究了曲面的法曲率与测地线.
 对``曲''的研究正式进入了几何学之中.
 1827年, Gauss在论文\textit{Disquisitiones generales circa superficies curvas} (关于曲面的一般研究) 中证明了``Gauss绝妙定理'' (Theorema Egregium).
-从此一种观念开始进入几何学: 我们可以研究抽象的几何体, 而不考虑它在欧式空间中的实现.
+从此一种观念开始进入几何学: 我们可以研究抽象的几何体, 而不考虑它在欧氏空间中的实现.
 进而不久非欧几何便产生了.
 
 回到几何学的两个要件上.
@@ -37,7 +37,7 @@ Leibniz通过密切圆引入了曲线的曲率, Bernoulli与Euler研究了曲面
 于是在1893年F.\ Klein发表了对整个几何学的``总结性''综述\textit{Vergleichende Betrachtungen \"{u}ber neuere geometrische Forschungen} (关于近代几何学研究的比较考察).
 文章中提到几何学的目的在于
 \begin{quotation}
-    给定一个流形和其上的变换群, 建立关于这个变换群的不变量理论.
+    给定一个流形和其上的变换群, 发展关于这个群的不变量理论.
     \begin{flushright}
         (\parencite{Klein_Erlangen}, 自译)
     \end{flushright}
@@ -60,7 +60,7 @@ $k$维子流形的概念是一个局部长得像$\mathbb{R}^k$的空间.
 \end{defn}
 \begin{rem}
     拓扑流形定义中的第二可数与Haussdorf这两个条件目前看不出来有什么作用, 但这两个条件能够保证\textit{单位分解定理}这个重要的工具成立, 之后遇到了我们会再讨论这一点.
-    此外, 给出上述定义之后我们需要证明$n$维拓扑流形是良定义的, 即证明$\mathbb{R}^n$与$\mathbb{R}^m$在$m\neq n$时不同胚, 但这需要用到代数拓扑的工具.
+    此外, 给出上述定义之后我们需要证明$n$维拓扑流形是良定义的, 即证明$\mathbb{R}^n$与$\mathbb{R}^m$在$m\neq n$时不同胚, 但这需要用到代数拓扑的工具 (参考~\parencite[定理 17.26]{Lee_IntroSmMani}, 那里用的是de Rham理论).
     不过证明微分流形是良定义的会相对比较简单, 之后我们会处理这件事情.
 \end{rem}
 由于我们不太需要关心流形的拓扑, 所以以上定义对微分几何来说其实并不是特别重要\footnote{也就是你不懂的话也不必深究的意思.}.
@@ -77,7 +77,7 @@ $k$维子流形的概念是一个局部长得像$\mathbb{R}^k$的空间.
 \end{defn}
 有时我们会将$\varphi_\beta\circ\varphi_\alpha^{-1}$称为\textbf{转移函数}.
 我们有一张图可以用来直观地理解转移函数:
-\begin{figure}[H]
+\begin{figure}[ht]
     \centering
     \input{figures/transistion_function.tex}
     \caption{转移函数}
@@ -89,8 +89,8 @@ $k$维子流形的概念是一个局部长得像$\mathbb{R}^k$的空间.
         我们指出一点, 证明一个流形具有微分结构只需要找出一组图册就可以了, 这组图册对应的微分结构就是所有与图册相容的坐标卡的集合.
         一般将恒等映射所在的图册称为$\mathbb{R}^n$的\textbf{标准微分结构}.
         \item $\mathbb{R}$, 以$\varphi:u\mapsto u^3$为坐标卡.
-        注意到$\varphi$是$\mathbb{R}$到自身的同胚, 所以决定了一个微分结构.
-        但是$1_{\mathbb{R}}\circ\varphi^{-1}$在$u=0$处不可导, 所以这个微分结构与标准微分结构不相容.
+        注意到$\varphi$是$\mathbb{R}$到自身的同胚, 从而决定了一个微分结构.
+        但是$1_{\mathbb{R}}\circ\varphi^{-1}$在$u=0$处不可导, 因此这个微分结构与标准微分结构不相容.
         这说明了一个微分流形上的微分结构可以有不止一个.
         \item 单位球面$\mathbb{S}^n$, 南北两极的球极投影. 两个球极投影$p_N,p_S$分别满足
         \begin{gather*}
@@ -113,6 +113,7 @@ $k$维子流形的概念是一个局部长得像$\mathbb{R}^k$的空间.
 \end{sym}
 
 在这一节的最后我们引入流形的定向的概念.
+我们用$\mathrm{d}f$来表示一个可微映射$f$的微分, 即最佳近似线性映射.
 \begin{defn}
     设$M$是微分流形, 如果它拥有一组图册满足任意转移函数的Jacobi行列式$\det\mathrm{d}(\varphi_\alpha\circ\varphi_\beta^{-1})>0$, 那么就称$M$为\textbf{可定向流形}, 这样的一组图册称为给出了$M$的一个\textbf{定向}; 否则称$M$为\textbf{不可定向流形}.
 \end{defn}
@@ -150,12 +151,6 @@ $k$维子流形的概念是一个局部长得像$\mathbb{R}^k$的空间.
 在数学分析课程中, 我们会考虑由函数图像给定的曲面, 并使用这个函数的微分映射的像来定义切平面.
 但是在一般的微分流形中, 我们没有办法先验地给坐标卡定义微分, 所以我们要寻找其他的办法来定义流形的切向量.
 
-\begin{figure}[H]
-    \centering
-    \input{figures/tangent_vector.tex}
-    \caption{曲面上的切向量}
-\end{figure}
-
 对于曲面$S$上$p$点处的一个切向量$v$, 我们可以找到一条曲线$c:I\to S$使得$p=c(0),v=c'(0)$ (这里的导数定义为逐分量求导).
 为了去掉全空间, 我们考虑一个函数$f:S\to\mathbb{R}$, 那么由链式法则有
 \[(f\circ c)'(0)=\langle\grad{f}(p),c'(0)\rangle\]
@@ -169,6 +164,13 @@ $k$维子流形的概念是一个局部长得像$\mathbb{R}^k$的空间.
     ((fg)\circ c)'(0)=(f\circ c)(0)(g\circ c)'(0)+(g\circ c)(0)(f\circ c)'(0)\label{leibniz}
 \end{equation}
 通过以上式子, 我们可以看出方向导数可以被$S$上的曲线决定, 从而并不需要全空间.
+
+\begin{figure}[ht]
+    \centering
+    \input{figures/tangent_vector.tex}
+    \caption{曲面上的切向量}
+\end{figure}
+
 事实上, \eqref{linearity}~和~\eqref{leibniz}~两个性质就足够给出方向导数的定义了.
 
 \begin{defn}
@@ -312,12 +314,12 @@ $k$维子流形的概念是一个局部长得像$\mathbb{R}^k$的空间.
     而对$(u^1,u^2,\cdots,u^n)$, 我们有$\displaystyle I_{\varphi_1^{-1}}(u^1,u^2,\cdots,u^n)=\left.\sum_{j}u^j\frac{\partial}{\partial x^j}\right|_p$, 而由~\eqref{tangent vector}~可知
     \[\displaystyle I_{\varphi_2}^i\circ I_{\varphi_1^{-1}}(u^1,u^2,\cdots,u^n)=\left.\sum_{i}u^j\frac{\partial y^i}{\partial x^j}\right|_p\]
     所以有
-    \[\frac{\partial}{\partial u^j}I_{\varphi_2}^i\circ I_{\varphi_1^{-1}}=\frac{\partial y^i}{\partial x^j}\]
+    \[\frac{\partial}{\partial u^j}(I_{\varphi_2}^i\circ I_{\varphi_1^{-1}})=\frac{\partial y^i}{\partial x^j}\]
     那么$\det\mathrm{d}(I_{\varphi_2}\circ I_{\varphi_1}^{-1})=\det\left[\dfrac{\partial y^i}{\partial x^j}\right]_{i,j}$.
     又注意到
     \[\frac{\partial y^i}{\partial x^i}=\frac{\partial(\pi^i\circ\varphi_2\circ\varphi_1)}{\partial u^j}\]
     所以$\left[\dfrac{\partial y^i}{\partial x^j}\right]_{i,j}=\mathrm{d}(\varphi_2\circ\varphi_1^{-1})$, 因此
-    \[\det\mathrm{d}((\varphi_2\times I_{\varphi_2})\circ(\varphi_1\times I_{\varphi_1})^{-1})=(\det\mathrm{d}(\varphi_2\circ\varphi_1^{-1}))^2>0\]
+    \[\det\mathrm{d}((\varphi_2\times I_{\varphi_2})\circ(\varphi_1\times I_{\varphi_1})^{-1})=(\det\mathrm{d}(\varphi_2\circ\varphi_1^{-1}))^2>0\qedhere\]
 \end{proof}
 
 \subsection*{微分映射}
@@ -379,7 +381,7 @@ $L_x$把一个$v\in\mathbb{R}^n$映到一个$L_xv\in\mathbb{R}^m$.
 \end{proof}
 
 作为链式法则的第一个应用, 我们来证明之前被搁置的一个问题, 那就是微分流形维度的良定义性.
-\begin{prop}
+\begin{prop}\label{def of dim}
     设开集$U\subset\mathbb{R}^m$与开集$V\subset\mathbb{R}^n$微分同胚, 即存在一个双射$\varphi:U\to V$使得$\varphi,\varphi^{-1}$都是$C^\infty$的, 那么一定有$m=n$.
     特别的, 微分流形的维度是良定义的.
 \end{prop}
@@ -387,19 +389,27 @@ $L_x$把一个$v\in\mathbb{R}^n$映到一个$L_xv\in\mathbb{R}^m$.
     由于$\varphi^{-1}\circ\varphi=1_{\mathbb{R}^m},\varphi\circ\varphi^{-1}=1_{\mathbb{R}^n}$, 在某一点取微分可以得到
     \[\varphi^{-1}_*\circ\varphi_*=1_{\mathbb{R}^m},\varphi_*\circ\varphi^{-1}_*=1_{\mathbb{R}^n}\]
     从而$\varphi_*$同时有左右逆, 是向量空间之间的同构, 那么一定有$m=n$.\\
-    对一个微分流形$M$而言, $M$的维度定义为与微分结构中的一个开集$U$同胚的$\varphi(U)$所在欧式空间的维度.
-    而对两个不同的$\varphi_1(U_1),\varphi_2(U_2)$而言, 两个方向的转移函数构成了它们 (的一部分) 之间的微分同胚, 按照上面的论证, 它们所在的欧式空间维度一定是一样的.
-    所以微分流形的维度是良定义的.
+    对一个微分流形$M$而言, $M$的维度定义为与微分结构中的一个开集$U$同胚的$\varphi(U)$所在欧氏空间的维度.
+    而对两个不同的$\varphi_1(U_1),\varphi_2(U_2)$而言, 两个方向的转移函数构成了它们 (的一部分) 之间的微分同胚, 按照上面的论证, 它们所在的欧氏空间维度一定是一样的.
+    综上所述, 微分流形的维度是良定义的.
 \end{proof}
 
 \begin{rem}
+    实际上命题~\ref{def of dim}~的证明用到的只是数学分析课程中证明过的欧氏空间的链式法则, 并没有用到流形上的链式法则.
+    不过由于想法是一样的, 所以我们仍然在这里陈述它的证明.
+\end{rem}
+
+\begin{rem}
     最后我们解释一下$f_*$这个记号.
-    微分对复合映射的作用$(f\circ g)_*=f_*\circ g_*$表现得很像范畴论中的\textit{协变函子}, 而一类很常见的协变函子$\Hom_{\mathcal{C}}(A,\quad):\mathcal{C}\to\mathsf{Set}$作用在$h\in\Hom_{\mathcal{C}}(B,C)$上得到的态射一般会记为$h_*$.
-    选用这个记号可以一定程度上体现\textit{协变性}.
-    此外, $f_*$也会被称为\textit{推前映射}, 也许是因为$f_*$的箭头是向前的.
+    首先, 我们更倾向使用$f_*|_p$而不是$df(p)$的一个简单的理由是前者更紧凑一些, 在写微分映射作用在切空间上的向量时会节约很多空间.
+    同时, $\mathrm{d}f$更多特指欧氏空间之间的可微映射, 会有更多分析学上的用途 (比如用来写Jacobi矩阵和行列式).
+
+    其次, 从范畴论的角度来看, 微分对复合映射的作用$(f\circ g)_*=f_*\circ g_*$表现得很像\textit{协变函子}, 而一类很常见的协变函子$\Hom_{\mathcal{C}}(A,\quad):\mathcal{C}\to\mathsf{Set}$作用在$h\in\Hom_{\mathcal{C}}(B,C)$上得到的态射一般会记为$h_*$.
+    选用这个记号可以一定程度上体现链式法则代表的\textit{协变性}.
+
+    此外, 在微分几何传统中, $f_*$也会被称为\textit{推前映射}, 也许是因为$f_*$的箭头是向前的.
     之后我们还会遇到一类与微分对偶的映射, 被称为\textit{拉回映射}, 记作$f^*$, 它的箭头是向后的.
-    拉回映射传统上就一直使用$f^*$作为记号, 所以用$f_*$表示推前映射也是恰当的.
-    如果我们剧透一些张量的知识的话, 我们会把一个\emph{函数}的微分看作余切空间$T_pM^*$中的一个元素, 但是流形间的微分映射却是$T_pM^*\otimes T_pN$中的一个元素, 使用相同的记号会造成一定的混淆.
+    拉回映射传统上就一直使用$f^*$作为记号, 因此用$f_*$表示推前映射也是恰当的.  
 
     最后, 我们必须指出, 虽然我们提到了协变性, 推前, 拉回这些词语, 但是他们和范畴论中一样的词语含义并不一样.
     它们的相似性只是\textbf{巧合}, 这些巧合让我们采用了相似的记号, 但并不意味着可以把范畴论的观点生搬硬套进来.
@@ -414,4 +424,42 @@ $L_x$把一个$v\in\mathbb{R}^n$映到一个$L_xv\in\mathbb{R}^m$.
 \begin{defn}
     映射$f:M\to N$被称为$M$到$N$的一个\textbf{浸入}, 如果对任意$p\in M$都有$f_*|_p$是单射.
     如果进一步地, $f$是$M$与赋予了$N$的子空间拓扑的$f(M)$之间的微分同胚, 那么$f$被称为是$M$到$N$的一个\textbf{嵌入}.
+\end{defn}
+
+\begin{eg}
+    \begin{enumerate}[(1)]
+        \item 考虑最简单的的流形$\mathbb{R}$, 以及映射
+        \begin{align*}
+            \varphi:\mathbb{R}&\to\mathbb{R}^2\\
+            t&\mapsto\begin{bmatrix}
+                \cos{t}\\ \sin{t}
+            \end{bmatrix}
+        \end{align*}
+        注意到$\varphi_*|_t=(-\sin{t},\cos{t})^\mathsf{T}$, 由于$\cos^2t+\sin^2t=1$, 所以总有$\varphi_*\neq 0$, 从而$\varphi_*$是满秩的.
+        因此$\varphi$是一个浸入.
+        注意到$\varphi$不是双射, 从而不是一个嵌入.
+        \item $\mathbb{R}^3$中的曲面片.
+        我们用古典的语言来说这件事.
+        设$U$是$\mathbb{R}^2$中的开集 (从而自然是一个$2$维流形), 映射$r:U\mapsto\mathbb{R}^3$在某一点$p$处的两个偏导数$r_1(p),r_2(p)$构成$\mathbb{R}^3$中的两个向量 ($r_i$表示对第$i$个分量求偏导).
+        如果对任意$p\in U$都有$r_1(p)\times r_2(p)\neq 0$, 那么$r$就是一个浸入, 并得到了$\mathbb{R}^3$中的一块曲面片.
+        如果要解释一下的话, $r_1(p),r_2(p)$是$T_pU\cong\mathbb{R}^2$的标准基在$r_*$下的像, 而$r_1(p)\times r_2(p)\neq 0$保证了他们线性无关, 所以$r$是一个浸入.
+        \item $\infty$符号: $r(t)=(2\sin{t},\sin(2t))$, $t\in(-\pi,\pi)$.
+        \begin{figure}[ht]
+            \centering
+            \includegraphics[width=0.7\textwidth]{figures/lemniscate.pdf}
+            \caption{双纽线}
+        \end{figure}
+        显然$r_*$总是非零的, 所以$r$是一个浸入.
+        并且我们也能发现$r$是一个单射.
+        然而$r$不是一个嵌入: 作为$\mathbb{R}$的开子集, $(-\pi,\pi)$不是一个紧集, 但它在$r$下的像在$\mathbb{R}^2$的子空间拓扑下是一个紧集, 所以$r$不是一个同胚.
+        有时候这个曲线也被称为\textit{双纽线}.
+    \end{enumerate}
+\end{eg}
+
+按照我们之前的想法, 子流形是大流形的一个子集, 而且自己也是一个流形.
+不过我们要求这个子集是要在大流形的拓扑下成为流形, 不然会出现双纽线那样自交等各种情况.
+所以我们利用嵌入给出子流形的定义:
+\begin{defn}
+    设微分流形$M,N$满足$M\subset N$, 如果包含映射$\iota:M\to N$是一个嵌入, 那么就称$M$为$N$的\textbf{子流形}.
+    $M$在$N$中的\textbf{余维度}定义为$\codim{M}=\dim{N}-\dim{M}$.
 \end{defn}

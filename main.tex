@@ -1,7 +1,6 @@
-\documentclass[11pt]{ctexbook}
+\documentclass[11pt,fontset=none]{ctexbook}
 
-\usepackage[paper=a4paper,twoside=true]{geometry}
-\usepackage{float}
+\usepackage[paper=b5paper,twoside=true]{geometry}
 \usepackage{graphicx}
 \usepackage[affil-it]{authblk}
 \usepackage{indentfirst}
@@ -10,7 +9,8 @@
 \usepackage[shortlabels]{enumitem}
 \setlist{nosep}
 
-\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.17}
 \tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt
 
 \usepackage{amsmath}
@@ -22,6 +22,7 @@
 \DeclareMathOperator*{\grad}{grad}
 \DeclareMathOperator*{\Hom}{Hom}
 \DeclareMathOperator*{\Obj}{Obj} % 我承诺这篇笔记中不会有范畴论
+\DeclareMathOperator*{\codim}{codim}
 
 \renewcommand{\proofname}{{\bf 证明}}
 \theoremstyle{definition}
@@ -39,9 +40,12 @@
 \newtheorem{ex}[defn]{习题}
 
 \setmainfont{STIX Two Text}
+\setsansfont{TeX Gyre Heros}
 \usepackage{unicode-math}
 \setmathfont{STIX Two Math}
-\setCJKmainfont{FZSSJ.otf}[BoldFont={FZHTJ.otf},ItalicFont={FZKTJ.otf}]
+\setCJKmainfont{FZSSJ.otf}[BoldFont={FZCSJ.otf},ItalicFont={FZKTJ.otf}]
+\setCJKsansfont{FZHTJ.otf}
+\setCJKmonofont{FZFSJ.otf}
 
 \usepackage{titlesec}
 \titleformat{\chapter}[frame]{\Huge\bfseries}{第\,\thechapter\,章}{1em}{}{}
@@ -62,7 +66,7 @@
     \maketitle
     \vspace*{15cm}
     \thispagestyle{empty}
-    \begin{figure}[h]
+    \begin{figure}[ht]
         \includegraphics[width=0.4\textwidth]{by-sa.pdf}\hspace{0.05\textwidth}\begin{minipage}[b]{0.55\textwidth}
         本作品采用 知识共享 署名-相同方式共享 4.0 国际 (CC BY-SA 4.0) 协议进行共享. 您可以访问\url{https://creativecommons.org/licenses/by-sa/4.0/}查看该协议.
         \end{minipage}
