@@ -1,0 +1,64 @@
+\ProvidesPackage{aklmath}[2022/5/21 v0.0.1 Alkali's personal mathematical abbeviation and theorem environments]
+\NeedsTeXFormat{XeLaTeX}[2020/02/02]
+
+\RequirePackage{ifthen}
+\newif\if@Chinese\@Chinesetrue
+\newif\if@English
+
+\DeclareOption{cn}{\@Chinesetrue\@Englishfalse}
+\DeclareOption{en}{\@Englishtrue\@Chinesefalse}
+\DeclareOption*{\PackageWarning{aklmath}{I don't know the option `\CurrentOption'}}
+\ProcessOptions\relax
+
+\if@Chinese
+    \PackageInfo{aklmath}{Using Chinese environment.}
+\else\if@English
+    \PackageInfo{aklmath}{Using Chinese environment.}
+\else
+    \PackageError{aklmath}{No language provided.}{Please use option `cn' or `en'.}
+\fi
+
+\RequirePackage{amsmath,amssymb,amsthm,unicode-math,pgfplots}
+\RequirePackage[all]{xy}
+\pgfplotsset{compat=newest}
+
+% Math Operators
+\DeclareMathOperator*{\grad}{grad}
+\DeclareMathOperator*{\Hom}{Hom}
+\DeclareMathOperator*{\Obj}{Obj}
+\DeclareMathOperator*{\codim}{codim}
+
+% Theorem Environments
+\if@Chinese
+    \renewcommand{\proofname}{{\bf 证明}}
+    \newenvironment{solution}{\begin{proof}[{\bf 解答}]}{\end{proof}}
+    \theoremstyle{definition}
+    \newtheorem{defn}{定义}[section]
+    \newtheorem{sym}[defn]{记号}
+    \newtheorem{eg}[defn]{例}
+    \theoremstyle{plain}
+    \newtheorem{thm}[defn]{定理}
+    \newtheorem{lem}[defn]{引理}
+    \newtheorem{col}[defn]{推论}
+    \newtheorem{prop}[defn]{命题}
+    \newtheorem*{pro}{问题}
+    \theoremstyle{remark}
+    \newtheorem{rem}[defn]{评注}
+    \newtheorem{ex}[defn]{习题}
+\fi
+\if@English
+    \newenvironment{solution}{\begin{proof}[Solution]}{\end{proof}}
+    \theoremstyle{definition}
+    \newtheorem{defn}{Definition}[section]
+    \newtheorem{sym}[defn]{Notation}
+    \newtheorem{eg}[defn]{Example}
+    \theoremstyle{plain}
+    \newtheorem{thm}[defn]{Theorem}
+    \newtheorem{lem}[defn]{Lemma}
+    \newtheorem{col}[defn]{Corollary}
+    \newtheorem{prop}[defn]{Proposition}
+    \newtheorem*{pro}{Question}
+    \theoremstyle{remark}
+    \newtheorem{rem}[defn]{Remark}
+    \newtheorem{ex}[defn]{Exercise}
+\fi
