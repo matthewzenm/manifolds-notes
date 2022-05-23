@@ -17,7 +17,7 @@ Euclid所著的\textit{Elements} (汉语中通常称作《几何原本》) 是�
     {\bfseries 命题}4.\ 如果两个三角形中, 一个的两边分别等于另一个的两边, 而且这些线段所夹的角相等.
     那么它们的底边等于底边, 这样其余的角也等于相应的角, 即那些等边所对应的角.\\
     \begin{flushright}
-        (译文引自\parencite{Euclid_Elem})
+        (译文引自~\parencite{Euclid_Elem})
     \end{flushright}
 \end{quotation}
 在这最原始的直觉中, ``重合''蕴含了运动的概念, 而边角的相等则蕴含了不变量的概念.
@@ -52,7 +52,7 @@ Leibniz通过密切圆引入了曲线的曲率, Bernoulli与Euler研究了曲面
 
 \section{微分流形}
 由于我们要在一般的几何体上处理问题, 所以我们要先引入\textit{流形}的概念.
-在数学分析的课程中, 我们学习过了$\mathbb{R}^n$的$k$维子流形的概念 (例如在\parencite{Zorich_MathAnal}的第8章).
+在数学分析的课程中, 我们学习过了$\mathbb{R}^n$的$k$维子流形的概念 (例如在~\parencite{Zorich_MathAnal}~的第8章).
 $k$维子流形的概念是一个局部长得像$\mathbb{R}^k$的空间.
 这启发我们给出一般流形的定义:
 \begin{defn}
@@ -426,7 +426,7 @@ $L_x$把一个$v\in\mathbb{R}^n$映到一个$L_xv\in\mathbb{R}^m$.
     如果进一步地, $f$是$M$与赋予了$N$的子空间拓扑的$f(M)$之间的微分同胚, 那么$f$被称为是$M$到$N$的一个\textbf{嵌入}.
 \end{defn}
 
-\begin{eg}
+\begin{eg}\label{submanifold_eg}
     \begin{enumerate}[(1)]
         \item 考虑最简单的的流形$\mathbb{R}$, 以及映射
         \begin{align*}
@@ -447,7 +447,7 @@ $L_x$把一个$v\in\mathbb{R}^n$映到一个$L_xv\in\mathbb{R}^m$.
         \begin{figure}[ht]
             \centering
             \includegraphics[width=0.7\textwidth]{figures/lemniscate.pdf}
-            \caption{双纽线}
+            \caption{``$\infty$''或双纽线}
         \end{figure}
         显然$r_*$总是非零的, 所以$r$是一个浸入.
         并且我们也能发现$r$是一个单射.
@@ -463,3 +463,42 @@ $L_x$把一个$v\in\mathbb{R}^n$映到一个$L_xv\in\mathbb{R}^m$.
     设微分流形$M,N$满足$M\subset N$, 如果包含映射$\iota:M\to N$是一个嵌入, 那么就称$M$为$N$的\textbf{子流形}.
     $M$在$N$中的\textbf{余维度}定义为$\codim{M}=\dim{N}-\dim{M}$.
 \end{defn}
+
+对曲线曲面论而言, 最重要的是欧氏空间子流形, 尤其是\textit{曲线}与\textit{超曲面}.
+我们引用~\parencite[8.7节定义1]{Zorich_MathAnal}~中引入$k$-维曲面所用的定义.
+\begin{thm}
+    设$S\subset\mathbb{R}^n$, 赋予了$\mathbb{R}^n$的子空间拓扑.
+    如果对每一点$x_0\in S$都存在$\mathbb{R}^n$的一个邻域$U(x_0)$以及一个微分同胚$\varphi:U(x_0)\to I^n$将这个邻域映为$\mathbb{R}^n$中的$n$-维单位立方体$I^n=\{t\in\mathbb{R}^n||t^i|<1,i=1,\cdots,n\}$,
+    并且满足集合$S\cap U(x_0)$的像是$\mathbb{R}^n$中由关系$t^{k+1}=\cdots=t^n=0$定义的$k$-维平面在$I^n$中的部分,
+    那么$S$是$\mathbb{R}^n$的一个$k$-维子流形.
+\end{thm}
+\begin{proof}
+    这基本上是把流形的定义说了一遍.
+    由于$S$是$\mathbb{R}^n$的子空间, 所以自动是第二可数的Haussdorff空间.
+    由子空间拓扑可知$S\cap U(x_0)$是$x_0$在$S$中的一个邻域, 按照假设它同胚于
+    \[I^n\cap\mathbb{R}^k\times\{0\}=\{t\in\mathbb{R}^n||t^i|<1,i=1,\cdots,k,t^{k+1}=\cdots=t^n=0\}\]
+    而这个集合又同胚于$\mathbb{R}^k$中的标准单位立方体$I^k$, 从而$x_0$的邻域同胚于$\mathbb{R}^k$中的开集.
+    因此$S$是一个$k$维拓扑流形.
+    而又由于假设, 所有同胚都是微分同胚, 所以转移函数都是光滑的.
+    因此$S$有微分结构, 是一个微分流形.
+    由于$S$的拓扑即为$\mathbb{R}^n$的子空间拓扑, 所以$S$是$\mathbb{R}^n$的子流形.
+\end{proof}
+
+\begin{defn}
+    欧氏空间中的\textbf{曲线}指的是维度为$1$的子流形.
+    欧氏空间中的\textbf{超曲面}指的是余维度为$1$的子流形, 特别地, $3$维欧氏空间中的超曲面会被直接称为\textbf{曲面}.
+\end{defn}
+
+实践中我们更多处理的是例~\ref{submanifold_eg} (2) 中的参数化曲面片.
+对一般的浸入来说, 我们没有办法说明它是不是嵌入, 从而也不能说明曲面片是不是流形.
+但是以下的定理可以保证在局部上每个浸入都是嵌入, 从而每一个曲面片在局部都是一个$2$维子流形, 或者说曲面.
+\begin{thm}
+    设$M,N$是微分流形, $f:M\to N$是光滑映射.
+    那么$f$是一个浸入当且仅当$M$中的每一个点都有一个邻域$U$使得$f|U:U\to N$是一个嵌入.
+\end{thm}
+\begin{proof}
+    \parencite[定理4.25]{Lee_IntroSmMani}.
+\end{proof}
+
+\section{向量场}
+向量场是我们研究流形的主要工具之一, 本节我们讨论一些简单的有关向量场的性质.
