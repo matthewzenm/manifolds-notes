@@ -2,7 +2,7 @@
 \chapter{准备}
 \section{几何学是什么?}
 现代几何学源于古希腊.
-在古希腊语中, ``几何学''一词为γεωμετρία \textit{(geōmetría)}, 意为测量大地.
+在古希腊语中, ``几何学''一词为{\greek γεωμετρία} \textit{(geōmetría)}, 意为测量大地.
 这反映了早期几何学主要是对长度, 面积, 体积, 角度的经验性原理的收集, 主要用于满足实用性用途.
 直至今日, 初步的几何学教学仍然是从对几何体的大小的直观认识开始的.
 因此几何学的一个经典要件就是\emph{度量}.
@@ -274,7 +274,7 @@ $k$维子流形的概念是一个局部长得像$\mathbb{R}^k$的空间.
 我们给出一个很重要的构造.
 
 \begin{defn}
-    定义$TM:=\{(p,v)|p\in M,v\in T_pM\}$, 或者用不交并这个更代数的记号写作$\displaystyle TM:=\bigsqcup_{p\in M}T_pM$, 称为$M$的\textbf{切丛}.
+    定义$TM:=\{(p,v)|p\in M,v\in T_pM\}$, 或者用不交并这个更代数的记号写作$\displaystyle TM:=\coprod_{p\in M}T_pM$, 称为$M$的\textbf{切丛}.
     切丛的\textbf{自然投影映射}$\pi:TM\to M$将每个$(p,v)$映为$p$.
 \end{defn}
 
@@ -300,7 +300,7 @@ $k$维子流形的概念是一个局部长得像$\mathbb{R}^k$的空间.
 这应该是我们遇到的第一个与常见的曲线曲面相去甚远的流形.
 
 \begin{rem}
-    命题~\ref{diff_stru_TM}~中给出的坐标卡$\varphi\times I_\varphi$使得$TM$在局部同胚于$V\times\mathbb{R}^n$, 这叫做$TM$的\textbf{局部平凡化}.
+    命题~\ref{diff_stru_TM}~中给出的坐标卡$\varphi\times I_\varphi$使得$TM$在局部同胚于$V\times\mathbb{R}^n$, 这叫做$TM$的\textbf{局部平凡化}.\label{local trivialization}
     实际上这也是我们对切丛的直观: 每一点处长出了一根由切空间构成的\textit{纤维}.
 \end{rem}
 
@@ -502,3 +502,57 @@ $L_x$把一个$v\in\mathbb{R}^n$映到一个$L_xv\in\mathbb{R}^m$.
 
 \section{向量场}
 向量场是我们研究流形的主要工具之一, 本节我们讨论一些简单的有关向量场的性质.
+\begin{defn}
+    设$X:M\to TM$是一个光滑映射, 如果有$\pi\circ s=1_M$成立, 其中$1_M$是$M$到自身的恒等映射, 那么称$X$是$M$上的一个\textbf{向量场}.
+\end{defn}
+\begin{rem}
+    我们讲一下这个定义是怎么回事.
+    向量场实际上是希望在流形每一点的切空间处光滑地指派一个向量.
+    为了描述光滑, 我们会直接定义一个光滑的映射$X:M\to TM$, 同时为了让点$p$处的向量$X_p$在$T_pM$中, 我们让$\pi\circ X=1_M$成立.
+    如果套用传统的定义来说的话, 我们会取定一个坐标卡$(U,\varphi)$, 对任意一点$p\in U$, 我们指派一个切向量:
+    \begin{equation}
+        p\mapsto\left(p,\sum_{i}a^i\frac{\partial}{\partial x^i}\right)\label{vector field on coordinate}
+    \end{equation}
+    其中$a^i$是$M$上的函数.
+    那么取$TM$的坐标卡$(U\times\mathbb{R}^n,\varphi\times\varphi_*)$可知
+    \begin{align*}
+        &(\varphi\times\varphi_*)\circ X\circ\varphi^{-1}:\mathbb{R}^n\to\mathbb{R}^n\times\mathbb{R}^n\\
+        &u\mapsto\left(u,(a^1\circ\varphi^{-1})(u),\cdots,(a^n\circ\varphi^{-1})(u)\right)
+    \end{align*}
+    所以向量场$X$是光滑的当且仅当每个坐标分量函数是光滑的.
+    同时, \eqref{vector field on coordinate}~也给出了一个向量场在某组坐标卡下的具体表示.
+\end{rem}
+\begin{sym}
+    我们用$\mathfrak{X}(M)$表示$M$上全体向量场的集合, 它是一个$\mathbb{R}$-向量空间.
+    按照显然定义的运算, 它也是一个$C^\infty(M)$-模 (一种在环上的满足类似向量空间运算律的结构, 之后会在定义~\ref{def of left module}~正式遇到它).
+\end{sym}
+\begin{eg}
+    对给定的坐标卡$(U,\varphi)$, $\dfrac{\partial}{\partial x^1},\dfrac{\partial}{\partial x^2},\cdots,\dfrac{\partial}{\partial x^n}$是$\mathfrak{X}(U)$中的$n$个向量场, 它们在每点$p$处的取值构成了$T_pU$的一组基.
+    这样的一组向量场被称为一组\textbf{局部标架}.
+    如果存在$\mathfrak{X}(M)$中的$n$个向量场满足它们在每点处的取值都构成切空间的一组基, 那么这组向量场称为$M$的一组\textbf{标架}, 同时我们称切丛$TM$是\textbf{平凡的}.
+    容易注意到, 平凡的切丛$TM$总是同胚于$M\times\mathbb{R}^n$, 所以我们会将其称为是平凡的.
+    这也再次说明了评注~\ref{local trivialization}~中将坐标卡称为局部平凡化的理由.
+\end{eg}
+我们知道$p$点处的一个切向量$X_p$将一个光滑函数映成一个数, 那么一个向量场$X$在每一点都将一个光滑函数映成一个数,
+因此我们有
+\begin{prop}\label{vector field act}
+    设$X\in\mathfrak{X}(M)$, 那么$X$诱导了$C^\infty(M)$到自身的一个映射.
+    如果把$f$在映射下的像记作$Xf$, 那么这个映射定义为
+    \[Xf(p)=X_p(f)\]
+\end{prop}
+\begin{proof}
+    只需验证$Xf$是光滑的.
+    而只需注意到在局部设$X=\sum_{i}a^i\dfrac{\partial}{\partial x^i}$, 那么有
+    \[Xf=\sum_{i}a^i\frac{\partial f}{\partial x^i}\]
+    从而由$a^i$的光滑性与光滑函数的线性性可知$Xf$是光滑的.
+\end{proof}
+反过来, 我们还有一个判别方法:
+\begin{prop}
+    如果$Y$是一个$C^\infty(M)$到自身的映射, 那么$Y$是$\mathfrak{X}(M)$中的向量场按命题~\ref{vector field act}~诱导出来的当且仅当它满足Leibniz法则, 即对任意$f,g\in C^\infty(M)$有$Y(fg)=fYg+gYf$.
+\end{prop}
+\begin{proof}
+    如果$Y$是向量场诱导出来的, 那么它显然满足Leibniz法则.
+    如果$Y$满足Leibniz法则, 考虑等式两侧在$p$点处的取值, 可知此时``$Y$作用+赋值$p$''相当于$T_pM$中的一个元素.
+    收集所有的元素得到一个向量场, 这个向量场可以诱导出$Y$.
+    我们还需要说明这个向量场是光滑的.%没写完
+\end{proof}

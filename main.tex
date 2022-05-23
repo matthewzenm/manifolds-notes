@@ -23,6 +23,8 @@
 \DeclareMathOperator*{\Hom}{Hom}
 \DeclareMathOperator*{\Obj}{Obj} % 我承诺这篇笔记中不会有范畴论
 \DeclareMathOperator*{\codim}{codim}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\End}{End}
 
 \renewcommand{\proofname}{{\bf 证明}}
 \theoremstyle{definition}
@@ -39,10 +41,14 @@
 \newtheorem{rem}[defn]{评注}
 \newtheorem{ex}[defn]{习题}
 
-\setmainfont{STIX Two Text}
+\setmainfont{TeX Gyre Termes}
 \setsansfont{TeX Gyre Heros}
+\setmonofont{TeX Gyre Bonum}
+\newfontfamily\greek{FreeSerif}
 \usepackage{unicode-math}
-\setmathfont{STIX Two Math}
+\setmathfont{TeX Gyre Termes Math}
+\setmathfont{STIX Two Math}[range={"2211,"222B}]
+\setmathfont{TeX Gyre Pagella Math}[range={bb,"1D51B,"3C0}]
 \setCJKmainfont{FZSSJ.otf}[BoldFont={FZCSJ.otf},ItalicFont={FZKTJ.otf}]
 \setCJKsansfont{FZHTJ.otf}
 \setCJKmonofont{FZFSJ.otf}
@@ -68,7 +74,9 @@
     \thispagestyle{empty}
     \begin{figure}[ht]
         \includegraphics[width=0.4\textwidth]{by-sa.pdf}\hspace{0.05\textwidth}\begin{minipage}[b]{0.55\textwidth}
-        本作品采用 知识共享 署名-相同方式共享 4.0 国际 (CC BY-SA 4.0) 协议进行共享. 您可以访问\url{https://creativecommons.org/licenses/by-sa/4.0/}查看该协议.
+        \small
+        本作品采用 知识共享 署名-相同方式共享 4.0 国际 (CC BY-SA 4.0) 协议进行共享.
+        您可以访问\url{https://creativecommons.org/licenses/by-sa/4.0/}查看该协议.
         \end{minipage}
     \end{figure}
 
@@ -79,6 +87,9 @@
 
     \mainmatter
     \input{manifolds.tex}
+    \input{curve.tex}
+    
+    \input{calculation1.tex}
 
     \appendix
     \printbibliography[title={参考文献},heading=bibintoc]
