@@ -4,20 +4,19 @@
 \usepackage{graphicx}
 \usepackage[affil-it]{authblk}
 \usepackage{indentfirst}
-\usepackage[all]{xy}
-
 \usepackage[shortlabels]{enumitem}
 \setlist{nosep}
-
-\usepackage{pgfplots}
-\pgfplotsset{compat=1.17}
-\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt
+\newcommand{\rmparen}[1]{{\rm (}#1{\rm )}}
 
 \usepackage{amsmath}
 \usepackage{amsthm}
 \usepackage{amssymb}
+\usepackage[all]{xy}
+\usepackage{pgfplots}
 \numberwithin{equation}{section}
 \allowdisplaybreaks
+\pgfplotsset{compat=1.17}
+\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt
 
 \DeclareMathOperator*{\grad}{grad}
 \DeclareMathOperator*{\Hom}{Hom}
@@ -25,6 +24,7 @@
 \DeclareMathOperator*{\codim}{codim}
 \DeclareMathOperator{\Aut}{Aut}
 \DeclareMathOperator{\End}{End}
+\DeclareMathOperator*{\Span}{Span}
 
 \renewcommand{\proofname}{{\bf 证明}}
 \theoremstyle{definition}
@@ -47,9 +47,11 @@
 \newfontfamily\greek{FreeSerif}
 \usepackage{unicode-math}
 \setmathfont{TeX Gyre Termes Math}
-\setmathfont{STIX Two Math}[range={"2211,"222B}]
-\setmathfont{TeX Gyre Pagella Math}[range={bb,"1D51B,"3C0}]
-\setCJKmainfont{FZSSJ.otf}[BoldFont={FZCSJ.otf},ItalicFont={FZKTJ.otf}]
+\setmathfont{STIX Two Math}[range={"2211,"222B,"1D70B}]
+\setmathfont{TeX Gyre Pagella Math}[range={bb,"1D51B}]
+\setCJKmainfont[BoldFont={FZCSJ.otf},
+    ItalicFont={FZKTJ.otf},
+    BoldItalicFont={FZCKJ.otf}]{FZSSJ.otf}
 \setCJKsansfont{FZHTJ.otf}
 \setCJKmonofont{FZFSJ.otf}
 
@@ -61,7 +63,7 @@
 \addbibresource{biblio.bib}
 
 \usepackage{xcolor}
-\usepackage[colorlinks=true,linkcolor=blue,citecolor=green]{hyperref}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=green,urlcolor=red]{hyperref}
 
 \title{曲面曲线论笔记}
 \author{魔法少女Alkali}
@@ -75,7 +77,7 @@
     \begin{figure}[ht]
         \includegraphics[width=0.4\textwidth]{by-sa.pdf}\hspace{0.05\textwidth}\begin{minipage}[b]{0.55\textwidth}
         \small
-        本作品采用 知识共享 署名-相同方式共享 4.0 国际 (CC BY-SA 4.0) 协议进行共享.
+        本作品采用知识共享署名-相同方式共享 4.0 国际 (CC BY-SA 4.0) 协议进行共享.
         您可以访问\url{https://creativecommons.org/licenses/by-sa/4.0/}查看该协议.
         \end{minipage}
     \end{figure}
