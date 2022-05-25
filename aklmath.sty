@@ -1,5 +1,5 @@
 \ProvidesPackage{aklmath}[2022/5/21 v0.0.1 Alkali's personal mathematical abbeviation and theorem environments]
-\NeedsTeXFormat{XeLaTeX}[2020/02/02]
+\NeedsTeXFormat{LaTeX2e}[2020/02/02]
 
 \RequirePackage{ifthen}
 \newif\if@Chinese\@Chinesetrue
@@ -16,7 +16,7 @@
     \PackageInfo{aklmath}{Using English environment.}
 \else
     \PackageError{aklmath}{No language provided.}{Please use option `cn' or `en'.}
-\fi
+\fi\fi
 
 \RequirePackage{amsmath,amssymb,amsthm,unicode-math,pgfplots}
 \RequirePackage[all]{xy}

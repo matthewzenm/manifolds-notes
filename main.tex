@@ -1,31 +1,18 @@
-\documentclass[11pt,fontset=none]{ctexbook}
+\documentclass[11pt]{aklbook}
 
-\usepackage[paper=b5paper,twoside=true]{geometry}
-\usepackage{graphicx}
-\usepackage[affil-it]{authblk}
-\usepackage{indentfirst}
-\usepackage[en]{aklmath}
-
-\usepackage[shortlabels]{enumitem}
+\aklclsset{lang=cn,cnfontset=founder,enfontset=gnu}
 \setlist{nosep}
 
-\usepackage{pgfplots}
-\pgfplotsset{compat=1.17}
+\geometry{paper=b5paper,twoside=true}
+
 \tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt
 
 \numberwithin{equation}{section}
 \allowdisplaybreaks
 
-\setmainfont{STIX Two Text}
-\setsansfont{TeX Gyre Heros}
-\setmathfont{STIX Two Math}
-\setCJKmainfont{FZSSJ.otf}[BoldFont={FZCSJ.otf},ItalicFont={FZKTJ.otf}]
-\setCJKsansfont{FZHTJ.otf}
-\setCJKmonofont{FZFSJ.otf}
-
-\usepackage{titlesec}
-\titleformat{\chapter}[frame]{\Huge\bfseries}{第\,\thechapter\,章}{1em}{}{}
-\titleformat*{\subsection}{\Large\itshape}
+%\usepackage{titlesec}
+%\titleformat{\chapter}[frame]{\Huge\bfseries}{第\,\thechapter\,章}{1em}{}{}
+%\titleformat*{\subsection}{\Large\itshape}
 
 \usepackage[style=caspervector,sorting=ecnyt,utf8,seconds=true]{biblatex}
 \addbibresource{biblio.bib}
@@ -34,7 +21,10 @@
 \usepackage[colorlinks=true,linkcolor=blue,citecolor=green]{hyperref}
 
 \title{曲面曲线论笔记}
-\author{魔法少女Alkali}
+\authoronline{魔法少女Alkali}
+\authorprint{曾梦辰}
+\datecompile{\today}
+\datepublish{2022 年 6 月}
 \affil{北京师范大学数学科学学院}
 \date{2022 年 5 月}
 
