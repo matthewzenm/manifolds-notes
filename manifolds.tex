@@ -219,7 +219,7 @@ $k$维子流形的概念是一个局部长得像$\mathbb{R}^k$的空间.
 \begin{proof}
     固定$u\in U$, 考虑关于$t$的函数$f(tu)$, 我们有
     \begin{align*}
-        f(u)-f(0)=&\int_0^1\frac{\mathrm{d}}{\mathrm{d}{t}}f(tu)\ \mathrm{d}{t}\\
+        f(u)-f(0)=&\int_0^1\frac{\mathrm{d}f(tu)}{\mathrm{d}{t}}\ \mathrm{d}{t}\\
         =&\int_0^1\sum_{i}\frac{\partial f(tu)}{\partial u^i}u^i\ \mathrm{d}{t}\quad\text{(链式法则)}\\
         =&\sum_iu^i\int_0^1\frac{\partial f(tu)}{\partial u^i}\ \mathrm{d}{t}
     \end{align*}
@@ -274,7 +274,7 @@ $k$维子流形的概念是一个局部长得像$\mathbb{R}^k$的空间.
 我们给出一个很重要的构造.
 
 \begin{defn}
-    定义$TM:=\{(p,v)|p\in M,v\in T_pM\}$, 或者用不交并这个更代数的记号写作$\displaystyle TM:=\coprod_{p\in M}T_pM$, 称为$M$的\textbf{切丛}.
+    定义$TM:=\{(p,v)|\ p\in M,v\in T_pM\}$, 或者用不交并这个更有代数味道的记号写作$\displaystyle TM:=\coprod_{p\in M}T_pM$, 称为$M$的\textbf{切丛}.
     切丛的\textbf{自然投影映射}$\pi:TM\to M$将每个$(p,v)$映为$p$.
 \end{defn}
 
@@ -356,17 +356,18 @@ $L_x$把一个$v\in\mathbb{R}^n$映到一个$L_xv\in\mathbb{R}^m$.
 我们接下来证明关于微分映射最重要的结论:
 
 \begin{thm}[链式法则]设流形$M,N,P$间有光滑映射$f:M\to N,g:N\to P$, $h=g\circ f$.
-    点$p\in M,q\in N,r\in P$满足$f(p)=q,g(q)=r$, 那么一定有$h_*|_p=g_*|_q\circ f_*|_p$.
+    点$p\in M,q\in N,r\in P$满足$f(p)=q,g(q)=r$, 那么一定有
+    \[h_*|_p=g_*|_q\circ f_*|_p\]
     换言之, 图表
-    \[\xymatrix{
-        M \ar[rr]^h \ar[dr]_f & & P\\
-        & N \ar[ur]_g
-    }\]
+    \[\begin{tikzcd}
+        M \arrow[r, "f"] \arrow[dr, "h"'] & N \arrow[d, "g"]\\
+        & P
+    \end{tikzcd}\]
     交换蕴含以下图表交换
-    \[\xymatrix{
-        T_pM \ar[rr]^{h_*} \ar[dr]_{f_*} & & T_rP\\
-        & T_qN \ar[ur]_{g_*}
-    }\]
+    \[\begin{tikzcd}
+        T_pM \arrow[r, "f_*"] \arrow[dr, "h_*"'] & T_pN \arrow[d, "g_*"]\\
+        & T_pP
+    \end{tikzcd}\]
 \end{thm}
 \begin{proof}
     对$v\in T_pM$与$\psi\in C^\infty(P)$, 我们有
@@ -670,7 +671,7 @@ $L_x$把一个$v\in\mathbb{R}^n$映到一个$L_xv\in\mathbb{R}^m$.
     \begin{align*}
         \det{B}&=\det{
             \begin{bmatrix}
-                (\psi^{-1}\circ\varphi)_* & \\
+                (\psi\circ\varphi^{-1})_* & \\
                 & 1
             \end{bmatrix}
         }\det{A}\\
@@ -698,7 +699,7 @@ $L_x$把一个$v\in\mathbb{R}^n$映到一个$L_xv\in\mathbb{R}^m$.
 可定向流形上面一定存在标架场, 从而切丛是平凡的.
 但是目前我们还证明不了这件事情, 我们还需要等待单位分解定理的出场.
 
-作为本章的结束, 我们来讨论在~\ref{sect_of_mani}~结尾处留下的问题, 即证明M\"{o}bius带是不可定向的.
+作为定理~\ref{orientable iff normal field}~的结束, 我们来讨论在第~\ref{sect_of_mani}~节结尾处留下的问题, 即证明M\"{o}bius带是不可定向的.
 \begin{eg}
     M\"{o}bius带是把一个纸条扭转一次, 然后粘合两端得到的.
     比较自然的方法是使用商拓扑 (也叫``手术''), 但我们在这里直接一些, 把M\"{o}bius带看成直纹面写参数方程.
@@ -708,10 +709,13 @@ $L_x$把一个$v\in\mathbb{R}^n$映到一个$L_xv\in\mathbb{R}^m$.
     \begin{gather*}
         a(u)=a(\cos{2u},\sin{2u},0)\\
         l(u)=a(u)\cos{u}+(0,0,a\sin{u})\\
-        u\in[0,\pi),v\in(-b,b),0<b<a
+        u\in[0,\pi),v\in\left(-\frac{1}{2},\frac{1}{2}\right)
     \end{gather*}
     假如M\"{o}bius带可定向, 那么它有单位法向量场$N$, 不妨设$(a,0,0)$处取值为
-    \[\frac{r_u(0,0)\times r_v(0,0)}{|r_u(0,0)\times r_v(0,0)|}=(0,0,-1)\]
+    \begin{align*}
+        \frac{r_u(0,0)\times r_v(0,0)}{|r_u(0,0)\times r_v(0,0)|}&=\frac{(0,2a,0)\times(a,0,0)}{2a^2}\\
+        &=(0,0,-1)
+    \end{align*}
     (回忆例~\ref{submanifold_eg}~(2) 中表示偏导数的记号)
     考虑$N$在准线$a(u)$上的限制, 按照连续性, 对任意$0\leq t<\pi$都有
     \begin{align*}
@@ -721,9 +725,13 @@ $L_x$把一个$v\in\mathbb{R}^n$映到一个$L_xv\in\mathbb{R}^m$.
     但
     \begin{align*}
         \lim_{t\to\pi}N_{a(t)}&=\left(\lim_{t\to\pi}r_u(t)\times\lim_{t\to\pi}r_v(t)\right)^0\\
+        &=((0,2a,0)\times(0,-a,0))^0\\
         &=(0,0,1)\\
         &\neq N_{a(0)}
     \end{align*}
     与连续性矛盾.
     所以M\"{o}bius带不可定向.
 \end{eg}
+
+\subsection*{$\mathfrak{X}(M)$的自同态}
+本笔记中需要用到这一小节的地方离我们还有点远, 第一次阅读时可以先跳过这一小节.
