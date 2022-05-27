@@ -1,11 +1,14 @@
 % This class is still individually maintained.
 % So no comments will occur.
+% Class series `akl' may be bundled with projects,
+% but will never publish alone.
+
 \ProvidesClass{aklbook}[2022/5/21 v0.0.1 Alkali's personal template for book]
 \NeedsTeXFormat{LaTeX2e}
 
-\newcommand{\aklclsset}[1]{\PassOptionsToClass{aklbook}{#1}}
-
-\RequirePackage{kvoptions,xstring}
+\RequirePackage{kvoptions}
+\RequirePackage{xstring}
+\RequirePackage{xkeyval}
 \SetupKeyvalOptions{
     family=@akl,
     prefix=@akl@
@@ -14,15 +17,17 @@
 \DeclareStringOption[cn]{lang}
 \DeclareStringOption[cm]{enfontset}
 \DeclareStringOption[fandol]{cnfontset}
-\DeclareStringOption[cm]{mathfontset}
+\DeclareStringOption[lm]{mathfontset}
 \DeclareBoolOption[false]{print}
-\DeclareOption*{\PassOptionsToClass{\CurrentOption}{book}}
+\DeclareDefaultOption{\PassOptionsToClass{\CurrentOptionKey}{book}}
+\DeclareOption*{}
 
-\ProcessOptions*
-\ProcessKeyvalOptions{akl}{\PassOptionsToPackage{aklmath}{\@akl@lang}}
+\ProcessOptions
+\relax
 \ProcessKeyvalOptions*
 \relax
 
+% \def\aklclsset{\kvsetkeys{@akl}}
 
 \LoadClass{book}
 \RequirePackage{geometry}
@@ -32,6 +37,7 @@
 \RequirePackage{aklmath}
 \RequirePackage[shortlabels]{enumitem}
 \RequirePackage[affil-it]{authblk}
+\PassOptionsToPackage{\@akl@lang}{aklmath}
 
 \def\onlinename{}
 \def\printname{}
@@ -121,7 +127,7 @@
         \setCJKmonofont{simfang.ttf}
     }{}
     \IfStrEq{\@akl@cnfontset}{founder}{
-        \new\if@fileexists\@fileexiststrue
+        \newif\if@fileexists\@fileexiststrue
         \IfFileExists{FZSSJ.otf}{}{\@fileexistsfalse}
         \IfFileExists{FZKTJ.otf}{}{\@fileexistsfalse}
         \IfFileExists{FZCSJ.otf}{}{\@fileexistsfalse}
@@ -136,4 +142,27 @@
         \fi
     }{}
 }
+
+\IfStrEq{\@akl@mathfontset}{lm}{
+    \setmathfont{Latin Modern Math}
+    \setmathfont{TeX Gyre Pagella Math}[range=bb]
+}{}
+\IfStrEq{\@akl@mathfontset}{mtpro2}{
+    \RequirePackage{mtpro2}
+}{}
+\IfStrEq{\@akl@mathfontset}{stix2}{
+    \setmathfont{STIX Two Math}
+    \setmathfont{TeX Gyre Pagella Math}[range={bb,"1D51B}]
+}{}
+\IfStrEq{\@akl@mathfontset}{xits}{
+    \setmathfont{XITS Math}
+    \setmathfont{TeX Gyre Pagella Math}[range={bb,"1D51B}]
+}{}
+\IfStrEq{\@akl@mathfontset}{newtx}{
+    \setmathfont{TeX Gyre Termes Math}
+    \setmathfont{TeX Gyre Pagella Math}[range={bb,"1D51B}]
+    \setmathfont{STIX Two Math}[range={"2211,"222B,"1D70B}]
+}{}
+
+
 % This is not finished.
