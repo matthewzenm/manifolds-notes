@@ -1,0 +1,208 @@
+\chapter{张量}
+本章中所有的环都有单位元.
+
+\section{模与对偶空间}
+
+\subsection*{模的定义与简单性质}
+
+\begin{defn}\label{def of left module}
+    一个环$R$上的\textbf{左模}由一个Abel群$M$与$R$到$M$的自同态群的一个同态构成.
+    换言之, 任意一个$r\in R$都诱导了一个$M\to M$的映射, 对$m\in M$, $m$在$r$诱导的映射下的像记为$rm$.
+    我们要求这些映射满足如下公理:
+    \begin{enumerate}
+        \item 对$r\in R$, $m,n\in M$有$r(m+n)=rm+rn$;
+        \item 对$r,s\in R$, $m\in M$有$(r+s)m=rm+sm$;
+        \item 对$r,s\in R$, $m\in M$有$(rs)m=r(sm)$;
+        \item 对任意$m\in M$有$1m=m$.
+    \end{enumerate}
+\end{defn}
+
+\begin{defn}
+    一个环$R$上的\textbf{右模}由一个Abel群$M$与$R$到$M$的自同态群的一个反同态构成.
+    即将定义~\ref{def of left module}~中的公理3变为$(rs)m=s(rm)$.
+\end{defn}
+
+\begin{rem}
+    如果$R$是交换的, 那么左模和右模是一样的, 称为\textbf{双侧模}或者直接简称为\textbf{模}.
+    此外, 我们也可以把右模的像写成$mr$, 那么``数乘的结合公理''\footnote{打引号是因为我们只对向量空间说数乘, 模一般说作用.}可以写成很好看的形式$m(sr)=(ms)r$.
+    我们接下来基本不会遇到非交换环上的模, 所以我们不再区分左右模.
+    如果环给定了, 有时我们也不会特别指明环.
+\end{rem}
+
+类似于向量空间之间的同态, 我们也有模之间的同态:
+\begin{defn}
+    设$M,N$是$R$上的模, $f$是$M\to N$的Abel群同态, 如果$f$满足对任意$r\in R$与$m\in M$有$rf(m)=f(rm)$, 那么称$f$是$M$到$N$的一个\textbf{$R$-同态}.
+    如果一个$R$-同态是一个双射, 那么就将其称为是一个\textbf{$R$-同构}.
+    如果两个模$M,N$之间存在一个同构$f:M\to N$, 那么就称他们是\textbf{同构}的, 并记作$M\cong N$.
+    一个模到自身的同构叫做\textbf{自同构}.
+\end{defn}
+
+\begin{sym}
+    $M$到$N$间的全体$R$-同态的集合记为$\Hom_R(M,N)$, 当$M=N$时$\Hom_R(M,N):=\End_RM$.
+    $M$到自身的全体$R$-自同构的集合记为$\Aut_RM$.
+\end{sym}
+
+\begin{eg}
+    模与向量空间有许多类似的性质.
+    例如对于任意$r\in R$与$0\in M$有
+    \begin{align*}
+        r0 & =  r(0+0) \quad \text{(Abel群公理)}\\
+        r0 & =  r0+r0 \quad \text{(第1条模公理)}\\
+        \implies 0 & =  r0 \quad \text{(Abel群消去律)}
+    \end{align*}
+    也就是说有$r0=0$.
+    同理也有对任意$m\in M$有$0m=0$.
+    但与向量空间不同的是, 在模上$ra=0$并不能推出$a=0$.
+    例如所有Abel群都是$\mathbb{Z}$-模 (作用方式为$na=\underbrace{a+\cdots+a}_{n\text{次}}$), 那么对有限Abel群$G$来说,
+    Lagrange定理保证了对任意$g\in G$都有$|G|g=0$, 而$g$不一定是$0$.
+
+    对模的同态$f\in\Hom_R(M,N)$, 我们也类似线性映射定义
+    \begin{gather*}
+        \ker{f}:=\{m\in M|\ f(m)=0\}\\
+        \im{f}:=\{n\in N|\ \exists m\in M: f(m)=n\}
+    \end{gather*}
+    与线性映射相同, 我们仍有 ``$f$是单射当且仅当$\ker{f}=0$'' 与 ``$f$是满射当且仅当$\im{f}=N$'' 这两条命题成立.
+\end{eg}
+
+子模的定义是自然的:
+\begin{defn}\label{def of submodule}
+    设$M$是$R$上的模, 如果$N\subset M$关于加法是$M$的子群, 并且对任意$r\in R, n\in N$有$rn\in N$, 那么称$N$是$M$的一个\textbf{子模}.
+\end{defn}
+
+对子模而言, 我们会考虑子模上的商结构.
+$N$是Abel加群$M$的子群, 所以存在一个商群$M/N$.
+但$M/N$上有更多的代数结构:
+\begin{prop}
+    记号承定义~\ref{def of submodule}, $M/N$有自然的$R$-模结构.
+    即$M/N$是$R$-模且有自然$R$-同态$\pi:M\to M/N$.
+\end{prop}
+\begin{proof}
+    设$\pi$是商群的自然同态.
+    对$\bar{n}\in M/N$, 如果$\pi(n)=\bar{n}$, 定义$r\bar{n}=\pi(rn)$.
+    我们验证良定义性: 设$\pi(m)=\pi(n)$, 那么一定有
+    \begin{align*}
+        r\pi(m)-r\pi(n)&=\pi(rm)-\pi(rn)\\
+        &=r\pi(m-n)\\
+        &=r0\\
+        &=0
+    \end{align*}
+    容易验证这样定义的作用满足模的公理, 所以$M/N$是一个模, 并且由作用的定义立刻知道$\pi:M\to M/N$是自然的$R$-同态.
+\end{proof}
+
+\subsection*{对偶模与对偶空间}
+
+\begin{prop}
+    对$R$-模$M$, $\Hom_R(M,R)$构成一个$R$-模, 称作$M$的\textbf{对偶模}.
+\end{prop}
+\begin{proof}
+    对$f,g\in\Hom_R(M,R)$, 定义
+    \begin{gather*}
+        (f+g)(m)=f(m)+g(m)\\
+        (-f)(m)=-f(m)
+    \end{gather*}
+    那么这样定义的加法使得$\Hom_R(M,R)$成为Abel群;
+    对$r\in R$, 定义
+    \[(rf)(m)=rf(m)\]
+    容易验证这样定义的作用满足模公理, 从而使得$\Hom_R(M,R)$成为一个模.
+\end{proof}
+
+\begin{sym}
+    当$V$是域$k$上的向量空间时, 习惯上把$\Hom_k(V,k)$记作$V^*$, 并称为\textbf{对偶空间}.
+\end{sym}
+
+研究对偶模 (确切地说是\textit{反变函子}$\Hom_R(\quad,R)$) 的性质需要深入的代数讨论, 在微分几何中我们更关心对偶空间的性质.
+以下我们主要讨论有限维向量空间的对偶空间.
+
+有限维对偶空间的一个基本性质是
+\begin{prop}\label{dim of dual space}
+    $\dim V=\dim V^*<\infty$.
+\end{prop}
+\begin{proof}
+    取$V$的一组基$(e_1,\cdots,e_n)$, 我们定义$V^*$的\textbf{对偶基}$(\theta^1,\cdots,\theta^n)$为:
+    \[\theta^i(e_j)=\delta_{ij}=\begin{cases}
+        1, & i=j\\
+        0, & i\neq j
+    \end{cases}\]
+    首先我们验证$\{\theta^1,\cdots,\theta^n\}$线性无关.
+    如果存在$c_i\in k(i=1,\cdots,n)$使得
+    \begin{equation}
+        \sum_ic_i\theta^i=0\label{independence of dual basis}
+    \end{equation}
+    那么将~\eqref{independence of dual basis}~两端作用在$e_j$上, 可以得到$c_j=0$.
+    由$j$的任意性可知$\{\theta^1,\cdots,\theta^n\}$线性无关.
+    其次, 对任意$v^*\in V^*$, 考虑
+    \begin{equation}
+        \sum_{i}v^*(e_i)\theta^i\in V^*\label{element in dual space}
+    \end{equation}
+    \eqref{element in dual space}~与$v^*$对$(e_1,\cdots,e_n)$中每个元素的作用都是一样的, 那么它们作为线性映射是相等的,
+    从而$v^*$可以被$(\theta^1,\cdots,\theta^n)$线性表示.
+    因此$(\theta^1,\cdots,\theta^n)$是$V^*$的一组基.
+\end{proof}
+
+对偶也可以应用在线性映射上:
+\begin{defn}
+    对$f\in\Hom_k(V,W)$, 定义它的\textbf{对偶映射}为
+    \begin{align*}
+        f^*:W^*&\to V^*\\
+        w^*&\mapsto w^*\circ f
+    \end{align*}
+\end{defn}
+注意到对偶映射把箭头反了过来.
+对偶映射还有一个有趣的性质:
+\begin{prop}
+    设$f\in\Hom_k(V,W)$在$V,W$各自的一组基下的矩阵为$A$, 那么$f^*$在这两组基的对偶基下的矩阵为$A^\mathsf{T}$.
+\end{prop}
+\begin{proof}
+    对任意一个$w^*\in W$, 设它在$W$的对偶基下的坐标为列向量$Q$.
+    那么由~\eqref{element in dual space}~式可知, 它作为一个线性映射在$W$的基下的矩阵为$Q^\mathsf{T}$.
+    因此$w^*$在$f$作用下的像在$V$的基下的矩阵为$Q^\mathsf{T}A$, 那么$f^*(w^*)$在$V$的对偶基下的坐标为$A^\mathsf{T}Q$.
+    从而$f^*$在对应对偶基下的矩阵为$A^\mathsf{T}$.
+\end{proof}
+
+命题~\ref{dim of dual space}~保证了$V$与$V^*$总是同构的, 但这个同构并不是\textit{自然}的:
+``自然''意味着这个同构应当不依赖于基的选取, 或者后面我们也会给它另一个严格的定义.
+再次应用命题~\ref{dim of dual space}~可以知道$V$和$V^{**}$也是同构的, 此时它们之间存在自然的同构映射了.
+
+\begin{prop}
+    任意一个有限维向量空间$V$与它对偶空间的对偶空间$V^{**}$\textbf{自然地}同构.
+    具体而言, 对任意$V$, 存在同构$\iota_V:V\to V^{**}$, 满足对任意$f\in\Hom_k(V,W)$有图表
+    \begin{equation}
+        \begin{tikzcd}
+            V\arrow[r, "f"] \arrow[d, "\iota_V"'] & W \arrow[d, "\iota_W"]\\
+            V^{**} \arrow[r, "f^{**}"] & W^{**}
+        \end{tikzcd}\label{naturality of double dual}
+    \end{equation}
+    交换.
+\end{prop}
+\begin{proof}
+    我们定义
+    \begin{align*}
+        \iota_V(v):V^*&\to k\\
+        a^*&\mapsto a^*(v)
+    \end{align*}
+    我们证明这是一个同构.
+    设$v\in\ker\iota_V$, 那么对任意$a^*\in V^*$都有$a^*(v)=0$.
+    如果$v\neq 0$, 定义
+    \[b^*(w)=\begin{cases}
+        l, & w=lv\\
+        0, & \text{其他}
+    \end{cases}\]
+    容易验证$b^*\in V^*$, 从而产生矛盾, 一定有$v=0$.
+    因此$\iota_V$是单射, 结合$\dim V=\dim V^*$可知$\iota_V$是同构.
+    我们接下来证明映射族$\{\iota_V\}_{V\in\mathsf{finVect}_k}$的自然性\footnote{自然性来自范畴论, 是针对的一个协变函子与一族自然态射来说的, 所以会用这样的一个记号}.
+    对$f\in\Hom_k(V,W)$与$v\in V$, 我们有
+    \(\iota_W\circ f(v):W^*\to k\)
+    \begin{align*}
+        w^*&\mapsto w^*(f(v))\\
+        &=(f^*(w^*))(v)
+    \end{align*}
+    以及
+    \(f^{**}\circ\iota_V(v):W^*\to k\)
+    \begin{align*}
+        w^*&\mapsto(\iota_V(v)\circ f^*)(w^*)\\
+        &=\iota_V(v)(f^*(w^*))\\
+        &=f^*(w^*)(v)
+    \end{align*}
+    因此图表~\eqref{naturality of double dual}~交换.
+    综上可知$V$与$V^{**}$自然同构.
+\end{proof}

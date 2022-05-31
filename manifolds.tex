@@ -1,5 +1,5 @@
-\setcounter{chapter}{-1}
-\chapter{准备}
+\chapter{流形}
+我们从几何学的源头开始, 找寻一些经典几何学的关键要素, 然后在这些要素之上来搭建我们的舞台: 微分流形.
 \section{几何学是什么?}
 现代几何学源于古希腊.
 在古希腊语中, ``几何学''一词为{\greek γεωμετρία} \textit{(geōmetría)}, 意为测量大地.
@@ -604,7 +604,7 @@ $L_x$把一个$v\in\mathbb{R}^n$映到一个$L_xv\in\mathbb{R}^m$.
 
 \begin{prop}[Lie括号的性质]\label{property of lie bracket}
     对任意$X,Y,Z\in\mathfrak{X}(M)$有
-    \begin{enumerate}[{\upshape (1)}]
+    \begin{enumerate}[{\upshape 1.}]
         \item \rmparen{双线性性} 对任意$a,b\in\mathbb{R}$有
         \begin{gather*}
             [aX+bY,Z]=a[X,Z]+b[Y,Z]\\
@@ -699,7 +699,7 @@ $L_x$把一个$v\in\mathbb{R}^n$映到一个$L_xv\in\mathbb{R}^m$.
 可定向流形上面一定存在标架场, 从而切丛是平凡的.
 但是目前我们还证明不了这件事情, 我们还需要等待单位分解定理的出场.
 
-作为定理~\ref{orientable iff normal field}~的结束, 我们来讨论在第~\ref{sect_of_mani}~节结尾处留下的问题, 即证明M\"{o}bius带是不可定向的.
+作为本章的结束, 我们来讨论在第~\ref{sect_of_mani}~节结尾处留下的问题, 即证明M\"{o}bius带是不可定向的.
 \begin{eg}
     M\"{o}bius带是把一个纸条扭转一次, 然后粘合两端得到的.
     比较自然的方法是使用商拓扑 (也叫``手术''), 但我们在这里直接一些, 把M\"{o}bius带看成直纹面写参数方程.
@@ -732,6 +732,3 @@ $L_x$把一个$v\in\mathbb{R}^n$映到一个$L_xv\in\mathbb{R}^m$.
     与连续性矛盾.
     所以M\"{o}bius带不可定向.
 \end{eg}
-
-\subsection*{$\mathfrak{X}(M)$的自同态}
-本笔记中需要用到这一小节的地方离我们还有点远, 第一次阅读时可以先跳过这一小节.
