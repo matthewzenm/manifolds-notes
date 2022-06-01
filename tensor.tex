@@ -1,4 +1,6 @@
 \chapter{张量}
+本章的内容比较偏向代数, 如果读者只关心代数工具在几何上的应用的话, 不妨跳过一些证明, 尤其是有许多交换图的那些.
+
 本章中所有的环都有单位元.
 
 \section{模与对偶空间}
@@ -72,13 +74,18 @@
 对子模而言, 我们会考虑子模上的商结构.
 $N$是Abel加群$M$的子群, 所以存在一个商群$M/N$.
 但$M/N$上有更多的代数结构:
-\begin{prop}
+\begin{prop}\label{quotient module}
     记号承定义~\ref{def of submodule}, $M/N$有自然的$R$-模结构.
-    即$M/N$是$R$-模且有自然$R$-同态$\pi:M\to M/N$.
+    即$M/N$是$R$-模且有自然$R$-同态$\pi:M\to M/N$, 自然性体现为$\pi$满足\textbf{泛性质}:
+    如果模同态$f:M\to P$满足$N\subset\ker{f}$, 那么存在唯一的$\overline{f}:N\to P$使得下图交换
+    \[\begin{tikzcd}
+        M \arrow[r, "f"] \arrow[d, "\pi"'] & P \\
+        N \arrow[ur, dashed, "\overline{f}"'] &
+    \end{tikzcd}\]
 \end{prop}
 \begin{proof}
     设$\pi$是商群的自然同态.
-    对$\bar{n}\in M/N$, 如果$\pi(n)=\bar{n}$, 定义$r\bar{n}=\pi(rn)$.
+    对$\overline{n}\in M/N$, 如果$\pi(n)=\overline{n}$, 定义$r\overline{n}=\pi(rn)$.
     我们验证良定义性: 设$\pi(m)=\pi(n)$, 那么一定有
     \begin{align*}
         r\pi(m)-r\pi(n)&=\pi(rm)-\pi(rn)\\
@@ -86,8 +93,23 @@ $N$是Abel加群$M$的子群, 所以存在一个商群$M/N$.
         &=r0\\
         &=0
     \end{align*}
-    容易验证这样定义的作用满足模的公理, 所以$M/N$是一个模, 并且由作用的定义立刻知道$\pi:M\to M/N$是自然的$R$-同态.
+    容易验证这样定义的作用满足模的公理, 所以$M/N$是一个模, 并且由作用的定义立刻知道$\pi:M\to M/N$是$R$-同态.
+    以下验证泛性质: 设$f:M\to P$满足$N\subset\ker{f}$, 定义
+    \[\overline{f}(\overline{m})=f(m)\]
+    如果$\pi(m)=\pi(n)$, 那么有$m-n\in\ker{f}$, 则
+    \begin{align*}
+        \overline{f}(\pi(m))-\overline{f}(\pi(n))&=f(m)-f(n)\\
+        &=f(m-n)\\
+        &=0
+    \end{align*}
+    所以$\overline{f}$是良定义的.
+    如果另外存在一个同态$g$满足要求, 那么一定有
+    \[g(\overline{m})=f(m)=\overline{f}(\overline{m})\]
+    对任意$\overline m\in M/N$成立.
+    所以$g=\overline{f}$, 即$\overline{f}$是唯一的.
 \end{proof}
+
+这是我们遇到的第一个泛性质, 之后我们还会遇到很多次.
 
 \subsection*{对偶模与对偶空间}
 
@@ -189,7 +211,7 @@ $N$是Abel加群$M$的子群, 所以存在一个商群$M/N$.
     \end{cases}\]
     容易验证$b^*\in V^*$, 从而产生矛盾, 一定有$v=0$.
     因此$\iota_V$是单射, 结合$\dim V=\dim V^*$可知$\iota_V$是同构.
-    我们接下来证明映射族$\{\iota_V\}_{V\in\mathsf{finVect}_k}$的自然性\footnote{自然性来自范畴论, 是针对的一个协变函子与一族自然态射来说的, 所以会用这样的一个记号}.
+    我们接下来证明映射族$\{\iota_V\}_{V\in\mathsf{finVect}_k}$的自然性\footnote{自然性来自范畴论, 是针对的一个共变函子与一族自然态射来说的, 所以会用这样的一个记号}.
     对$f\in\Hom_k(V,W)$与$v\in V$, 我们有
     \(\iota_W\circ f(v):W^*\to k\)
     \begin{align*}
@@ -205,4 +227,377 @@ $N$是Abel加群$M$的子群, 所以存在一个商群$M/N$.
     \end{align*}
     因此图表~\eqref{naturality of double dual}~交换.
     综上可知$V$与$V^{**}$自然同构.
+\end{proof}
+
+\section{自由模与张量积}
+我们在这一节描述我们要用到的最重要的代数工具: 张量积.
+第一小节\textit{自由模}会提供证明张量积存在所需要的工具, 并让我们熟悉\textit{泛性质}的语言与相应的证明手法.
+在第二小节\textit{张量积}中, 我们会模仿前一小节使用的语言与证明, 通过泛性质给出张量积的定义与基本性质.
+我们还会讨论张量积与向量空间有关的性质.
+本节中的$R$是一个交换环, $k$是一个域.
+
+\subsection*{自由模}
+\begin{defn}
+    一个集合$X$上的\textbf{自由$R$-模}是一个$R$-模$FX$与嵌入映射$\iota:X\to FX$, 满足如下泛性质:
+    对任意$R$-模$M$与映射$f:X\to M$, 均存在唯一的$R$-同态$\overline{f}$使得以下图表交换:
+    \[\begin{tikzcd}[row sep=large]
+        FX \arrow[dr, dashed, "\overline{f}"]\\
+        X \arrow[u, "\iota"] \arrow[r, "f"'] & M
+    \end{tikzcd}\]
+    $X$也称为$FX$的\textbf{基}.
+\end{defn}
+
+在证明自由模的存在性之前, 我们先说明自由模的唯一性.
+\begin{prop}\label{uniqueness of free module}
+    如果$X$上的自由$R$-模存在, 那么它在同构意义下是唯一的.
+\end{prop}
+\begin{proof}
+    假设$(A,\iota_A),(B,\iota_B)$是$X$上的两个自由模, 按照泛性质, 我们可以画出如下交换图:
+    \begin{equation*}
+        \begin{tikzcd}[sep=large]
+            A \arrow[rr, "1_A"] \arrow[dr, dashed, "\overline{\iota_B}"] & & A\\
+            & B \arrow[ur, dashed, "\overline{\iota_A}"] &\\
+            & X \arrow[uul, "\iota_A"] \arrow[u, "\iota_B"] \arrow[uur, "\iota_A"'] &
+        \end{tikzcd}
+    \end{equation*}
+    由泛性质, 存在$R$-同态$\overline{\iota_A},\overline{\iota_B}$使得左右的两个小三角形交换.
+    而上方小三角形的交换性结合唯一性可以给出$\overline{\iota_A}\circ\overline{\iota_B}=1_A$.
+    同理$\overline{\iota_B}\circ\overline{\iota_A}=1_B$, 那么$\overline{\iota_A},\overline{\iota_B}$是同构映射, 从而$A$与$B$同构.
+\end{proof}
+
+我们接下来证明自由模存在.
+为此, 我们先回忆一下\textit{外直和}的概念.
+\begin{defn}
+    设$\{M_\alpha\}_{\alpha\in A}$是一族$R$-模, 它们的\textbf{外直和}定义为
+    \[\bigoplus_{\alpha\in A}M_\alpha:=\left\{\left.m\in\prod_{\alpha\in A}M_\alpha\right|\ m\text{仅有有限个坐标非}0\right\}\]
+\end{defn}
+
+外直和有一个简单的泛性质:
+\begin{prop}\label{direct limit}
+    设$\{M_\alpha\}_{\alpha\in A}$是一族$R$-模, $\displaystyle\iota_\beta:M_\beta\to\bigoplus_{\alpha\in A}M_\alpha$为自然嵌入映射,
+    即将$m\in M_\beta$映为$\displaystyle\bigoplus_{\alpha\in A}M_\alpha$中$\beta$分量为$m$的元素.
+    设$N$是一个$R$-模, 那么对任意一族同态$\{f_\alpha:M_\alpha\to N\}_{\alpha\in A}$, 均存在唯一一个同态满足
+    \begin{align*}
+        f:\bigoplus_{\alpha\in A}M_\alpha&\to N\\
+        \forall\alpha\in A:\ f\circ\iota_\alpha&=f_\alpha
+    \end{align*}
+\end{prop}
+\begin{proof}
+    对$\displaystyle m=\sum_{m_i\in M_i}r_im_i$ (注意到这是一个有限和), 直接定义
+    \[f(m)=\sum_{m_i\in M_i}r_i\ f_i(m_i)\]
+    如果还有另一个同态满足条件, 那么有
+    \begin{align*}
+        g\left(\sum_{m_i\in M_i}r_im_i\right)&=\sum_{m_i\in M_i}r_ig(m_i)\\
+        &=\sum_{m_i\in M_i}r_i(g\circ\iota_i)(m_i)\\
+        &=\sum_{m_i\in M_i}r_i\ f_i(m_i)\\
+        &=f\left(\sum_{m_i\in M_i}r_im_i\right)
+    \end{align*}
+    从而$g=f$, 这个同态是唯一的.
+\end{proof}
+
+外直和也可以从这个泛性质出发来定义, 证明唯一性等等.
+
+以下证明任意集合$X$上的自由模存在.
+\begin{proof}
+    记号承命题~\ref{direct limit}.
+    我们用$X$为$R$加上指标, 得到一族$R$-模 (每一个都是$R$的一份复制), 考虑它们的外直和
+    \[FX=\bigoplus_{x\in X}R_x\]
+    并定义嵌入映射$\iota:x\mapsto\iota_x(1)$.
+    我们定义每个$R_x$到$M$的同态$f_x(r)=rf(x)$, 那么由命题~\ref{direct limit}~可知存在唯一的$\overline{f}$满足对任意$x$都有$\overline{f}\circ\iota_x=f_x$.
+    断言$\overline{f}$就是所求的同态, 那么我们需要验证交换性. 对任意$x\in X$都有
+    \begin{align*}
+        (\overline{f}\circ\iota)(x)&=(\overline{f}\circ\iota_x)(1)\\
+        &=f_x(1)\\
+        &=1f(x)=f(x)
+    \end{align*}
+    所以$\overline{f}\circ\iota=f$, 命题得证.
+\end{proof}
+
+\begin{eg}
+    \begin{enumerate}[(1)]
+        \item 设$\mathcal{B}$是向量空间$V$的一组基, 那么$V$就是$\mathcal{B}$上的向量空间.
+        于是$V$由$\mathcal{B}$的基数决定, 即由维度决定.
+        从而命题~\ref{uniqueness of free module}~再次给出了``向量空间同构当且仅当他们维度相等''这个命题的证明.
+        \item 考察以下交换图:
+        \[\begin{tikzcd}
+            FX \arrow[rr, bend left, "F(g\circ f)"] \arrow[r, "Ff"] & FY \arrow[r, "Fg"] & FZ\\
+            X \arrow[u, "\iota_X"] \arrow[r, "f"] \arrow[rr,bend right, "g\circ f"'] & Y \arrow[u, "\iota_Y"] \arrow[r, "g"] & Z \arrow[u, "\iota_Z"]
+        \end{tikzcd}\]
+        通过对每个矩形应用泛性质, 我们可以知道基$X,Y$之间的映射$f$可以决定自由模之间的同态$Ff:FX\to FY$.
+        同时, 上方的小三角形说明基决定的同态满足$F(g\circ f)=Fg\circ Ff$.
+        这些在线性代数中熟知 (但不一定这样陈述) 的事实有一个高大上的名字叫做\textit{自由的函子性}.
+        \item 按照自由模存在性的证明中同态的构造, 有限维自由模之间的同态也可以使用矩阵来表示, 并通过左乘列向量 (或现在少有人用的右乘行向量) 来进行作用.
+    \end{enumerate}
+\end{eg}
+
+\subsection*{张量积}
+我们也用泛性质来定义张量积.
+首先回忆映射$f:A\times B\to C$满足\textit{$R$-双线性}指的是对任意$a,u\in A,\ b,v\in B$与$r\in R$有
+\begin{gather*}
+    f(a+u,b)=f(a,b)+f(u,b)\\
+    f(a,b+v)=f(a,b)+f(a,v)\\
+    f(ra,b)=rf(a,b)=f(a,rb)
+\end{gather*}
+
+\begin{defn}
+    $R$-模$M,N$的\textbf{张量积}是一个$R$-模$T$与自然$R$-双线性映射$h:M\times N\to T$, 满足如下泛性质:
+    对任意$R$-模$E$与双线性映射$f:M\times N\to E$, 存在唯一的$\overline{f}\in\Hom_R(T,E)$使得以下图表交换
+    \[\begin{tikzcd}[row sep=large]
+        T \arrow[rd, dashed, "\widetilde{f}"] & \\
+        M\times N\arrow[r, "f"'] \arrow[u, "h"] & E
+    \end{tikzcd}\]
+\end{defn}
+
+类似命题~\ref{uniqueness of free module}~也有
+
+\begin{prop}
+    如果$R$-模$M,N$的张量积存在, 那么它在同构意义下唯一, 记为$M\otimes_R N$.
+\end{prop}
+\begin{proof}
+    证明是一模一样的, 如果$M,N$有两个张量积$A,B$, 考察以下交换图
+    \[\begin{tikzcd}[sep=large]
+        A \arrow[rr, "1_A"] \arrow[dr, dashed, "\overline{h_B}"] & & A\\
+        & B \arrow[ur, dashed, "\overline{h_A}"] &\\
+        & M\times N \arrow[uul, "h_A"] \arrow[u, "h_B"] \arrow[uur, "h_A"'] &
+    \end{tikzcd}\]
+    可以知道$\overline{h_A}\circ\overline{h_B}=1_A$, 同理也有$\overline{h_B}\circ\overline{h_A}=1_B$, 因此$A$和$B$是同构的.
+\end{proof}
+
+\begin{sym}
+    \begin{enumerate}[(1)]
+        \item 大部分时候, 如果环是确定的, 我们不会在$\otimes$下写下标.
+        \item 对$m\in M,n\in N$, 我们记$h(m,n):=m\otimes n$.
+    \end{enumerate}
+\end{sym}
+
+我们接下来着手证明张量积的存在性.
+
+\begin{proof}
+    设$(F,\iota)$是$M\times N$上的自由模, 又设$S$是$F$中所有形如
+    \begin{gather*}
+        (a+c,b)-(a,b)-(c,b)\\
+        (a,b+c)-(a,b)-(a,c)\\
+        (ra,b)-r(a,b)\\
+        (a,rb)-r(a,b)
+    \end{gather*}
+    的元素生成的子模.
+    考虑$F/S$, 设自然同态$\pi:F\to F/S$.
+    取自然映射$h=\pi\circ\iota$, 由$S$的定义立刻可以知道$h$是双线性的.
+    对于一个模$E$与双线性映射$f:M\times N\to E$, 考虑以下交换图:
+    \[\begin{tikzcd}[sep=large]
+        M\times N \arrow[dr, "\iota"] \arrow[ddr, "f"'] \arrow[rr, "h"] &  & F/S \arrow[ddl, dashed, "\widetilde{f}"]\\
+        & F \arrow[ur, "\pi"] \arrow[d, dashed, "\overline{f}"] & \\
+        & E &
+    \end{tikzcd}\]
+    自由模的泛性质保证了存在唯一的$\overline{f}:F\to E$使得左边的小三角形交换.
+    由于$f$是双线性的, 对任意$a,b,c$一定有
+    \begin{align*}
+        \overline{f}((a+c,b)-(a,b)-(c,b))&=\overline{f}((a+c,b))-\overline{f}((a,b))-\overline{f}((c,b))\\
+        &=\overline{f}(\iota(a+c,b))-\overline{f}(\iota(a,b))-\overline{f}(\iota(c,b))\\
+        &=f(a+c,b)-f(a,b)-f(c,b)\\
+        &=0
+    \end{align*}
+    同理也有
+    \begin{gather*}
+        \overline{f}((a,b+c)-(a,b)-(a,c))=0\\
+        \overline{f}((ra,b)-r(a,b))=0\\
+        \overline{f}((a,rb)-r(a,b))=0
+    \end{gather*}
+    因此一定有$S\subset\ker{\overline{f}}$.
+    那么由商模的泛性质 (命题~\ref{quotient module}~), 存在唯一的$\widetilde{f}:F/S\to E$使得右边的小三角形交换.
+    于是我们完成了整个证明.
+\end{proof}
+
+\begin{eg}\label{eg of tensor product}
+    \begin{enumerate}
+        \item 对任意$R$-模, 都有$M\otimes R\cong M$.
+        这只需要注意到我们可以取一个双线性的$h(m,r)=rm$, 并且对所有双线性的$f:M\times R\to N$, 取一个同态$\widetilde{f}(m)=f(m,1)$,
+        这样就有
+        \[f(m,r)=f(rm,1)=\widetilde{f}(rm)=(\widetilde{f}\circ h)(m,r)\]
+        满足泛性质. 那么由唯一性就有$M\otimes R\cong M$.
+        \item 张量积的行为可以十分诡异, 比如对Abel群 ($\mathbb{Z}$-模) $\mathbb{Z}/n\mathbb{Z}$与$\mathbb{Q}$, 考虑它们的自然映射:
+        \begin{align*}
+            h(a,b)&=h\left(na,\frac{b}{n}\right)\\
+            &=h\left(0,\frac{b}{n}\right)\\
+            &=0
+        \end{align*}
+        对任意$(a,b)\in\mathbb{Z}/n\mathbb{Z}\times\mathbb{Q}$成立, 所以有$\mathbb{Z}/n\mathbb{Z}\otimes\mathbb{Q}=0$.
+        两个非平凡的模的张量积可以是平凡模.
+    \end{enumerate}
+\end{eg}
+
+张量积的出现提供了一种模之间的``乘法'', 我们接下来讨论一些张量积简单的类似于乘法的性质.
+
+\begin{prop}[交换律]
+    对模$A,B$有$A\otimes B\cong B\otimes A$成立, 其中同构映射由
+    \[a\otimes b\mapsto b\otimes a\]
+    线性延拓给出.
+\end{prop}
+\begin{proof}
+    设双线性映射
+    \begin{gather*}
+        h:A\times B\to A\otimes B,\ (a,b)\mapsto a\otimes b\\
+        k:A\times B\to B\otimes A,\ (a,b)\mapsto b\otimes a
+    \end{gather*}
+    以及$R$-同态
+    \begin{gather*}
+        f:A\otimes B\to B\otimes A,\ a\otimes b\mapsto b\otimes a\\
+        g:B\otimes A\to A\otimes B,\ b\otimes a\mapsto a\otimes b
+    \end{gather*}
+    由线性延拓给出.
+    那么考察我们熟悉的交换图
+    \[\begin{tikzcd}[sep=large]
+        A\otimes B\arrow[rr, "1_{A\otimes B}"] \arrow[dr, "f"] & & A\otimes B\\
+        & B\otimes A \arrow[ur, "g"] &\\
+        & A\times B \arrow[uul, "h"] \arrow[u, "k"] \arrow[uur, "h"']
+    \end{tikzcd}\]
+    就可以得到结论.
+\end{proof}
+
+\begin{prop}[结合律]
+    对模$A,B,C$有$A\otimes(B\otimes C)\cong(A\otimes B)\otimes C$, 其中同构映射由
+    \[a\otimes(b\otimes c)\mapsto (a\otimes b)\otimes c\]
+    线性延拓给出.
+\end{prop}
+\begin{proof}
+    考虑由泛性质
+    \[\begin{tikzcd}[row sep=large]
+        A\otimes B\otimes C \arrow[dr, dashed, "\widetilde{f}"] & \\
+        A\times B\times C \arrow[u, "h"] \arrow[r, "f"] & M 
+    \end{tikzcd}\]
+    决定的模$A\otimes B\otimes C$, 其中$h$是一个三重线性映射 (定义类似双线性映射), 且对任意三重线性映射$f$均存在一个同态$\widetilde{f}$使得上图交换.
+    类似两个模的张量积存在的证明, 可以证明$A\otimes B\otimes C$存在且在同构意义下唯一.
+    我们证明$A\otimes(B\otimes C)$也满足如上泛性质.
+    设以下张量积的自然映射为
+    \begin{gather*}
+        h_1:A\times(B\otimes C)\to A\otimes(B\otimes C)\\
+        h_2:B\times C\to B\otimes C
+    \end{gather*}
+    给定三重线性映射$f:A\times B\times C\to M$.
+    对任意$a\in A$, 映射
+    \begin{align*}
+        f_a:B\times C&\to M\\
+        (b,c)&\mapsto f(a,b,c)
+    \end{align*}
+    关于$b,c$是双线性的, 因此由$B\otimes C$的泛性质, 存在唯一的$\widetilde{f_a}:B\otimes C\to M$满足$f_a=\widetilde{f_a}\circ h_2$.
+    再定义一个双线性映射
+    \begin{align*}
+        \overline{f}:A\times(B\otimes C)&\to M\\
+        (a,p)&\mapsto \widetilde{f_a}(p)
+    \end{align*}
+    我们验证它是双线性的.
+    由于$\widetilde{f_a}$是同态, 所以$\overline{f}$的第二个分量是线性的.
+    而设$\displaystyle p=\sum_{i}r_ib_i\otimes c_i$ (可以这么假设是因为张量积是一个自由模的商), 则有
+    \begin{align*}
+        \overline{f}(a,p)&=\widetilde{f_a}\left(\sum_{i}r_ib_i\otimes c_i\right)\\
+        &=\sum_ir_i\ \widetilde{f_a}(b_i\otimes c_i)\\
+        &=\sum_ir_i\ f_a(b_i,c_i)\quad (f_a=\widetilde{f_a}\circ h_2)\\
+        &=\sum_ir_i\ f(a,b_i,c_i)
+    \end{align*}
+    由于$f$是三重线性的, 那么由上式可知$\overline{f}$对第一个分量也是线性的.
+    那么由$A\otimes(B\otimes C)$的泛性质, 存在唯一的$\widetilde{f}$满足$\overline{f}=\widetilde{f}\circ h_1$.
+    取$h=h_1\circ(1_A\times h_2):A\times B\times C\to A\otimes(B\otimes C)$, 那么容易验证$h$是三重线性的, 并且有
+    \begin{align*}
+        \widetilde{f}\circ h&=\widetilde{f}\circ h_1\circ(1_A\times h_2)\\
+        &=\overline{f}\circ(1_A\times h_2)
+    \end{align*}
+    同时又有
+    \begin{align*}
+        \overline{f}\circ(1_A\times h_2)(a,b,c)&=\overline{f}(a,h_2(b,c))\\
+        &=\widetilde{f_a}\circ h_2(b,c)\\
+        &=f_a(b,c)\\
+        &=f(a,b,c)
+    \end{align*}
+    所以有$\widetilde{f}\circ h=f$, 因此$A\otimes(B\otimes C)$满足泛性质.
+    同理可证$(A\otimes B)\otimes C$也满足泛性质, 所以它们一定同构.
+    容易验证$a\otimes(b\otimes c)\mapsto (a\otimes b)\otimes c$给出了同构映射.
+\end{proof}
+
+\begin{prop}[分配律]\label{distribution}
+    对模$A$与一族模$\{B_i\}_{i\in I}$, 有如下同构成立:
+    \[A\otimes\left(\bigoplus_{i\in I}B_i\right)\cong\bigoplus_{i\in I}(A\otimes B_i)\]
+    同构映射由
+    \[a\otimes(b_i)\mapsto(a\otimes b_i)\]
+    线性延拓给出.
+\end{prop}
+\begin{proof}
+    设$\{B_i\}_{i\in I}$的嵌入映射为$\{\iota_i\}_{i\in I}$, $\{A\otimes B_i\}_{i\in I}$的嵌入映射为$\{\iota^\otimes_i\}_{i\in I}$.
+    对于任意$i\in I$, 考虑以下图表:
+    \[\begin{tikzcd}[row sep =large]
+        A\times B_i \arrow[dd, "1_A\times\iota_i"'] \arrow[dr, "f_i"] \arrow[rr, "h_i"] & &
+        A\otimes B_i \arrow[dl, dashed, "\widetilde{f_i}"'] \arrow[dd, "\iota^\otimes_i"] \\
+        & M & \\
+        A\times(\bigoplus_{i\in I}B_i) \arrow[ur, "f"] \arrow[rr, dashed, "h"] & &
+        \bigoplus_{i\in I}(A\otimes B_i) \arrow[ul, dashed, "\widetilde{f}"']
+    \end{tikzcd}\]
+    $f_i=f\circ(1_A\times\iota_i)$是一个双线性映射, $h_i$是$A\otimes B_i$的自然双线性映射.
+    那么由$A\otimes B_i$的泛性质, 存在唯一的同态$\widetilde{f_i}:A\otimes B_i\to M$使得上方的三角形交换.
+    又由外直和的泛性质 (命题~\ref{direct limit}), 存在唯一的$\displaystyle f:\bigoplus_{i\in I}(A\otimes B_i)\to M$使得每张图中右侧的三角形交换.
+    定义
+    \begin{align*}
+        h:A\otimes\bigoplus_{i\in I}B_i&\to\bigoplus_{i\in I}(A\otimes B_i)\\
+        \left(a,\sum_{b_i\in B_i}r_ib_i\right)&\mapsto\sum_{b_i\in B_i}r_ia\otimes b_i
+    \end{align*}
+    那么$h$自然是双线性的.
+    以下验证泛性质:
+    \begin{align*}
+        (\widetilde{f}\circ h)\left(a,\sum_{b_i\in B_i}r_ib_i\right)&=\widetilde{f}\left(a,\sum_{b_i\in B_i}r_ib_i\right)\\
+        &=\sum_{b_i\in B_i}r_i(\ \widetilde{f}\circ\iota_i^\otimes)(a\otimes b_i)\\
+        &=\sum_{b_i\in B_i}r_i\ f_i(a\otimes b_i)\\
+        &=\sum_{b_i\in B_i}r_i\ f(a,b_i)\\
+        &=f\left(a,\sum_{b_i\in B_i}r_ib_i\right)
+    \end{align*}
+    所以有
+    \[A\otimes\left(\bigoplus_{i\in I}B_i\right)\cong\bigoplus_{i\in I}(A\otimes B_i)\]
+    容易验证$a\otimes(b_i)\mapsto(a\otimes b_i)$给出了同构映射.
+\end{proof}
+
+当我们的目光转向向量空间时, 分配律会给我们一些很强的结论.
+
+\begin{prop}
+    设$V,W$是有限维向量空间, 那么有$\dim{V\otimes W}=\dim{V}\dim{W}$.
+\end{prop}
+\begin{proof}
+    用自然数为域$k$加上指标, 可以得到一族$k$-向量空间, 其中每一个都是$k$自身的一个复制.
+    设$\dim V=m,\dim W=n$, 那么有$V\cong k^m,W\cong k^n$, 则$V\otimes W\cong k^m\otimes k^n$, 且有
+    \begin{align*}
+        k^m\otimes k^n&=\left(\bigoplus_{i=1}^mk_i\right)\otimes\left(\bigoplus_{j=1}^nk_j\right)\\
+        &\cong\bigoplus_{1\leq i\leq m,1\leq j\leq n}k_i\otimes k_j\quad\text{(分配律)}\\
+        &\cong\bigoplus_{1\leq i\leq mn}k_i\quad\text{(例~\ref{eg of tensor product})}\\
+        &=k^{mn}
+    \end{align*}
+    所以$V\otimes W\cong k^{mn}$, 因此是$mn$维的.
+\end{proof}
+
+这件事情还可以由另一种方式得到:
+\begin{prop}
+    设$V,W$是有限维向量空间, 分别以$\{e_1,\cdots,e_m\}$与$\{g_1,\cdots,g_n\}$为一组基, 那么$\mathcal{B}:=\{e_i\otimes g_j|1\leq i\leq m,1\leq j\leq n\}$是$V\otimes W$的一组基.
+    从而可以推出$V,W$是$mn$维的.
+\end{prop}
+\begin{proof}
+    向量空间就是域上的自由模, 我们尝试通过处理泛性质来证明这个命题.
+    设$\iota:\mathcal{B}\to V\otimes W$是嵌入映射.
+    对任意的$k$-向量空间$A$, 给定映射$f:\mathcal{B}\to A$, 我们定义一个双线性映射
+    \begin{align*}
+        \overline{f}:V\times W&\to A\\
+        (e_i,g_j)&\mapsto f(e_i\otimes g_j)
+    \end{align*}
+    由于双线性映射被其在两组基的Descartes积上的取值唯一确定, 所以上述定义是良好的.
+    我们考察以下图表
+    \[\begin{tikzcd}[row sep=large]
+        \mathcal{B}\arrow[r, "\iota"] \arrow[dr, "f"'] &
+        V\otimes W \arrow[d, dashed, "\widetilde{f}"] &
+        V\times W \arrow[l, "h"'] \arrow[dl, "\overline{f}"]\\
+        & A &
+    \end{tikzcd}\]
+    由$V\otimes W$的泛性质, 存在唯一的同态$\widetilde{f}$使得右侧小三角形交换.
+    而对左侧小三角形, 我们有
+    \begin{align*}
+        (\widetilde{f}\circ\iota)(e_i\otimes g_j)&=\widetilde{f}(e_i\otimes g_j)\\
+        &=(\widetilde{f}\circ h)(e_i,g_j)\\
+        &=\overline{f}(e_i,g_j)\\
+        &=f(e_i\otimes g_j)
+    \end{align*}
+    从而左侧小三角形交换, $(V\otimes W,\iota)$满足自由模的泛性质.
+    所以$\mathcal{B}$是$V\otimes W$的一组基.
 \end{proof}
