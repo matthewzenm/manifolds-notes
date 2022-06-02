@@ -1,5 +1,6 @@
-\chapter{张量}
-本章的内容比较偏向代数, 如果读者只关心代数工具在几何上的应用的话, 不妨跳过一些证明, 尤其是有许多交换图的那些.
+\chapter{多重线性代数}
+本章介绍之后的笔记中需要用到的代数内容.
+我们的讨论比较偏向代数本身, 如果读者只关心代数工具在几何上的应用的话, 不妨跳过一些证明, 尤其是有许多交换图的那些.
 
 本章中所有的环都有单位元.
 
@@ -172,13 +173,13 @@ $N$是Abel加群$M$的子群, 所以存在一个商群$M/N$.
 注意到对偶映射把箭头反了过来.
 对偶映射还有一个有趣的性质:
 \begin{prop}
-    设$f\in\Hom_k(V,W)$在$V,W$各自的一组基下的矩阵为$A$, 那么$f^*$在这两组基的对偶基下的矩阵为$A^\mathsf{T}$.
+    设$f\in\Hom_k(V,W)$在$V,W$各自的一组基下的矩阵为$A$, 那么$f^*$在这两组基的对偶基下的矩阵为$A^\top$.
 \end{prop}
 \begin{proof}
     对任意一个$w^*\in W$, 设它在$W$的对偶基下的坐标为列向量$Q$.
-    那么由~\eqref{element in dual space}~式可知, 它作为一个线性映射在$W$的基下的矩阵为$Q^\mathsf{T}$.
-    因此$w^*$在$f$作用下的像在$V$的基下的矩阵为$Q^\mathsf{T}A$, 那么$f^*(w^*)$在$V$的对偶基下的坐标为$A^\mathsf{T}Q$.
-    从而$f^*$在对应对偶基下的矩阵为$A^\mathsf{T}$.
+    那么由~\eqref{element in dual space}~式可知, 它作为一个线性映射在$W$的基下的矩阵为$Q^\top$.
+    因此$w^*$在$f$作用下的像在$V$的基下的矩阵为$Q^\top A$, 那么$f^*(w^*)$在$V$的对偶基下的坐标为$A^\top Q$.
+    从而$f^*$在对应对偶基下的矩阵为$A^\top$.
 \end{proof}
 
 命题~\ref{dim of dual space}~保证了$V$与$V^*$总是同构的, 但这个同构并不是\textit{自然}的:
@@ -355,7 +356,7 @@ $N$是Abel加群$M$的子群, 所以存在一个商群$M/N$.
 \end{prop}
 \begin{proof}
     证明是一模一样的, 如果$M,N$有两个张量积$A,B$, 考察以下交换图
-    \[\begin{tikzcd}[sep=large]
+    \[\begin{tikzcd}[row sep=large]
         A \arrow[rr, "1_A"] \arrow[dr, dashed, "\overline{h_B}"] & & A\\
         & B \arrow[ur, dashed, "\overline{h_A}"] &\\
         & M\times N \arrow[uul, "h_A"] \arrow[u, "h_B"] \arrow[uur, "h_A"'] &
@@ -384,7 +385,7 @@ $N$是Abel加群$M$的子群, 所以存在一个商群$M/N$.
     考虑$F/S$, 设自然同态$\pi:F\to F/S$.
     取自然映射$h=\pi\circ\iota$, 由$S$的定义立刻可以知道$h$是双线性的.
     对于一个模$E$与双线性映射$f:M\times N\to E$, 考虑以下交换图:
-    \[\begin{tikzcd}[sep=large]
+    \[\begin{tikzcd}[row sep=large]
         M\times N \arrow[dr, "\iota"] \arrow[ddr, "f"'] \arrow[rr, "h"] &  & F/S \arrow[ddl, dashed, "\widetilde{f}"]\\
         & F \arrow[ur, "\pi"] \arrow[d, dashed, "\overline{f}"] & \\
         & E &
@@ -426,6 +427,22 @@ $N$是Abel加群$M$的子群, 所以存在一个商群$M/N$.
     \end{enumerate}
 \end{eg}
 
+除了对模本身做张量积, 模的同态之间也可以做张量积.
+\begin{lem}
+    对模$M,N,A,B$与同态$f:M\to A,g:N\to B$, 存在唯一的同态$f\otimes g$使得以下图表交换
+    \[\begin{tikzcd}[row sep=large]
+        M\times N \arrow[r, "f\times g"] \arrow[d, "h_1"] & A\times B \arrow[d, "h_2"]\\
+        M\otimes N \arrow[r, "f\otimes g"] & A\otimes B
+    \end{tikzcd}\]
+    并且$f\otimes g$由
+    \[a\otimes b\mapsto f(a)\otimes g(b)\]
+    线性延拓给出.
+\end{lem}
+\begin{proof}
+    由于$h_2\circ(f\times g)$是双线性的, 泛性质保证了$f\otimes g$的存在.
+    $(f\otimes g)(a\otimes b)=f(a)\otimes g(b)$容易由交换性验证.
+\end{proof}
+
 张量积的出现提供了一种模之间的``乘法'', 我们接下来讨论一些张量积简单的类似于乘法的性质.
 
 \begin{prop}[交换律]
@@ -446,7 +463,7 @@ $N$是Abel加群$M$的子群, 所以存在一个商群$M/N$.
     \end{gather*}
     由线性延拓给出.
     那么考察我们熟悉的交换图
-    \[\begin{tikzcd}[sep=large]
+    \[\begin{tikzcd}[row sep=large]
         A\otimes B\arrow[rr, "1_{A\otimes B}"] \arrow[dr, "f"] & & A\otimes B\\
         & B\otimes A \arrow[ur, "g"] &\\
         & A\times B \arrow[uul, "h"] \arrow[u, "k"] \arrow[uur, "h"']
@@ -462,11 +479,11 @@ $N$是Abel加群$M$的子群, 所以存在一个商群$M/N$.
 \begin{proof}
     考虑由泛性质
     \[\begin{tikzcd}[row sep=large]
-        A\otimes B\otimes C \arrow[dr, dashed, "\widetilde{f}"] & \\
+        U[A,B,C] \arrow[dr, dashed, "\widetilde{f}"] & \\
         A\times B\times C \arrow[u, "h"] \arrow[r, "f"] & M 
     \end{tikzcd}\]
-    决定的模$A\otimes B\otimes C$, 其中$h$是一个三重线性映射 (定义类似双线性映射), 且对任意三重线性映射$f$均存在一个同态$\widetilde{f}$使得上图交换.
-    类似两个模的张量积存在的证明, 可以证明$A\otimes B\otimes C$存在且在同构意义下唯一.
+    决定的模$U[A,B,C]$, 其中$h$是一个三重线性映射 (定义类似双线性映射), 且对任意三重线性映射$f$均存在一个同态$\widetilde{f}$使得上图交换.
+    类似两个模的张量积存在的证明, 可以证明$U[A,B,C]$存在且在同构意义下唯一.
     我们证明$A\otimes(B\otimes C)$也满足如上泛性质.
     设以下张量积的自然映射为
     \begin{gather*}
@@ -523,7 +540,7 @@ $N$是Abel加群$M$的子群, 所以存在一个商群$M/N$.
 \begin{proof}
     设$\{B_i\}_{i\in I}$的嵌入映射为$\{\iota_i\}_{i\in I}$, $\{A\otimes B_i\}_{i\in I}$的嵌入映射为$\{\iota^\otimes_i\}_{i\in I}$.
     对于任意$i\in I$, 考虑以下图表:
-    \[\begin{tikzcd}[row sep =large]
+    \[\begin{tikzcd}[column sep=small]
         A\times B_i \arrow[dd, "1_A\times\iota_i"'] \arrow[dr, "f_i"] \arrow[rr, "h_i"] & &
         A\otimes B_i \arrow[dl, dashed, "\widetilde{f_i}"'] \arrow[dd, "\iota^\otimes_i"] \\
         & M & \\
@@ -601,3 +618,134 @@ $N$是Abel加群$M$的子群, 所以存在一个商群$M/N$.
     从而左侧小三角形交换, $(V\otimes W,\iota)$满足自由模的泛性质.
     所以$\mathcal{B}$是$V\otimes W$的一组基.
 \end{proof}
+
+接下来我们让对偶空间加入讨论. 以下我们默认$V=V^{**}$, 即将有限维向量空间的双重对偶视为与自身是等同的.
+同时, 我们还假设所有向量空间都是有限维的.
+一个小小的引理是对偶关于张量积``分配''.
+\begin{lem}
+    设$V,W$是向量空间, 那么$(V\otimes W)^*$与$V^*\otimes W^*$自然同构, 即同构映射不依赖于基的选取.
+\end{lem}
+\begin{proof}
+    设$V,W$分别有基$\{v_i\}_{1\leq i\leq m}$与$\{w_i\}_{1\leq i\leq n}$, 这两组基给出它们到各自对偶空间的同构$d^V_1:V\to V^*$, $d^W_1:W\to W^*$与$d_1:V\otimes W\to (V\otimes W)^*$.
+    设它们各自的另一组基为$\{e_i\}_{1\leq i\leq m}$, $\{g_i\}_{1\leq i\leq n}$, 及同构$d^V_2:V\to V^*$, $d^W_2:W\to W^*$与$d_2:V\otimes W\to(V\otimes W)^*$.
+    考虑图表
+    \begin{equation}
+        \begin{tikzcd}[column sep=0]
+            V^*\times W^* \arrow[rr, "d^V_1\times d^W_1"] \arrow[dd, "d^V_2\times d^W_2"'] \arrow[dr, "h_1"] & &
+            V\times W \arrow[dd, "d_1\circ h_2"]\\
+            & V^*\otimes W^* \arrow[dr, dashed, "f"] &\\
+            V\times W \arrow[rr, "d_2\circ h_2"] & & (V\otimes W)^*
+        \end{tikzcd}\label{comudiag for v*w*=(vw)*}
+    \end{equation}
+    我们想要证明大矩形是交换的.
+    为此, 设$p_1=d_1\circ h_2\circ(d_1^V\times d_1^W)$, $p_2=d_2\circ h_2\circ(d_2^V\times d_2^W)$.
+    任取$V,W$中的两个元素, 利用双线性性计算有
+    \begin{align*}
+        p_1\left(\sum_{i=1}^ma^iv_i,\sum_{j=1}^nb^jw_j\right)=\sum_{i,j}a^ib^j(v_i\otimes w_j)^*
+    \end{align*}
+    设基变换
+    \begin{gather*}
+        v_i=\sum_{k=1}^mx^k_ie_k\quad i=1,2,\cdots,m\\
+        w_i=\sum_{l=1}^ny^l_ig_l\quad i=1,2,\cdots,n
+    \end{gather*}
+    那么有
+    \begin{equation}
+        \left(\sum_{i=1}^ma^iv_i,\sum_{j=1}^nb^jw_j\right)=\left(\sum_{i,k}a^ix^k_ie_k,\sum_{j,l}b^jy^l_jg_l\right)\label{tensor for 2 basis}
+    \end{equation}
+    且有
+    \begin{align*}
+        \sum_{i,j}a^ib^j(v_i\otimes w_j)^*&=\sum_{i,j}a^ib^j\left(\sum_{k}x^k_ie_k\otimes\sum_{l}y^l_jg_l\right)^*\\
+        &=\sum_{i,j,k,l}a^ib^jx^k_iy^l_j(e_k\otimes g_l)^*
+    \end{align*}
+    以及
+    \begin{align*}
+        p_2\left(\sum_{i=1}^ma^iv_i,\sum_{j=1}^nb^jw_j\right)&=\left(\sum_{i,k}a^ix^k_ie_k\otimes\sum_{j,l}b^jy^l_jg_l\right)^*\quad\text{(由式~\eqref{tensor for 2 basis})}\\
+        &=\sum_{i,j,k,l}a^ib^jx^k_iy^l_j(e_k\otimes g_l)^*
+    \end{align*}
+    所以大矩形是交换的.
+    那么由张量积的泛性质, 存在唯一的线性映射$f:V^*\otimes W^*\to(V\otimes W)^*$使得整个图交换, 并且注意到$f$不依赖某个特定的基的选取.
+    考虑由$v_i^*\otimes w_j^*\mapsto (v_i\otimes w_j)^*$线性延拓得到的映射$f'$, $f'$将$V^*\otimes W^*$的一组基映为$(V\otimes W)^*$的一组基, 从而是一个同构.
+    又注意到$f'$显然可以作为虚线处的映射使得图~\eqref{comudiag for v*w*=(vw)*}~交换, 所以有$f=f'$.
+    因此$f$是同构, 并且我们前面证明了它不依赖于基的选取.
+    所以$V^*\otimes W^*$与$(V\otimes W)^*$自然同构.
+\end{proof}
+
+这是我们第一次用张量的分量进行计算.
+
+关于对偶空间有两个基础的性质:
+\begin{prop}\label{linear and tensor}
+    对向量空间$V,W$, 有自然同构$V^*\otimes W\cong\Hom(V,W)$.
+\end{prop}
+\begin{proof}
+    设$h:V^*\times W\to V^*\otimes W$是自然映射.
+    定义一个双线性映射
+    \begin{align*}
+        f:V^*\times W&\to\Hom(V,W)\\
+        f(v^*,w):a&\mapsto v^*(a)w
+    \end{align*}
+    由泛性质, 存在一个线性映射$\widetilde{f}:V^*\otimes W\to\Hom(V,W)$使得$f=\widetilde{f}\circ h$.
+    我们给出$\widetilde{f}$的逆映射$g$.
+    任取$V,W$的基$\{v_i\}_{1\leq i\leq m}$与$\{w_i\}_{1\leq i\leq n}$, 如果$\sigma\in\Hom(V,W)$满足
+    \[\sigma(v_i)=\sum_{j}=a_{ji}w_j,\quad i=1,2,\cdots,m\]
+    那么定义$\displaystyle g(\sigma)=\sum_{i,j}a_{ji}v_i\otimes w_j$.
+    注意到
+    \begin{align*}
+        (\widetilde{f}\circ g)(\sigma)&=\widetilde{f}\left(\sum_{i,j}a_{ji}v_i\otimes w_j\right)\\
+        &=\sum_{i,j}a_{ji}\ \widetilde{f}(v_i\otimes w_j)\\
+        &=\sum_{i,j}a_{ji}\ f(v_i^*,w_j)\\
+        &=\sum_{i,j}a_{ji}v_i^*(\quad)w_j
+    \end{align*}
+    注意到$\displaystyle\sum_{i,j}a_{ji}v_i^*(\quad)w_j$在基$\{v_i\}_{1\leq i\leq m}$上取值与$\sigma$相同, 所以它与$\sigma$相等.
+    因此$\widetilde{f}\circ g=1_{\Hom(V,W)}$, 所以$\widetilde{f}$是同构\footnote{想想为什么不需要验证$g\circ\widetilde{f}=1_{V^*\otimes W}$?}.
+    由于基是任取的, 所以同构一定是自然的.
+\end{proof}
+
+\begin{prop}\label{bilinear and tensor}
+    设$B(U,V;W)$是全体$U\times V\to W$双线性映射的向量空间, 那么有自然同构$B(U,V;W)\cong U^*\otimes V^*\otimes W$.
+\end{prop}
+\begin{proof}
+    由$U\otimes V$的泛性质, $B(U,V;W)$中的双线性映射与$\Hom(U\otimes V,W)$中的线性映射一一对应, 结合命题~\ref{linear and tensor}~有
+    \begin{align*}
+        B(U,V;W)&\cong\Hom(U\otimes V,W)\\
+        &\cong (U\otimes V)^*\otimes W\\
+        &\cong U^*\otimes V^*\otimes W\qedhere
+    \end{align*}
+\end{proof}
+
+\begin{sym}
+    对于一个$R$-模, 我们记
+    \begin{align*}
+        &\bigotimes\nolimits^0 M:=R\\
+        &\bigotimes\nolimits^1 M:=M\\
+        &\bigotimes\nolimits^n M:=\underbrace{M\otimes_R M\otimes_R\cdots\otimes_R M}_{n\text{次}},\quad n\geq 2
+    \end{align*}
+    而对于一个$k$-向量空间$V$, 按照交换律与结合律, $V$与它的对偶空间$V^*$的任意有限次张量积总会同构于
+    \[\left(\bigotimes\nolimits^r V\right)\otimes\left(\bigotimes\nolimits^s V^*\right)\]
+    我们记
+    \[\tensor^{r,s}(V):=\left(\bigotimes\nolimits^r V\right)\otimes\left(\bigotimes\nolimits^s V^*\right)\]
+    并把$r,s$分别称为\textbf{反变指数}与\textbf{共变指数}.
+\end{sym}
+
+\begin{rem}
+    对任意$n$个模及以它们为定义域的$n$重线性同态, 考虑由泛性质
+    \[\begin{tikzcd}[row sep=huge]
+        U[M_1,M_2,\cdots,M_n] \arrow[dr, dashed, "\widetilde{f}"] & \\
+        M_1\times M_2\times\cdots\times M_n \arrow[r, "f"] \arrow[u, "h"] & N
+    \end{tikzcd}\]
+    决定的模$U[M_1,M_2,\cdots,M_n]$.
+    可以证明$U[M_1,M_2,\cdots,M_n]$存在且自然同构于$M_1\otimes M_2\otimes\cdots\otimes M_n$ (\parencite[命题B-5.17, B-5.18]{Rotman_AdvMdnAlg}).
+    那么类似于命题~\ref{bilinear and tensor}, 容易证明所有$r+s$重线性映射$(V^*)^r\times V^s\to k$构成的空间等同于$\tensor^{r,s}(V)$.
+
+    古典意义上的一个\textbf{张量}指的是一个$(V^*)^r\times V^s\to k$的多重线性映射, 也即$\tensor^{r,s}(V)$中的一个元素$v_1\otimes\cdots v_r\otimes v^*_{r+1}\otimes\cdots\otimes v^*_s$.
+    其中$v_1\otimes\cdots v_r$称为\textbf{反变部分}, $v^*_{r+1}\otimes\cdots\otimes v^*_s$称为\textbf{共变部分}.
+    $r=0$时的张量称为\textbf{共变张量}, $s=0$时的张量称为\textbf{反变张量}.
+
+    古典的张量是直接使用多重线性映射定义的, 但这样的定义只适用于有限维向量空间.
+    因此我们把古典张量理论中的一些名词列举了出来, 方便读者阅读其他资料, 但之后的笔记中我们会为了保持``\textit{代数的纯洁性}''而不怎么使用这些名词.
+\end{rem}
+
+\section{张量代数与外代数}
+本节为微分形式这一微分几何中的重要工具铺路.
+不是很希望了解具体代数构造的读者可以直接跳到最后外代数的部分阅读外代数的性质.
+\subsection*{代数与分次代数}
+\textit{代数}一词在这里指的是一种建立在模上的代数结构, 虽然容易引起混淆, 但是在学界广泛使用, 我们也依例沿用.
