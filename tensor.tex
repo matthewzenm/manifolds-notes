@@ -285,12 +285,13 @@ $N$是Abel加群$M$的子群, 所以存在一个商群$M/N$.
 \end{prop}
 \begin{proof}
     对$\displaystyle m=\sum_{m_i\in M_i}r_im_i$ (注意到这是一个有限和), 直接定义
-    \[f(m)=\sum_{m_i\in M_i}r_i\ f_i(m_i)\]
-    如果还有另一个同态满足条件, 那么有
+    \[f(m)=\sum_{m_i\in M_i}r_if_i(m_i)\]
+    容易验证$f$满足要求.
+    如果还有另一个同态$g$满足条件, 那么有
     \begin{align*}
         g\left(\sum_{m_i\in M_i}r_im_i\right)&=\sum_{m_i\in M_i}r_ig(m_i)\\
         &=\sum_{m_i\in M_i}r_i(g\circ\iota_i)(m_i)\\
-        &=\sum_{m_i\in M_i}r_i\ f_i(m_i)\\
+        &=\sum_{m_i\in M_i}r_if_i(m_i)\\
         &=f\left(\sum_{m_i\in M_i}r_im_i\right)
     \end{align*}
     从而$g=f$, 这个同态是唯一的.
@@ -316,7 +317,7 @@ $N$是Abel加群$M$的子群, 所以存在一个商群$M/N$.
 
 \begin{eg}
     \begin{enumerate}[(1)]
-        \item 设$\mathcal{B}$是向量空间$V$的一组基, 那么$V$就是$\mathcal{B}$上的向量空间.
+        \item 设$\mathcal{B}$是向量空间$V$的一组基, 那么$V$就是$\mathcal{B}$上的自由$k$-模.
         于是$V$由$\mathcal{B}$的基数决定, 即由维度决定.
         从而命题~\ref{uniqueness of free module}~再次给出了``向量空间同构当且仅当他们维度相等''这个命题的证明.
         \item 考察以下交换图:
@@ -351,7 +352,7 @@ $N$是Abel加群$M$的子群, 所以存在一个商群$M/N$.
 
 类似命题~\ref{uniqueness of free module}~也有
 
-\begin{prop}
+\begin{prop}\label{uniqueness of tensor product}
     如果$R$-模$M,N$的张量积存在, 那么它在同构意义下唯一, 记为$M\otimes_R N$.
 \end{prop}
 \begin{proof}
@@ -405,7 +406,7 @@ $N$是Abel加群$M$的子群, 所以存在一个商群$M/N$.
         \overline{f}((a,rb)-r(a,b))=0
     \end{gather*}
     因此一定有$S\subset\ker{\overline{f}}$.
-    那么由商模的泛性质 (命题~\ref{quotient module}~), 存在唯一的$\widetilde{f}:F/S\to E$使得右边的小三角形交换.
+    那么由商模的泛性质 (命题~\ref{quotient module}), 存在唯一的$\widetilde{f}:F/S\to E$使得右边的小三角形交换.
     于是我们完成了整个证明.
 \end{proof}
 
@@ -428,7 +429,7 @@ $N$是Abel加群$M$的子群, 所以存在一个商群$M/N$.
 \end{eg}
 
 除了对模本身做张量积, 模的同态之间也可以做张量积.
-\begin{lem}
+\begin{lem}\label{tensor of map}
     对模$M,N,A,B$与同态$f:M\to A,g:N\to B$, 存在唯一的同态$f\otimes g$使得以下图表交换
     \[\begin{tikzcd}[row sep=large]
         M\times N \arrow[r, "f\times g"] \arrow[d, "h_1"] & A\times B \arrow[d, "h_2"]\\
@@ -507,9 +508,9 @@ $N$是Abel加群$M$的子群, 所以存在一个商群$M/N$.
     而设$\displaystyle p=\sum_{i}r_ib_i\otimes c_i$ (可以这么假设是因为张量积是一个自由模的商), 则有
     \begin{align*}
         \overline{f}(a,p)&=\widetilde{f_a}\left(\sum_{i}r_ib_i\otimes c_i\right)\\
-        &=\sum_ir_i\ \widetilde{f_a}(b_i\otimes c_i)\\
-        &=\sum_ir_i\ f_a(b_i,c_i)\quad (f_a=\widetilde{f_a}\circ h_2)\\
-        &=\sum_ir_i\ f(a,b_i,c_i)
+        &=\sum_ir_i\widetilde{f_a}(b_i\otimes c_i)\\
+        &=\sum_ir_if_a(b_i,c_i)\quad (f_a=\widetilde{f_a}\circ h_2)\\
+        &=\sum_ir_if(a,b_i,c_i)
     \end{align*}
     由于$f$是三重线性的, 那么由上式可知$\overline{f}$对第一个分量也是线性的.
     那么由$A\otimes(B\otimes C)$的泛性质, 存在唯一的$\widetilde{f}$满足$\overline{f}=\widetilde{f}\circ h_1$.
@@ -552,16 +553,16 @@ $N$是Abel加群$M$的子群, 所以存在一个商群$M/N$.
     又由外直和的泛性质 (命题~\ref{direct limit}), 存在唯一的$\displaystyle f:\bigoplus_{i\in I}(A\otimes B_i)\to M$使得每张图中右侧的三角形交换.
     定义
     \begin{align*}
-        h:A\otimes\bigoplus_{i\in I}B_i&\to\bigoplus_{i\in I}(A\otimes B_i)\\
+        h:A\otimes\left(\bigoplus_{i\in I}B_i\right)&\to\bigoplus_{i\in I}(A\otimes B_i)\\
         \left(a,\sum_{b_i\in B_i}r_ib_i\right)&\mapsto\sum_{b_i\in B_i}r_ia\otimes b_i
     \end{align*}
     那么$h$自然是双线性的.
     以下验证泛性质:
     \begin{align*}
         (\widetilde{f}\circ h)\left(a,\sum_{b_i\in B_i}r_ib_i\right)&=\widetilde{f}\left(a,\sum_{b_i\in B_i}r_ib_i\right)\\
-        &=\sum_{b_i\in B_i}r_i(\ \widetilde{f}\circ\iota_i^\otimes)(a\otimes b_i)\\
-        &=\sum_{b_i\in B_i}r_i\ f_i(a\otimes b_i)\\
-        &=\sum_{b_i\in B_i}r_i\ f(a,b_i)\\
+        &=\sum_{b_i\in B_i}r_i(\widetilde{f}\circ\iota_i^\otimes)(a\otimes b_i)\\
+        &=\sum_{b_i\in B_i}r_if_i(a\otimes b_i)\\
+        &=\sum_{b_i\in B_i}r_if(a,b_i)\\
         &=f\left(a,\sum_{b_i\in B_i}r_ib_i\right)
     \end{align*}
     所以有
@@ -569,10 +570,10 @@ $N$是Abel加群$M$的子群, 所以存在一个商群$M/N$.
     容易验证$a\otimes(b_i)\mapsto(a\otimes b_i)$给出了同构映射.
 \end{proof}
 
-当我们的目光转向向量空间时, 分配律会给我们一些很强的结论.
+当我们的目光转向有限维向量空间时, 分配律会给我们一些很强的结论.
 
 \begin{prop}
-    设$V,W$是有限维向量空间, 那么有$\dim{V\otimes W}=\dim{V}\dim{W}$.
+    设$V,W$是向量空间, 那么有$\dim{V\otimes W}=\dim{V}\dim{W}$.
 \end{prop}
 \begin{proof}
     用自然数为域$k$加上指标, 可以得到一族$k$-向量空间, 其中每一个都是$k$自身的一个复制.
@@ -588,7 +589,7 @@ $N$是Abel加群$M$的子群, 所以存在一个商群$M/N$.
 
 这件事情还可以由另一种方式得到:
 \begin{prop}
-    设$V,W$是有限维向量空间, 分别以$\{e_1,\cdots,e_m\}$与$\{g_1,\cdots,g_n\}$为一组基, 那么$\mathcal{B}:=\{e_i\otimes g_j|1\leq i\leq m,1\leq j\leq n\}$是$V\otimes W$的一组基.
+    设$V,W$是向量空间, 分别以$\{e_1,\cdots,e_m\}$与$\{g_1,\cdots,g_n\}$为一组基, 那么$\mathcal{B}:=\{e_i\otimes g_j|1\leq i\leq m,1\leq j\leq n\}$是$V\otimes W$的一组基.
     从而可以推出$V,W$是$mn$维的.
 \end{prop}
 \begin{proof}
@@ -691,8 +692,8 @@ $N$是Abel加群$M$的子群, 所以存在一个商群$M/N$.
     注意到
     \begin{align*}
         (\widetilde{f}\circ g)(\sigma)&=\widetilde{f}\left(\sum_{i,j}a_{ji}v_i\otimes w_j\right)\\
-        &=\sum_{i,j}a_{ji}\ \widetilde{f}(v_i\otimes w_j)\\
-        &=\sum_{i,j}a_{ji}\ f(v_i^*,w_j)\\
+        &=\sum_{i,j}a_{ji}\widetilde{f}(v_i\otimes w_j)\\
+        &=\sum_{i,j}a_{ji}f(v_i^*,w_j)\\
         &=\sum_{i,j}a_{ji}v_i^*(\quad)w_j
     \end{align*}
     注意到$\displaystyle\sum_{i,j}a_{ji}v_i^*(\quad)w_j$在基$\{v_i\}_{1\leq i\leq m}$上取值与$\sigma$相同, 所以它与$\sigma$相等.
@@ -726,6 +727,8 @@ $N$是Abel加群$M$的子群, 所以存在一个商群$M/N$.
     并把$r,s$分别称为\textbf{反变指数}与\textbf{共变指数}.
 \end{sym}
 
+实际上, 前面的内容中我们只用到了向量空间的\textit{自由性质}, 所以前面关于有限维向量空间的命题都可以换成关于有限生成自由模的命题.
+
 \begin{rem}
     对任意$n$个模及以它们为定义域的$n$重线性同态, 考虑由泛性质
     \[\begin{tikzcd}[row sep=huge]
@@ -736,8 +739,8 @@ $N$是Abel加群$M$的子群, 所以存在一个商群$M/N$.
     可以证明$U[M_1,M_2,\cdots,M_n]$存在且自然同构于$M_1\otimes M_2\otimes\cdots\otimes M_n$ (\parencite[命题B-5.17, B-5.18]{Rotman_AdvMdnAlg}).
     那么类似于命题~\ref{bilinear and tensor}, 容易证明所有$r+s$重线性映射$(V^*)^r\times V^s\to k$构成的空间等同于$\tensor^{r,s}(V)$.
 
-    古典意义上的一个\textbf{张量}指的是一个$(V^*)^r\times V^s\to k$的多重线性映射, 也即$\tensor^{r,s}(V)$中的一个元素$v_1\otimes\cdots v_r\otimes v^*_{r+1}\otimes\cdots\otimes v^*_s$.
-    其中$v_1\otimes\cdots v_r$称为\textbf{反变部分}, $v^*_{r+1}\otimes\cdots\otimes v^*_s$称为\textbf{共变部分}.
+    古典意义下的一个\textbf{张量}指的是一个$(V^*)^r\times V^s\to k$的多重线性映射, 也即$\tensor^{r,s}(V)$中的一个元素$v_1\otimes\cdots v_r\otimes v^*_1\otimes\cdots\otimes v^*_s$.
+    其中$v_1\otimes\cdots v_r$称为\textbf{反变部分}, $v^*_1\otimes\cdots\otimes v^*_s$称为\textbf{共变部分}.
     $r=0$时的张量称为\textbf{共变张量}, $s=0$时的张量称为\textbf{反变张量}.
 
     古典的张量是直接使用多重线性映射定义的, 但这样的定义只适用于有限维向量空间.
@@ -746,6 +749,239 @@ $N$是Abel加群$M$的子群, 所以存在一个商群$M/N$.
 
 \section{张量代数与外代数}
 本节为微分形式这一微分几何中的重要工具铺路.
-不是很希望了解具体代数构造的读者可以直接跳到最后外代数的部分阅读外代数的性质.
-\subsection*{代数与分次代数}
-\textit{代数}一词在这里指的是一种建立在模上的代数结构, 虽然容易引起混淆, 但是在学界广泛使用, 我们也依例沿用.
+不是很希望了解具体代数构造的读者可以直接阅读第二小节外代数的性质.
+\subsection*{张量代数与外代数的构造}
+\textit{代数}一词在这里指的是一种建立在模上的代数结构, 虽然容易引起混淆, 但是在学界广泛使用已久, 我们也依例沿用.
+代数的等价定义有许多种, 我们这里选取~\parencite{Rotman_AdvMdnAlg}~上的定义.
+
+\begin{defn}
+    设$k$是一个交换环, 如果环$R$是一个$k$-模并且对任意$a\in k$, $r,s\in R$都有
+    \begin{equation}
+        a(rs)=(ar)s=r(as)\label{def of alg}
+    \end{equation}
+    那么称$R$是一个\textbf{$k$-代数}.
+\end{defn}
+
+我们需要用到的一类特殊的代数叫做分次代数.
+\begin{defn}
+    设$A$是一个环$k$-代数, 如果存在Abel群$A^i,i\in\mathbb{N}$满足
+    \begin{enumerate}
+        \item $\displaystyle A=\bigoplus_{i\in\mathbb{N}}A^i$;
+        \item 对任意$i,j\in\mathbb{N}$及$a_i\in A^i$与$a_j\in A^j$, 有$a_ia_j\in A^{i+j}$, 即
+        \[A^iA^j\subset A^{i+j}\]
+    \end{enumerate}
+    那么称$A$是一个\textbf{分次环}, 并将每个Abel群$G^i$中的元素称为\textbf{齐次元}.
+    如果进一步地, $A$是一个$k$-代数, 那么称$A$是一个\textbf{分次$k$-代数}.
+\end{defn}
+
+\begin{eg}
+    为了不让这一节过于枯燥, 我们举一个最简单的分次代数的例子.
+    考虑$k$上的多项式环$k[x]$与多元多项式环$k[x,y,z,\cdots]$, 它们有自然的次数与齐次多项式.
+    比如$xy+yz+xz$是齐次的, 但$x+yz$不是.
+\end{eg}
+
+\begin{defn}
+    设$I$是分次代数$A$的一个双边理想, 如果$I$满足
+    \[I=\bigoplus_{i\in N}I^i\]
+    其中$I^i=A^i\cap I,i\in\mathbb{N}$, 那么称$I$为$A$的一个\textbf{分次理想}.
+\end{defn}
+
+我们只需要两个小引理:
+\begin{lem}\label{quotient alg}
+    设$A$是分次代数, $I$是它的一个分次理想, 那么$A/I$也是一个分次代数.
+\end{lem}
+\begin{proof}
+    由于$I$是$A$的理想, 所以$A/I$具有环结构.
+    而对于任意的$a\in k$与$r+I,s+I\in A/I$, 有
+    \begin{align*}
+        (a(r+I))(s+I)&=(ar+I)(s+I)\\
+        &=(ar)s+I\\
+        a((r+I)(s+I))&=a(rs+I)\\
+        &=a(rs)+I\\
+        (r+I)(a(s+I))&=(r+I)(as+I)\\
+        &=r(as)+I
+    \end{align*}
+    与式~\eqref{def of alg}~比较可知$A/I$构成$k$-代数.
+    定义Abel群同态
+    \begin{align*}
+        f:\bigoplus_{i\in\mathbb{N}}A^i&\to\bigoplus_{i\in\mathbb{N}}(A^i/I^i)\\
+        (a_i)&\mapsto(a_i+I_i)
+    \end{align*}
+    那么显然$f$是满射, 且$\displaystyle\ker f=\bigoplus_{i\in\mathbb{N}}I$.
+    因此由第一同构定理可知
+    \[\bigoplus_{i\in\mathbb{N}}\frac{A^i}{I^i}\cong\frac{\bigoplus_{i\in\mathbb{N}}A}{\bigoplus_{i\in\mathbb{N}}I}=\frac{A}{I}\]
+    综上可知$A/I$是分次$k$-代数.
+\end{proof}
+
+\begin{lem}\label{homogeneous ideal}
+    设$I$是$A$中的齐次元生成的双边理想, 那么$I$是齐次理想.
+\end{lem}
+\begin{proof}
+    设$I=\langle X\rangle$, $X$中的元素均为齐次元.
+    我们只需要说明$\displaystyle I\subset\bigoplus_{i\in\mathbb{N}}(I\cap A^i)$ (另一边包含是自动成立的), 则命题得证.
+    对于$I$中任意一个元素, 我们一定可以将它写成
+    \[\sum_{x_\mscrl\in X}a_\mscrl x_\mscrl b_\mscrl\quad(a_\mscrl,b_\mscrl\in A)\]
+    我们只需要证明每一个$a_\mscrl x_\mscrl b_\mscrl$是$A$中齐次元的和即可.
+    去掉下标, 注意到$a$与$b$可以写成齐次元的和, 一定有
+    \[axb=\sum_{i,j}a_ixb_j\]
+    那么每个$a_ixb_j$都是$A$的齐次元, 并且在$I$中.
+    因此$I$中的元素都可以写成$I\cap A^i,\ i\in\mathbb{N}$中元素的和, 从而有$\displaystyle I\subset\bigoplus_{i\in\mathbb{N}}(I\cap A^i)$成立.
+\end{proof}
+
+有了这两个引理, 我们正式开始张量代数与外代数的构造.
+设$M$是一个$R$-模, 我们记
+\[\bigotimes{M}:=\bigoplus_{i\in\mathbb{N}}\bigotimes\nolimits^i M\]
+通过定义乘法$\otimes:(a,b)\mapsto a\otimes b$, 容易验证$(\bigotimes M,+,\otimes)$构成一个环 (利用张量积的分配律与交换律即可).
+同时我们注意到乘法满足
+\[\left(\bigotimes\nolimits^r M\right)\otimes\left(\bigotimes\nolimits^s M\right)\subset\bigotimes\nolimits^{r+s} M\]
+所以$\bigotimes M$是一个分次环.
+
+我们还希望$\bigotimes M$构成一个模, 为此我们定义$r\in R$的作用为
+\[r(m_1\otimes m_2\otimes\cdots\otimes m_n)=(rm_1)\otimes m_2\otimes\cdots\otimes m_n\]
+由多重线性性, 我们可以得到以下一些式子:
+\begin{align*}
+    r(m_1\otimes m_2\otimes\cdots\otimes m_n)&=(rm_1)\otimes m_2\otimes\cdots\otimes m_n\\
+    &=m_1\otimes(rm_2)\otimes\cdots\otimes m_n\\
+    &=\cdots\\
+    &=m_1\otimes m_2\otimes\cdots\otimes(rm_n)
+\end{align*}
+于是进一步地, 对任意$x_1\otimes\cdots x_i$与$y_1\otimes\cdots\otimes y_j$有
+\begin{align*}
+    (r(x_1\otimes\cdots x_i))\otimes(y_1\otimes\cdots\otimes y_j)&=(rx_1)\otimes\cdots\otimes x_i\otimes y_1\otimes\cdots\otimes y_j\\
+    &=x_1\otimes\cdots\otimes x_i\otimes((ry_1)\otimes\cdots\otimes y_j)
+\end{align*}
+这可以推出~\eqref{def of alg}~式.
+因此有
+\begin{prop}
+    $\bigotimes M$构成一个分次$R$-代数, 称为模$M$上的\textbf{张量代数}.
+\end{prop}
+
+取$J=\langle m\otimes m|\ m\in M\rangle$为$\bigotimes M$中所有形如$m\otimes m\ (m\in M)$的元素生成的双边理想, 那么由引理~\ref{homogeneous ideal}~可知$J$是齐次理想.
+于是由引理~\ref{quotient alg}~可知$A/J$是一个分次$R$-代数.
+我们记
+\begin{gather*}
+    A^i/J:=\bigwedge\nolimits^i M,\quad i\in\mathbb{N}\\
+    \bigwedge M:=\bigoplus_{i\in\mathbb{N}}\bigwedge\nolimits^i M
+\end{gather*}
+从而定义
+\begin{defn}
+    对$R$-模$M$, 称$\bigwedge M$为$M$上的\textbf{外代数}.
+\end{defn}
+
+\begin{sym}
+    $\displaystyle\bigwedge M$继承了$\displaystyle\bigotimes M$的乘法$\otimes:\displaystyle\bigotimes M\times\bigotimes M\to\bigotimes M$, 我们把这个乘法记作$\wedge$, 称为\textbf{楔积}.
+    那么按照这个记号, 我们也把陪集$m_1\otimes m_2\otimes\cdots\otimes m_n+J$记为$m_1\wedge m_2\wedge\cdots\wedge m_n$.
+\end{sym}
+
+\subsection*{外代数的性质}
+
+外代数是一个代数, 自然满足结合律, 分配律等简单性质.
+除此之外外代数还满足
+
+\begin{prop}[交错性]\label{alternative}
+    \begin{enumerate}[{\rm (1)}]
+        \item 对任意$m\in M$有$m\wedge m=0$;
+        \item 对任意$m, m'\in M$有$m\wedge m'=-m'\wedge m$.
+    \end{enumerate}
+\end{prop}
+\begin{proof}
+    \begin{enumerate}
+        \item $m\otimes m\in\ker\pi$.
+        \item 由上一条, 我们知道
+        \begin{align*}
+            0&=(m+m')\wedge(m+m')\\
+            &=m\wedge m+m'\wedge m+m\wedge m'+m'\wedge m'\\
+            &=m'\wedge m+m\wedge m'
+        \end{align*}
+        所以$m\wedge m'=-m'\wedge m$
+    \end{enumerate}
+\end{proof}
+
+这个命题的推广是
+\begin{prop}[反交换律]
+    设$\displaystyle x\in\bigwedge\nolimits^p,y\in\bigwedge\nolimits^q$, 那么有$x\wedge y=(-1)^{pq}y\wedge x$.
+\end{prop}
+\begin{proof}这是一个反复交换的过程.
+    设$x=x_1\wedge\cdots\wedge x_p,y=y_1\wedge\cdots\wedge y_q$, 则
+    \begin{align*}
+        x\wedge y&=-x_1\wedge\cdots\wedge y_1\wedge x_p\wedge y_2\wedge\cdots\wedge y_q\quad\text{(命题(\ref{alternative}))}\\
+        &=\cdots\\
+        &=(-1)^qx_1\wedge\cdots\wedge x_{p-1}\wedge y_1\wedge\cdots\wedge y_q\wedge x_p\quad\text{(交换$q$次)}\\
+        &=\cdots\\
+        &=(-1)^{2q}x_1\wedge\cdots\wedge y_1\wedge\cdots\wedge y_q\wedge x_{p-1}\wedge x_p\quad\text{(交换$2q$次)}\\
+        &=\cdots\\
+        &=(-1)^{pq}y_1\wedge\cdots\wedge y_q\wedge x_1\wedge\cdots\wedge x_p\quad\text{(交换$pq$次)}
+    \end{align*}
+\end{proof}
+
+\begin{col}
+    如果$m_1\wedge\cdots m_i\wedge m_j\wedge m_n$中$m_i=m_j$, 那么有$m_1\wedge\cdots m_i\wedge m_j\wedge m_n=0$.
+\end{col}
+\begin{proof}
+    由反交换律, $m_1\wedge\cdots m_i\wedge m_j\wedge m_n$和$m_i\wedge m_j\wedge m_1\wedge\cdots\wedge m_n$最多只差一个符号, 而$m_i\wedge m_j=0$, 所以$m_1\wedge\cdots m_i\wedge m_j\wedge m_n=0$.
+\end{proof}
+
+我们接下来讨论外代数使用泛性质的刻画.
+
+\begin{defn}
+    设$R$-同态$f:M_1\times\cdots\times M_n\to N$是$n$-重线性的, 如果存在指标$i\neq j$使得$m_i=m_j$可以推出
+    \[f(\cdots,m_i,\cdots,m_j,\cdots)=0\]
+    那么称$f$是\textbf{交错的}.
+    如果对任意$i\neq j$有
+    \[f(\cdots,m_i,\cdots,m_j,\cdots)=-f(\cdots,m_j,\cdots,m_i,\cdots)\]
+    那么称$f$是\textbf{反对称}的.
+\end{defn}
+
+一个有益的练习是, 证明如果在$R$中$2=1+1$是单位的话, 交错与反对称是一回事.
+
+\begin{prop}
+    设$M_1,M_2\cdots,M_n,N$是$R$-模, $n$-重线性映射$h$满足
+    \begin{align*}
+        h:M_1\times M_2\times\cdots\times M_n&\to M_1\wedge M_2\wedge\cdots\wedge M_n\\
+        (m_1,m_2,\cdots,m_n)&\mapsto m_1\wedge m_2\wedge\cdots\wedge m_n
+    \end{align*}
+    那么对任意$n$-重线性同态$f:M_1\times\cdots\times M_n\to N$, 存在唯一的$\widetilde{f}\in\Hom(M_1\wedge M_2\wedge\cdots\wedge M_n,N)$使得以下图表交换
+    \begin{equation}
+        \begin{tikzcd}[row sep=large]
+            M_1\wedge M_2\wedge\cdots\wedge M_n  \arrow[dr, "\widetilde{f}"] & \\
+            M_1\times M_2\times\cdots\times M_n \arrow[u, "h"] \arrow[r, "f"'] & N
+        \end{tikzcd}\label{comudiag in uniprop of extalg}
+    \end{equation}
+\end{prop}
+\begin{proof}
+    考虑以下交换图
+    \[\begin{tikzcd}[row sep=large]
+        M_1\wedge M_2\wedge\cdots\wedge M_n \arrow[ddr, dashed, bend left=15, "\widetilde{f}"] & \\
+        M_1\otimes M_2\otimes\cdots\otimes M_n \arrow[u, "\pi"] \arrow[dr, dashed, "\overline{f}"] & \\
+        M_1\times M_2\times\cdots\times M_n \arrow[u, "h'"] \arrow[r, "f"'] & N
+    \end{tikzcd}\]
+    由张量积的泛性质, 存在唯一的$\overline{f}\in\Hom(M_1\otimes M_2\otimes\cdots\otimes M_n,N)$使得下方的小三角形交换.
+    考虑$\ker\pi$, 即$M_1\otimes M_2\otimes\cdots\otimes M_n$中所有形如$m\otimes m\ (m\in M)$的元素生成的双边理想.
+    取$\ker\pi$中任意的$\displaystyle x=\sum_{m_i\in M}a_i\otimes m_i\otimes m_i\otimes b_i$, 由交错映射的定义, 一定有
+    \begin{align*}
+        \overline{f}(x)&=\sum_{m_i\in M}\overline{f}(a_i\otimes m_i\otimes m_i\otimes b_i)\\
+        &=\sum_{m_i\in M}f(a_i,m_i,m_i,b_i)\\
+        &=0
+    \end{align*}
+    这里我们轻微地滥用记号, 不区分$a_i,b_i$在$h'$作用下的像和原像.
+    因此有$\overline{f}(\ker\pi)=0$, 那么由商模的泛性质可知, 存在唯一的$\widetilde{f}\in\Hom(M_1\wedge M_2\wedge\cdots\wedge M_n,N)$使得上方的小三角形交换.
+    注意到$h=\pi\circ h'$, 所以大三角形与交换图~\eqref{comudiag in uniprop of extalg}~等价, 因此命题得证.
+\end{proof}
+
+\begin{rem}
+    在古典的张量理论中, 人们会用\textit{交错化}的方法构造交错函数, 即对多重线性函数$f$, 定义
+    \[(\operatorname{Alt}f)(v_1,\cdots,v_n):=\sum_{\sigma\in S_n}(\operatorname{sgn}{\sigma})f(v_{\sigma(1)},\cdots,v_{\sigma(n)})\]
+    并通过定义两个函数的张量积
+    \[(f\otimes g)(v_1,\cdots,v_n,v_{n+1},\cdots,v_m)=f(v_1,\cdots,v_n)g(v_{n+1},\cdots,v_m)\]
+    与交错函数的楔积
+    \[f\wedge g=\frac{(m+n)!}{m!n!}\operatorname{Alt}(f\otimes g)\]
+    来构造张量代数与外代数.
+    具体的细节参阅~\parencite{Spivak_CalMani}~的第4章或~\parencite{Lee_IntroSmMani}~的第12, 14章.
+
+    我们刚刚证明了外代数也具有泛性质, 因此我们也可以仿照命题~\ref{uniqueness of free module} 来证明某个模上的外代数的唯一性.
+    因此按照命题~\ref{bilinear and tensor}~的精神,
+    我们可以认为有限维向量空间$V$上所有$n$元交错函数的空间等同于$\displaystyle\bigwedge\nolimits^n V^*$.
+    因此按照古典方法构造的外代数和我们定义的外代数是等同的.
+    在下一章中, 我们会经常用到这一点的.
+\end{rem}
+\blank

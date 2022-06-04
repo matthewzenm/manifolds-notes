@@ -1,17 +1,25 @@
-\documentclass[11pt,fontset=none]{ctexbook}
+\documentclass[11pt]{book}
 
 \usepackage[paper=b5paper,twoside=true]{geometry}
+\usepackage[heading,fontset=none]{ctex}
 \usepackage{graphicx}
 \usepackage[affil-it]{authblk}
 \usepackage{indentfirst}
+\usepackage{textcomp}
 \usepackage[shortlabels]{enumitem}
 \setlist{nosep}
 \newcommand{\rmparen}[1]{{\rm (}#1{\rm )}}
 
+\newcommand{\blank}{%
+    \newpage
+    \thispagestyle{empty}
+    \tikz[remember picture, overlay] \node  at (current page.center) {\Large\itshape 本页特意留空.};
+}
+
 \usepackage{amsmath}
 \usepackage{amsthm}
 \usepackage{amssymb}
-\usepackage[all]{xy}
+\usepackage{autobreak}
 \usepackage{pgfplots}
 \numberwithin{equation}{section}
 \allowdisplaybreaks
@@ -25,7 +33,6 @@
 \DeclareMathOperator{\codim}{codim}
 \DeclareMathOperator{\Aut}{Aut}
 \DeclareMathOperator{\End}{End}
-\DeclareMathOperator{\Span}{Span}
 \DeclareMathOperator{\im}{im}
 \DeclareMathOperator{\tensor}{Tsr}
 \DeclareMathOperator{\grassmann}{Grm}
@@ -45,19 +52,17 @@
 \newtheorem{rem}[defn]{评注}
 \newtheorem{ex}[defn]{习题}
 
-\setmainfont{TeX Gyre Termes}
-\setsansfont{TeX Gyre Heros}
-\setmonofont{TeX Gyre Bonum}
-\newfontfamily\greek{FreeSerif}
+\setmainfont{STIX Two Text}
+\setsansfont{Fira Math}
+\setmonofont{Fira Mono}
 \usepackage{unicode-math}
-\setmathfont{TeX Gyre Termes Math}
-\setmathfont{STIX Two Math}[range={"2211,"222B,"1D70B}]
-\setmathfont{TeX Gyre Pagella Math}[range={bb,"1D51B}]
+\setmathfont{STIX Two Math}
+\setmathfont{TeX Gyre Pagella Math}[range={bb,\mfrakX}]
 \setCJKmainfont[BoldFont={FZCSJ.otf},
     ItalicFont={FZKTJ.otf},
     BoldItalicFont={FZCKJ.otf}]{FZSSJ.otf}
-\setCJKsansfont{FZHTJ.otf}
-\setCJKmonofont{FZFSJ.otf}
+\setCJKsansfont{FZHTJ.otf} % Maybe unused
+\setCJKmonofont{FZFSJ.otf} % Maybe unused
 
 \usepackage{titlesec}
 \titleformat{\chapter}[frame]{\Huge\bfseries}{第\,\thechapter\,章}{1em}{}{}
@@ -70,7 +75,14 @@
 \addbibresource{biblio.bib}
 
 \usepackage{xcolor}
-\usepackage[colorlinks=true,linkcolor=blue,citecolor=green,urlcolor=red]{hyperref}
+\usepackage[colorlinks=true,
+    linkcolor=blue,
+    citecolor=green,
+    urlcolor=red,
+    breaklinks=true]{hyperref}
+%\urlstyle{same}
+
+\usepackage{fixdif}
 
 \title{曲面曲线论笔记}
 \author{魔法少女Alkali}
@@ -82,7 +94,8 @@
     \vspace*{13cm}
     \thispagestyle{empty}
     \begin{figure}[ht]
-        \includegraphics[width=0.4\textwidth]{by-sa.pdf}\hspace{0.05\textwidth}\begin{minipage}[b]{0.55\textwidth}
+        \includegraphics[width=0.4\textwidth]{by-sa.pdf}\hspace{0.05\textwidth}
+        \begin{minipage}[b]{0.54\textwidth} % 这个数字是我跟xetex斗智斗勇整出来的
         \small
         本作品采用知识共享署名-相同方式共享 4.0 国际 (CC BY-SA 4.0) 协议进行共享.
         您可以访问\url{https://creativecommons.org/licenses/by-sa/4.0/}查看该协议.
@@ -98,9 +111,12 @@
     \mainmatter
     \input{manifolds.tex}
     \input{tensor.tex}
-    \input{curve.tex}
+    %\input{tensorfield.tex}
+    \input{curveinR3.tex}
+    %\input{curve.tex}
     
 
     \appendix
+    %\input{integration}
     \printbibliography[title={参考文献},heading=bibintoc]
 \end{document}

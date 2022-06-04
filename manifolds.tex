@@ -2,7 +2,7 @@
 我们从几何学的源头开始, 找寻一些经典几何学的关键要素, 然后在这些要素之上来搭建我们的舞台: 微分流形.
 \section{几何学是什么?}
 现代几何学源于古希腊.
-在古希腊语中, ``几何学''一词为{\greek γεωμετρία} \textit{(geōmetría)}, 意为测量大地.
+在古希腊语中, ``几何学''一词为γεωμετρία \textit{(geōmetría)}, 意为测量大地.
 这反映了早期几何学主要是对长度, 面积, 体积, 角度的经验性原理的收集, 主要用于满足实用性用途.
 直至今日, 初步的几何学教学仍然是从对几何体的大小的直观认识开始的.
 因此几何学的一个经典要件就是\emph{度量}.
@@ -113,9 +113,9 @@ $k$维子流形的概念是一个局部长得像$\mathbb{R}^k$的空间.
 \end{sym}
 
 在这一节的最后我们引入流形的定向的概念.
-我们用$\mathrm{d}f$来表示一个可微映射$f$的微分, 即最佳近似线性映射.
+我们用$\d f$来表示一个可微映射$f$的微分, 即最佳近似线性映射.
 \begin{defn}
-    设$M$是微分流形, 如果它拥有一组图册满足任意转移函数的Jacobi行列式$\det\mathrm{d}(\varphi_\alpha\circ\varphi_\beta^{-1})>0$, 那么就称$M$为\textbf{可定向流形}, 这样的一组图册称为给出了$M$的一个\textbf{定向}; 否则称$M$为\textbf{不可定向流形}.
+    设$M$是微分流形, 如果它拥有一组图册满足任意转移函数的Jacobi行列式$\det\d(\varphi_\alpha\circ\varphi_\beta^{-1})>0$, 那么就称$M$为\textbf{可定向流形}, 这样的一组图册称为给出了$M$的一个\textbf{定向}; 否则称$M$为\textbf{不可定向流形}.
 \end{defn}
 
 \begin{eg}
@@ -124,8 +124,8 @@ $k$维子流形的概念是一个局部长得像$\mathbb{R}^k$的空间.
         我们知道$\mathbb{R}^3$的基有左手系和右手系的区分, 右手系到右手系的过渡矩阵行列式为正, 右手系到左手系的过渡矩阵行列式为负.
         因此左手系和右手系分别决定了$\mathbb{R}^3$的一种定向, 这也是定向这一概念的来源.
         \item 如果流形$M$的一个图册中只有两个坐标卡, 那么$M$一定可定向:
-        设这两个坐标卡是$(U_1,\varphi_1)$与$(U_2,\varphi_2)$, 如果$\det\mathrm{d}(\varphi_1\circ\varphi_2^{-1})>0$, 那么已经完成证明;
-        否则我们复合一个$\mathbb{R}^n$上的反射变换$r$, 得到新的坐标卡$\varphi_3=r\circ\varphi_2:U_2\to\mathbb{R}^n$, 那么新的图册$\{(U_1,\varphi_1),(U_2,\varphi_3)\}$就满足$\det\mathrm{d}(\varphi_1\circ\varphi_3^{-1})=\det\mathrm{d}(\varphi_1\circ\varphi_2^{-1})\det{r^{-1}}>0$, 从而$M$可定向.
+        设这两个坐标卡是$(U_1,\varphi_1)$与$(U_2,\varphi_2)$, 如果$\det\d(\varphi_1\circ\varphi_2^{-1})>0$, 那么已经完成证明;
+        否则我们复合一个$\mathbb{R}^n$上的反射变换$r$, 得到新的坐标卡$\varphi_3=r\circ\varphi_2:U_2\to\mathbb{R}^n$, 那么新的图册$\{(U_1,\varphi_1),(U_2,\varphi_3)\}$就满足$\det\d(\varphi_1\circ\varphi_3^{-1})=\det\d(\varphi_1\circ\varphi_2^{-1})\det{r^{-1}}>0$, 从而$M$可定向.
         \item 按照上面的判别法, 单位球面$\mathbb{S}^n$拥有两个球极投影构成的图册, 所以是可定向的.
     \end{enumerate}
 \end{eg}
@@ -219,11 +219,11 @@ $k$维子流形的概念是一个局部长得像$\mathbb{R}^k$的空间.
 \begin{proof}
     固定$u\in U$, 考虑关于$t$的函数$f(tu)$, 我们有
     \begin{align*}
-        f(u)-f(0)=&\int_0^1\frac{\mathrm{d}f(tu)}{\mathrm{d}{t}}\ \mathrm{d}{t}\\
-        =&\int_0^1\sum_{i}\frac{\partial f(tu)}{\partial u^i}u^i\ \mathrm{d}{t}\quad\text{(链式法则)}\\
-        =&\sum_iu^i\int_0^1\frac{\partial f(tu)}{\partial u^i}\ \mathrm{d}{t}
+        f(u)-f(0)=&\int_0^1\frac{\d f(tu)}{\d{t}}\d{t}\\
+        =&\int_0^1\sum_{i}\frac{\partial f(tu)}{\partial u^i}u^i\d{t}\quad\text{(链式法则)}\\
+        =&\sum_iu^i\int_0^1\frac{\partial f(tu)}{\partial u^i}\d{t}
     \end{align*}
-    取$\displaystyle f_i(u)=\int_0^1\frac{\partial f(tu)}{\partial u^i}\ \mathrm{d}{t}$即可 (光滑性容易验证).
+    取$\displaystyle f_i(u)=\int_0^1\frac{\partial f(tu)}{\partial u^i}\d{t}$即可 (光滑性容易验证).
 \end{proof}
 
 \begin{prop}
@@ -310,16 +310,16 @@ $k$维子流形的概念是一个局部长得像$\mathbb{R}^k$的空间.
 \end{prop}
 \begin{proof}
     我们考虑命题~\ref{diff_stru_TM}~证明中的转移函数的行列式, 有
-    \[\det\mathrm{d}((\varphi_2\times I_{\varphi_2})\circ(\varphi_1\times I_{\varphi_1})^{-1})=\det\mathrm{d}(\varphi_2\circ\varphi_1^{-1})\det\mathrm{d}(I_{\varphi_2}\circ I_{\varphi_1}^{-1})\]
-    而对$(u^1,u^2,\cdots,u^n)$, 我们有$\displaystyle I_{\varphi_1^{-1}}(u^1,u^2,\cdots,u^n)=\left.\sum_{j}u^j\frac{\partial}{\partial x^j}\right|_p$, 而由~\eqref{tangent vector}~可知
-    \[\displaystyle I_{\varphi_2}^i\circ I_{\varphi_1^{-1}}(u^1,u^2,\cdots,u^n)=\left.\sum_{i}u^j\frac{\partial y^i}{\partial x^j}\right|_p\]
+    \[\det\d((\varphi_2\times I_{\varphi_2})\circ(\varphi_1\times I_{\varphi_1})^{-1})=\det\d(\varphi_2\circ\varphi_1^{-1})\det\d(I_{\varphi_2}\circ I_{\varphi_1}^{-1})\]
+    而对$(u^1,\cdots,u^n)$, 我们有$\displaystyle I_{\varphi_1^{-1}}(u^1,\cdots,u^n)=\left.\sum_{j}u^j\frac{\partial}{\partial x^j}\right|_p$, 而由~\eqref{tangent vector}~可知
+    \[\displaystyle I_{\varphi_2}^i\circ I_{\varphi_1^{-1}}(u^1,\cdots,u^n)=\left.\sum_{i}u^j\frac{\partial y^i}{\partial x^j}\right|_p\]
     所以有
     \[\frac{\partial}{\partial u^j}(I_{\varphi_2}^i\circ I_{\varphi_1^{-1}})=\frac{\partial y^i}{\partial x^j}\]
-    那么$\det\mathrm{d}(I_{\varphi_2}\circ I_{\varphi_1}^{-1})=\det\left[\dfrac{\partial y^i}{\partial x^j}\right]_{i,j}$.
+    那么$\det\d(I_{\varphi_2}\circ I_{\varphi_1}^{-1})=\det\left[\dfrac{\partial y^i}{\partial x^j}\right]_{i,j}$.
     又注意到
     \[\frac{\partial y^i}{\partial x^i}=\frac{\partial(\pi^i\circ\varphi_2\circ\varphi_1)}{\partial u^j}\]
-    所以$\left[\dfrac{\partial y^i}{\partial x^j}\right]_{i,j}=\mathrm{d}(\varphi_2\circ\varphi_1^{-1})$, 因此
-    \[\det\mathrm{d}((\varphi_2\times I_{\varphi_2})\circ(\varphi_1\times I_{\varphi_1})^{-1})=(\det\mathrm{d}(\varphi_2\circ\varphi_1^{-1}))^2>0\qedhere\]
+    所以$\left[\dfrac{\partial y^i}{\partial x^j}\right]_{i,j}=\d(\varphi_2\circ\varphi_1^{-1})$, 因此
+    \[\det\d((\varphi_2\times I_{\varphi_2})\circ(\varphi_1\times I_{\varphi_1})^{-1})=(\det\d(\varphi_2\circ\varphi_1^{-1}))^2>0\qedhere\]
 \end{proof}
 
 \subsection*{微分映射}
@@ -348,7 +348,7 @@ $L_x$把一个$v\in\mathbb{R}^n$映到一个$L_xv\in\mathbb{R}^m$.
 显然微分映射是线性映射.
 
 \begin{sym}
-    微分映射传统的记号是$df_p$或者$df(p)$, 但现在更多会写成我们定义的这个形式.
+    微分映射传统的记号是$\d f_p$或者$\d f(p)$, 但现在更多会写成我们定义的这个形式.
     具体为什么我们留到后面再讲.
     和之前一样, 如果$p$点是明确的, 我们就不会写脚标.
 \end{sym}
@@ -402,8 +402,8 @@ $L_x$把一个$v\in\mathbb{R}^n$映到一个$L_xv\in\mathbb{R}^m$.
 
 \begin{rem}
     最后我们解释一下$f_*$这个记号.
-    首先, 我们更倾向使用$f_*|_p$而不是$df(p)$的一个简单的理由是前者更紧凑一些, 在写微分映射作用在切空间上的向量时会节约很多空间.
-    同时, $\mathrm{d}f$更多特指欧氏空间之间的可微映射, 会有更多分析学上的用途 (比如用来写Jacobi矩阵和行列式).
+    首先, 我们更倾向使用$f_*|_p$而不是$\d f(p)$的一个简单的理由是前者更紧凑一些, 在写微分映射作用在切空间上的向量时会节约很多空间.
+    同时, $\d$更多表示外微分映射, 尽管在外微分意义下确实有$\d f=f|_*$, 但是$\d$的用途更广一些
 
     其次, 从范畴论的角度来看, 微分对复合映射的作用$(f\circ g)_*=f_*\circ g_*$表现得很像\textit{共变函子}, 而一类很常见的共变函子$\Hom_{\mathcal{C}}(A,\quad):\mathcal{C}\to\mathsf{Set}$作用在$h\in\Hom_{\mathcal{C}}(B,C)$上得到的态射一般会记为$h_*$.
     选用这个记号可以一定程度上体现链式法则代表的\textit{共变性}.
