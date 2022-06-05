@@ -6,3 +6,53 @@
 最后我们会讨论交错映射构成的张量场, 也就是微分形式, 我们会略微谈及它的应用.
 
 \section{张量场}
+\begin{defn}
+    微分流形$M$上一点$p$的\textbf{余切空间}是这一点处切空间的对偶空间, 记为$T^*_pM:=(T_pM)^*$.
+    $T^*_pM$中的元素称为\textbf{余向量}.
+\end{defn}
+
+命题~\ref{defn of dual}~说明了$T^*_pM$具有向量空间的结构, 且维数与$M$相同.
+那么类似命题~\ref{diff_stru_TM}~可以证明对$p\in M$, $T^*_pM$的不交并是一个微分流形.
+我们于是有定义
+\begin{defn}
+    设$M$是微分流形, $\displaystyle T^*M:=\coprod_{p\in M}T^*_pM$是一个$2n$维微分流形, 定义为$M$的\textbf{余切丛}.
+\end{defn}
+
+由于任意向量空间的张量积都是向量空间, 所以$\tensor^{(r,s)}(V)$也是向量空间, 于是进一步地可以定义
+\begin{defn}
+    设$M$是微分流形, 定义$\displaystyle T^{(r,s)}TM:=\coprod_{p\in M}\tensor^{(r,s)}(T_pM)$为$M$的$(r,s)$-张量丛.
+\end{defn}
+
+仿照向量场的定义, 我们如下定义张量场:
+\begin{defn}
+    流形$M$上的一个$(r,s)$-张量场$A$是一个满足$\pi\circ A=1_M$的光滑映射$A:M\to T^{(r,s)}TM$, 其中$\pi:T^{(r,s)}TM\to M$是自然投影映射.
+\end{defn}
+
+在有了全局的张量场的定义之后, 我们考虑张量场在局部, 也就是某个坐标卡下的表现.
+首先我们考虑余切空间.
+\begin{lem}
+    设$n$维流形$M$上的函数$x^1,\cdots,x^n$定义如引理~\ref{lem_indep}~所述, 那么$x^1_*|_p,\cdots,x^n_*|_p$是
+    $\displaystyle\left.\frac{\partial}{\partial x^1}\right|_p,\cdots,\left.\frac{\partial}{\partial x^n}\right|_p$的对偶基.
+    我们在这里将$T_{x^i(p)}\mathbb{R}$与$\mathbb{R}$视为等同的.
+\end{lem}
+\begin{proof}
+    对任意$f\in C^\infty(\mathbb{R})$有
+    \begin{align*}
+        x^i_*|_p\left(\left.\frac{\partial}{\partial x^j}\right|_p\right)(f)&=\left.\frac{\partial f\circ x^i}{\partial x^j}\right|_p\\
+        &=\frac{\partial f\circ x^i\circ\varphi^{-1}}{\partial u^j}\\
+        &=\frac{\partial f\circ\pi^i}{\partial u^j}\\
+        &=\frac{\d f}{\d x}\delta(i,j)
+    \end{align*}
+    注意到$\d/\d x\in T_{x^i(p)}\mathbb{R}$等同于$1\in\mathbb{R}$, 所以上式说明了$x^1_*|_p,\cdots,x^n_*|_p$是
+    $\displaystyle\left.\frac{\partial}{\partial x^1}\right|_p,\cdots,\left.\frac{\partial}{\partial x^n}\right|_p$的对偶基.
+\end{proof}
+
+\begin{prop}
+    设$A$是一个$(r,s)$-张量场 \rmparen{不一定是光滑的}, 那么$A$是光滑张量场当且仅当对任意坐标卡$(U,\varphi)$, $A$都具有
+    \[\sum_{\substack{i_1\cdots i_k\\j_1\cdots j_l}}A^{i_1\cdots i_k}_{j_1\cdots j_l}\frac{\partial}{\partial x^{i_1}}\otimes\cdots\otimes\frac{\partial}{\partial x^{i_k}}\otimes x^{j_1}_*\otimes\cdots\otimes x^{j_l}_*\]
+    的形式, 其中$A^{i_1\cdots i_k}_{j_1\cdots j_l}\in C^\infty(M)$.
+\end{prop}
+\begin{proof}
+    验证定义~\ref{smooth function 2}~即可.
+    对张量来说写出坐标卡的具体表达过于复杂, 我们把这个工作留给读者.
+\end{proof}

@@ -193,7 +193,7 @@ $k$维子流形的概念是一个局部长得像$\mathbb{R}^k$的空间.
     切向量$\dfrac{\partial}{\partial x^i}(i=1,2,\cdots,n)$线性无关.
 \end{lem}
 \begin{proof}
-    记函数$x^i=\pi^i\circ\varphi^{-1}$, 其中$\pi^i$为向第$i$个分量的投影.
+    记函数$x^i=\pi^i\circ\varphi$, 其中$\pi^i$为向第$i$个分量的投影.
     设有线性关系
     \begin{equation}
         \sum_ic_i\frac{\partial}{\partial x^i}=0\label{independence}
@@ -205,7 +205,7 @@ $k$维子流形的概念是一个局部长得像$\mathbb{R}^k$的空间.
 \begin{sym}
     我们第一次遇到了求和式.
     以后如果遇到的是有限求和, 我们会省略求和上下限, 并且此时如果有多个指标, 可以交换求和顺序, 我们会把指标写在一个求和号底下.
-    不过我们永远不会使用Einstein求和约定.
+    我们会使用Einstein求和约定以使得求和更加明确, 但是我们不会省略求和号.
 \end{sym}
 
 我们接下来说明$T_pM$可以被$\dfrac{\partial}{\partial x^i}(i=1,2,\cdots,n)$生成.
@@ -732,3 +732,4 @@ $L_x$把一个$v\in\mathbb{R}^n$映到一个$L_xv\in\mathbb{R}^m$.
     与连续性矛盾.
     所以M\"{o}bius带不可定向.
 \end{eg}
+\blank

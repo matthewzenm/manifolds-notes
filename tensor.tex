@@ -114,7 +114,7 @@ $N$是Abel加群$M$的子群, 所以存在一个商群$M/N$.
 
 \subsection*{对偶模与对偶空间}
 
-\begin{prop}
+\begin{prop}\label{defn of dual}
     对$R$-模$M$, $\Hom_R(M,R)$构成一个$R$-模, 称作$M$的\textbf{对偶模}.
 \end{prop}
 \begin{proof}
@@ -723,7 +723,7 @@ $N$是Abel加群$M$的子群, 所以存在一个商群$M/N$.
     而对于一个$k$-向量空间$V$, 按照交换律与结合律, $V$与它的对偶空间$V^*$的任意有限次张量积总会同构于
     \[\left(\bigotimes\nolimits^r V\right)\otimes\left(\bigotimes\nolimits^s V^*\right)\]
     我们记
-    \[\tensor^{r,s}(V):=\left(\bigotimes\nolimits^r V\right)\otimes\left(\bigotimes\nolimits^s V^*\right)\]
+    \[\tensor^{(r,s)}(V):=\left(\bigotimes\nolimits^r V\right)\otimes\left(\bigotimes\nolimits^s V^*\right)\]
     并把$r,s$分别称为\textbf{反变指数}与\textbf{共变指数}.
 \end{sym}
 
@@ -737,9 +737,9 @@ $N$是Abel加群$M$的子群, 所以存在一个商群$M/N$.
     \end{tikzcd}\]
     决定的模$U[M_1,M_2,\cdots,M_n]$.
     可以证明$U[M_1,M_2,\cdots,M_n]$存在且自然同构于$M_1\otimes M_2\otimes\cdots\otimes M_n$ (\parencite[命题B-5.17, B-5.18]{Rotman_AdvMdnAlg}).
-    那么类似于命题~\ref{bilinear and tensor}, 容易证明所有$r+s$重线性映射$(V^*)^r\times V^s\to k$构成的空间等同于$\tensor^{r,s}(V)$.
+    那么类似于命题~\ref{bilinear and tensor}, 容易证明所有$r+s$重线性映射$(V^*)^r\times V^s\to k$构成的空间等同于$\tensor^{(r,s)}(V)$.
 
-    古典意义下的一个\textbf{张量}指的是一个$(V^*)^r\times V^s\to k$的多重线性映射, 也即$\tensor^{r,s}(V)$中的一个元素$v_1\otimes\cdots v_r\otimes v^*_1\otimes\cdots\otimes v^*_s$.
+    古典意义下的一个\textbf{张量}指的是一个$(V^*)^r\times V^s\to k$的多重线性映射, 也即$\tensor^{(r,s)}(V)$中的一个元素$v_1\otimes\cdots v_r\otimes v^*_1\otimes\cdots\otimes v^*_s$.
     其中$v_1\otimes\cdots v_r$称为\textbf{反变部分}, $v^*_1\otimes\cdots\otimes v^*_s$称为\textbf{共变部分}.
     $r=0$时的张量称为\textbf{共变张量}, $s=0$时的张量称为\textbf{反变张量}.
 
