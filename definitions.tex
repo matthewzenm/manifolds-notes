@@ -1,0 +1,21 @@
+% Text macros
+\newcommand{\rmparen}[1]{{\rm (}#1{\rm )}}
+
+\newcommand{\blank}{%
+    \newpage
+    \thispagestyle{empty}
+    \tikz[remember picture, overlay] \node  at (current page.center) {\Large\itshape 本页特意留空.};
+}
+
+% Mathematical symbols & operators
+\DeclareMathOperator{\grad}{grad}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Obj}{Obj} % No category theory will occur in this note
+\DeclareMathOperator{\codim}{codim}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\tensor}{Tsr}
+\DeclareMathOperator{\grassmann}{Grm}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\interior}{int}

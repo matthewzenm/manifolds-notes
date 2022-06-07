@@ -1,4 +1,4 @@
-\chapter{流形}
+\chapter{流形}\label{chapter_manifolds}
 我们从几何学的源头开始, 找寻一些经典几何学的关键要素, 然后在这些要素之上来搭建我们的舞台: 微分流形.
 \section{几何学是什么?}
 现代几何学源于古希腊.
@@ -112,7 +112,7 @@ $k$维子流形的概念是一个局部长得像$\mathbb{R}^k$的空间.
     我们用$C^\infty(M)$来表示$M$上全体光滑函数的集合, 在逐点定义的加法与乘法下, 这是一个$\mathbb{R}$-代数 (同时是交换环与$\mathbb{R}$-向量空间).
 \end{sym}
 
-在这一节的最后我们引入流形的定向的概念.
+接下来我们用微分结构引入流形的定向的概念.
 我们用$\d f$来表示一个可微映射$f$的微分, 即最佳近似线性映射.
 \begin{defn}
     设$M$是微分流形, 如果它拥有一组图册满足任意转移函数的Jacobi行列式$\det\d(\varphi_\alpha\circ\varphi_\beta^{-1})>0$, 那么就称$M$为\textbf{可定向流形}, 这样的一组图册称为给出了$M$的一个\textbf{定向}; 否则称$M$为\textbf{不可定向流形}.
@@ -137,10 +137,169 @@ $k$维子流形的概念是一个局部长得像$\mathbb{R}^k$的空间.
 \end{prop}
 
 \begin{proof}
-    证明这个命题需要一些拓扑论证, 但我们不希望在这份笔记里出现太多的拓扑, 所以我们直接引用~\parencite[引理1.1.2]{Mei_Manifold}.
+    一个直接的证明可以看~\parencite[引理1.1.2]{Mei_Manifold}, 但是他使用了许多的拓扑论述.
+    我们不希望在这份笔记中出现太多拓扑, 在之后我们再用其他工具证明这个命题.
 \end{proof}
 
 事实上确实存在不可定向的流形, 比如大家熟悉的M\"{o}bius带, 我们在之后再来讨论这个例子.\label{sect_of_mani}
+
+\subsection*{单位分解定理}
+
+我们在这一小节简单介绍微分几何中的一个常用工具: 单位分解定理.
+我们首先需要引入一些定义.
+
+\begin{defn}
+    \begin{enumerate}[(1)]
+        \item 流形$M$上的集合族$A$被称为\textbf{局部有限}的, 如果对任意$p\in M$都存在$p$的一个邻域$U$, 使得$U$仅与$A$中有限个集合的交非空.
+        \item 一个光滑函数$f\in C^\infty(M)$的\textbf{支集}是$f$所有零点的集合的闭包, 记为$\supp{f}:=\overline{\{p\in M|\ f(p)=0\}}$.
+        \item 流形$M$的一个\textbf{单位分解}是指满足以下条件的一族光滑函数$\{f_k\}_{k\in\mathbb{N}}$:
+        \begin{enumerate}
+            \item 对任意$k\in\mathbb{N}$都有$0\leq f_k\leq 1$;
+            \item $\{\supp{f_k}|\ k\in\mathbb{N}\}$是$M$的开覆盖且局部有限;
+            \item 对任意$p\in M$有$\displaystyle\sum_{k\in\mathbb{N}}f_k(p)=1$ (由上一条, 这是一个有限和, 所以总是收敛的);
+        \end{enumerate}
+    \end{enumerate}
+\end{defn}
+
+关于单位分解, 我们的结论是
+\begin{thm}[单位分解定理]\label{partition of unity}
+    设$\mscrU=\{U_\alpha\}_{\alpha\in A}$是流形$M$的一个开覆盖, 那么存在一个\textbf{从属于$\mscrU$的单位分解}$\{f_\alpha\}_{\alpha\in\mathbb{N}}$, 即对任意$\alpha\in A$都存在一个$k\in A$使得$\supp{f_k}\subset U_\alpha$.
+\end{thm}
+
+我们先约定一些记号, 然后依次建立一些引理.
+\begin{sym}
+    记$\interior{A}$为$A$的内部, $\partial{A}$为$A$的边界;
+    $B_r(p)$是$\mathbb{R}^n$中以$p$点为球心, 半径为$r$的开球;
+    $C_l$是$\mathbb{R}^n$中的开立方体$(-l,l)^n$.
+\end{sym}
+
+\begin{lem}[流形的仿紧性]\label{paracompact}
+    设$\{U_\alpha\}_{\alpha\in A}$是$M$的一族开覆盖, 那么存在一族局部有限的图册满足$\{V_k,\varphi_k\}_{k\in\mathbb{N}}$
+    \begin{enumerate}[{\rm (1)}]
+        \item $\{V_k\}_{k\in\mathbb{N}}$是$\{U_\alpha\}_{\alpha\in A}$的加细, 即对任意$k\in\mathbb{N}$都存在$\alpha\in A$使得$V_k\subset U_\alpha$;
+        \item 对任意$k\in\mathbb{N}$有$\varphi_k(V_k)=B_3(0)$;
+        \item 集合族$\{\varphi^{-1}_k(B_1(0))\}_{k\in\mathbb{N}}$是$M$的一族开覆盖.
+    \end{enumerate}
+\end{lem}
+
+\begin{proof}
+    由于流形是第二可数的, 所以$M$存在一组可数基$\{Z_i\}_{i\in\mathbb{N}}$~\parencite[定理2.50]{Lee_IntroTopoMani}.
+    而流形是Hausdorff且局部紧的, 所以我们可以假设这组基满足$\overline{Z_i}$都是紧的~\parencite[命题4.63]{Lee_IntroTopoMani}.\\
+    我们归纳构造$M$的一个\textit{穷竭}: 这是一列集合$\{A_i\}_{i\in\mathbb{N}}$, 满足$A_i$是紧的, $A_i\subset\interior A_{i+1}$且$\displaystyle\bigcup_{i\in\mathbb{N}}A_i=M$.
+    取$A_1=Z_1$. 假设$A_i$取定, 由于$A_i$是紧的, 取最小的指标$j$使得$A_i\subset Z_1\cup\cdots\cup Z_j$, 并取$A_{i+1}=\overline{Z_1\cup\cdots\cup Z_j}$即可.
+    并且注意到额外地有
+    \begin{equation}
+        \bigcup_{i\in\mathbb{N}}(A_{i}\backslash\interior{A_{i-1}})=M\label{union of exhaustion}
+    \end{equation}
+    我们约定$i<1$时$A_i=\varnothing$.\\
+    我们通过穷竭来构造要求的图册. (见图~\ref{figure of exhaustion})
+    对任意一个$p\in M$, 设$p\in\interior A_{i+2}\backslash A_{i-1}$.
+    在微分结构中取一个包含$p$的坐标卡$(U,\psi)$, 然后选取$U\cap(\interior A_{i+2}\backslash A_{i-1})$的某个开子集$V_p$使得它同胚于$\mathbb{R}^n$中的开球 (这可以通过先选好$\psi(U\cap(\interior A_{i+2}\backslash A_{i-1}))$中的一个开球实现).
+    接下来将$\psi$复合一个$\mathbb{R}^n$到自身的同胚, 使得新同胚$\varphi_p$满足$\varphi_p(V_p)=B_3(0)$.
+    于是我们得到了一组图册$\{(V_p,\varphi_p)\}_{p\in M}$.
+    设$W_p:=\varphi^{-1}_p(B_1(0))$, 注意到$\{W_p\}_{p\in(\interior A_{i+2})\backslash A_{i-1}}$是$A_{i+1}\backslash\interior{A_i}$的一族开覆盖, 且$A_{i+1}\backslash\interior{A_i}$是紧的, 那么一定可以选出有限个$W_{i1},W_{i2},\cdots,W_{ik}$覆盖$A_{i+1}\backslash\interior{A_i}$.
+    让$i$取遍$\mathbb{N}$, 结合~\eqref{union of exhaustion}~式可知可数个开集$\{W_{ij}\}$覆盖了$M$, 重新编号并取对应的坐标卡, 我们便得到了一组图册$\{(V_k,\varphi_k)\}_{k\in\mathbb{N}}$, 且这组图册是覆盖$\{U_\alpha\}_{\alpha\in A}$的加细.\\
+    最后我们需要证明这组图册是局部有限的.
+    对于任一$p\in M$, 取$p$的邻域$\interior A_{i+2}\backslash A_{i-1}$.
+    对于一个$V_k$, 设$V_k\subset A_j\backslash\interior{A_{j-1}}$, 那么$V_k\cap\interior A_{i+2}\backslash A_{i-1}$非空当且仅当$j=i$或$j=i+1$, 从而至多有有限个$V_k$与$\interior A_{i+2}\backslash A_{i-1}$相交.
+    因此$\{(V_k,\varphi_k)\}_{k\in\mathbb{N}}$是局部有限的.
+\end{proof}
+
+\begin{figure}[ht]
+    \centering\label{figure of exhaustion}
+    \input{figures/exhaustion.tex}
+    \caption{穷竭的示意图}
+    (每个标签表示其所在位置的集合, 特别地最外层虚线与实线之间为$A_{i+2}$的边界. $A_{i+2}\backslash A_{i-1}$即为两个虚线之间的部分.)
+\end{figure}
+
+\begin{lem}[$\mathbb{R}^n$的Urysohn引理]\label{urysohn}
+    存在一个光滑函数$\eta:\mathbb{R}^n\to\mathbb{R}$满足
+    \[\eta(x)\begin{cases}
+        =1, & x\in \overline{C_1}\\
+        \in(0,1), & x\in C_2\backslash\overline{C_1}\\
+        =0, & x\in\mathbb{R}^n\backslash C_2
+    \end{cases}\]
+\end{lem}
+
+\begin{proof}
+    首先取
+    \[\gamma(x)=\begin{cases}
+        e^{-1/x}, & x>0\\
+        0, & x\leq 0
+    \end{cases}\]
+    通过直接 (而复杂) 的计算可以知道$\gamma$是光滑的.
+    然后取
+    \[\vartheta(x)=\frac{\gamma(2+x)\gamma(2-x)}{\gamma(2+x)\gamma(2-x)+\gamma(x-1)+\gamma(-x-1)}\]
+    由于$2+x<0$时$-x-1>0$, $2-x<0$时$x-1>0$, 所以分母总是正的.
+    容易计算$\vartheta$满足
+    \[\vartheta\begin{cases}
+        =1, & -1<x<1\\
+        \in(0,1), & -2<x\leq -1\ \text{或}\ 1\leq x<2\\
+        =0, & x\leq -2\ \text{或}\ x\geq 2
+    \end{cases}\]
+    那么取
+    \[\eta(x^1,x^2,\cdots,x^n)=\prod_{i=1}^n\vartheta(x^i)\]
+    即满足条件.
+\end{proof}
+
+\begin{proof}[{\bf 单位分解定理的证明.}]
+    设$\mscrU=\{U_\alpha\}_{\alpha\in A}$是微分流形$M$的一个开覆盖, 按照引理~\ref{paracompact}, 可以取$\mscrU$的一组局部有限加细坐标卡$\{V_k,\varphi_k\}_{k\in\mathbb{N}}$.
+    对任意一个$k\in\mathbb{N}$, 取
+    \begin{align*}
+        \theta_k:M&\to\mathbb{R}\\
+        p&\mapsto\left\{\begin{array}{ll}
+            \vartheta\circ\varphi_k(p), & p\in V_k\\
+            0, & \text{其他情况}
+        \end{array}\right.
+    \end{align*}
+    由于$\supp{\theta_k}\subset\varphi_k^{-1}(C_2)\subset\interior V_k$, 所以$\theta_k$是光滑的.
+    又由于$\{V_k\}_{k\in\mathbb{N}}$是局部有限的, 则$\{\supp{\theta_k}\}_{k\in\mathbb{N}}$也是局部有限的, 所以对任意$p\in M$都有$\displaystyle\sum_{i\in\mathbb{N}}\theta_i(p)$收敛, 且对某个使得$\varphi_l^{-1}(B_1(0))$包含$p$的坐标卡$(V_l,\varphi_l)$有$\displaystyle\sum_{i\in\mathbb{N}}\theta_i(p)\geq\theta_l(p)>0$.
+    因此可以取
+    \[f_k(p)=\frac{\theta_k(p)}{\sum_{i\in\mathbb{N}}\theta_i(p)}\]
+    那么$\supp{f_k}=\supp\theta_k$, 从而是局部有限的, 并且是$\mscrU$的加细.
+    按定义立刻知道有$\displaystyle\sum_{k\in\mathbb{N}}f_k=1$.
+    因此$\{f_k\}_{k\in\mathbb{N}}$即为所求的从属于$\mscrU$的单位分解.
+\end{proof}
+
+我们讨论一下单位分解定理的简单应用.
+第一个是引理~\ref{urysohn}~中构造的函数的推广.
+\begin{defn}
+    设$M$是微分流形, $A\subset M$是一个开集, 且它的闭包包含在开集$U$中.
+    开集$A$的一个\textbf{支集在$U$中的冲击函数}$\psi$是一个满足$\psi$在$A$上恒为$1$且$\supp\psi\subset U$的光滑函数.\footnote{\parencite{Mei_Manifold}~上称为\textit{鼓包函数}.}
+\end{defn}
+
+\begin{prop}\label{bump function}
+    设$A, U$是流形$M$上开集且$\overline{A}\subset I$, 那么存在$A$的一个支集在$U$中的冲击函数.
+\end{prop}
+\begin{proof}
+    注意到$U,M\backslash\overline{A}$构成$M$的一个开覆盖, 那么取从属于这组覆盖的一族单位分解$\{f_k\}_{k\in\mathbb{N}}$,
+    设$\mscrF:=\{f_{i_k}\}_{k\in\mathbb{N}}$是其中支集在$U$中的.
+    那么定义$\displaystyle\psi=\sum_{k\in\mathbb{N}}f_{i_k}$, 由局部有限性, $\psi$在$A$的每一点上收敛, 且$\supp\psi\subset U$.
+    断言$\psi$在$A$上恒为$1$.
+    如果不是这样的话, 存在一个$p\in A$与一些不在$\mscrF$中的$\{f_{j_l}\}_{1\leq l \leq m}$使得
+    \[\sum_{k=1}^nf_{i_k}(p)+\sum_{l=1}^mf_{j_l}=1\]
+    由于$\displaystyle\sum_{k=1}^nf_{i_k}(p)<1$, 存在一个$f_{j_l}(p)>0$, 那么$\supp{f_{j_l}}\cap A\neq 0$.
+    但$\supp{f_{j_l}}\subset M\backslash\overline{A}$, 矛盾.
+    所以$\psi$在$A$上恒为$1$.
+\end{proof}
+
+我们再用冲击函数证明一个简单的命题.
+\begin{prop}[光滑函数扩张引理]\label{function extension}
+    设$p\in M$, $U$是$p$的一个邻域, $f\in C^\infty(U)$.
+    那么存在一个$p$在$U$内的邻域$V$及$\widetilde{f}\in C^\infty(M)$, 使得$\supp\widetilde{f}\subset U$且$\widetilde{f}|_V=f|_V$.
+\end{prop}
+
+\begin{proof}
+    由Hausdorff性质, 可以找到一个开集$V\subset U$包含$p$.
+    那么按命题~\ref{bump function}~选择冲击函数$\psi$, 使得$\supp\psi\subset U$且$\psi$在$V$上取$1$.
+    取
+    \[\widetilde{f}(q)=\begin{cases}
+        \psi(q)f(q), & p\in U\\
+        0, & \text{其他情况}
+    \end{cases}\]
+    由于$\supp\psi\subset U$, 可知$\supp(\psi f)\subset U$, 从而$\widetilde{f}\in C^\infty(M)$.
+    按构造显然有$\widetilde{f}|_V=f|_V$.
+\end{proof}
 
 \section{切空间与微分映射}
 用``切''的手段来研究流形是微分几何学的基本想法, 我们在这一节建立有关切的几个概念.
@@ -403,7 +562,7 @@ $L_x$把一个$v\in\mathbb{R}^n$映到一个$L_xv\in\mathbb{R}^m$.
 \begin{rem}
     最后我们解释一下$f_*$这个记号.
     首先, 我们更倾向使用$f_*|_p$而不是$\d f(p)$的一个简单的理由是前者更紧凑一些, 在写微分映射作用在切空间上的向量时会节约很多空间.
-    同时, $\d$更多表示外微分映射, 尽管在外微分意义下确实有$\d f=f|_*$, 但是$\d$的用途更广一些
+    同时, $\d$更多表示外微分映射, 尽管在外微分意义下确实有$\d f=f|_*$, 但是$\d$的用途更广一些.
 
     其次, 从范畴论的角度来看, 微分对复合映射的作用$(f\circ g)_*=f_*\circ g_*$表现得很像\textit{共变函子}, 而一类很常见的共变函子$\Hom_{\mathcal{C}}(A,\quad):\mathcal{C}\to\mathsf{Set}$作用在$h\in\Hom_{\mathcal{C}}(B,C)$上得到的态射一般会记为$h_*$.
     选用这个记号可以一定程度上体现链式法则代表的\textit{共变性}.
@@ -522,7 +681,7 @@ $L_x$把一个$v\in\mathbb{R}^n$映到一个$L_xv\in\mathbb{R}^m$.
         &(\varphi\times\varphi_*)\circ X\circ\varphi^{-1}:\mathbb{R}^n\to\mathbb{R}^n\times\mathbb{R}^n\\
         &u\mapsto\left(u,(a^1\circ\varphi^{-1})(u),\cdots,(a^n\circ\varphi^{-1})(u)\right)
     \end{align*}
-    所以向量场$X$是光滑的当且仅当每个坐标分量函数是光滑的.
+    所以向量场\footnote{按照我们给``向量场''一词的定义, 这个映射必须是光滑的. 但考虑到很多时候我们会先指派切向量再考虑光滑性, 所以有时候``向量场''一词也会指不具有光滑性 (甚至是连续性) 的截面映射$X:M\to TM$.}$X$是光滑的当且仅当每个坐标分量函数是光滑的.
     同时, \eqref{vector field on coordinate}\\也给出了一个向量场在某组坐标卡下的具体表示.
 \end{rem}
 \begin{sym}
@@ -536,6 +695,20 @@ $L_x$把一个$v\in\mathbb{R}^n$映到一个$L_xv\in\mathbb{R}^m$.
     容易注意到, 平凡的切丛$TM$总是同胚于$M\times\mathbb{R}^n$, 所以我们会将其称为是平凡的.
     这也再次说明了评注~\ref{local trivialization}~中将坐标卡称为局部平凡化的理由.
 \end{eg}
+
+类似光滑函数, 我们也可以扩大一个局部的向量场.
+\begin{prop}[向量场扩充引理]\label{vector field extension}
+    设$p\in M$, 光滑向量场$X$定义在$p$的一个邻域$U$上, 那么存在$p$的一个邻域$V\subset U$与$\widetilde{X}\in \mfrakX(M)$使得$\widetilde{X}|_V=X|_V$.
+\end{prop}
+\begin{proof}
+    证明与命题~\ref{function extension}~基本相同.
+    取$p$的邻域$V\subset U$, 与合适的冲击函数$\psi$, 定义
+    \[\widetilde{X}_q=\begin{cases}
+        \psi(q)X_q, & q\in U\\
+        0, & \text{其他情况}
+    \end{cases}\]
+    即可.
+\end{proof}
 
 向量场的一个特点是可以像微分一样作用在光滑函数上.
 我们知道$p$点处的一个切向量$X_p$将一个光滑函数映成一个数, 那么一个向量场$X$在每一点都将一个光滑函数映成一个数,
@@ -694,10 +867,6 @@ $L_x$把一个$v\in\mathbb{R}^n$映到一个$L_xv\in\mathbb{R}^m$.
 \end{proof} % 要是我来评论这一段, 我会说这人线性代数没学好
 
 这是我们翻来覆去嚼了很多定义之后遇到的第一个真正的``定理''.
-
-此外, 如果我们发散一下定理~\ref{orientable iff normal field}~的证明思路, 可以直觉出来一个结论:
-可定向流形上面一定存在标架场, 从而切丛是平凡的.
-但是目前我们还证明不了这件事情, 我们还需要等待单位分解定理的出场.
 
 作为本章的结束, 我们来讨论在第~\ref{sect_of_mani}~节结尾处留下的问题, 即证明M\"{o}bius带是不可定向的.
 \begin{eg}

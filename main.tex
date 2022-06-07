@@ -5,16 +5,8 @@
 \usepackage{graphicx}
 \usepackage[affil-it]{authblk}
 \usepackage{indentfirst}
-\usepackage{textcomp}
 \usepackage[shortlabels]{enumitem}
 \setlist{nosep}
-\newcommand{\rmparen}[1]{{\rm (}#1{\rm )}}
-
-\newcommand{\blank}{%
-    \newpage
-    \thispagestyle{empty}
-    \tikz[remember picture, overlay] \node  at (current page.center) {\Large\itshape 本页特意留空.};
-}
 
 \usepackage{amsmath}
 \usepackage{amsthm}
@@ -26,16 +18,6 @@
 \pgfplotsset{compat=1.17}
 \tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt
 \usetikzlibrary{cd}
-
-\DeclareMathOperator{\grad}{grad}
-\DeclareMathOperator{\Hom}{Hom}
-\DeclareMathOperator{\Obj}{Obj} % 我承诺这篇笔记中不会有范畴论
-\DeclareMathOperator{\codim}{codim}
-\DeclareMathOperator{\Aut}{Aut}
-\DeclareMathOperator{\End}{End}
-\DeclareMathOperator{\im}{im}
-\DeclareMathOperator{\tensor}{Tsr}
-\DeclareMathOperator{\grassmann}{Grm}
 
 \renewcommand{\proofname}{{\bf 证明}}
 \theoremstyle{definition}
@@ -82,6 +64,7 @@
     breaklinks=true]{hyperref}
 %\urlstyle{same}
 
+\input{definitions.tex}
 \usepackage{fixdif}
 
 \title{曲面曲线论笔记}
