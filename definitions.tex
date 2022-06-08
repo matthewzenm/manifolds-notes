@@ -1,11 +1,21 @@
 % Text macros
 \newcommand{\rmparen}[1]{{\rm (}#1{\rm )}}
 
-\newcommand{\blank}{%
-    \newpage
-    \thispagestyle{empty}
+% Document format settings
+\makeatletter
+\def\cleardoublepage{%
+    \clearpage\if@twoside
+    \ifodd\c@page\else\thispagestyle{empty}
     \tikz[remember picture, overlay] \node  at (current page.center) {\Large\itshape 本页特意留空.};
+    \newpage
+    \if@twocolumn\hbox{}\newpage
+    \fi\fi\fi
 }
+\makeatother
+
+\usepackage{titlesec}
+\titleformat{\chapter}[frame]{\Huge\bfseries}{第\,\thechapter\,章}{1em}{}{}
+\titleformat*{\subsection}{\Large\itshape}
 
 % Mathematical symbols & operators
 \DeclareMathOperator{\grad}{grad}

@@ -46,10 +46,6 @@
 \setCJKsansfont{FZHTJ.otf} % Maybe unused
 \setCJKmonofont{FZFSJ.otf} % Maybe unused
 
-\usepackage{titlesec}
-\titleformat{\chapter}[frame]{\Huge\bfseries}{第\,\thechapter\,章}{1em}{}{}
-\titleformat*{\subsection}{\Large\itshape}
-
 \usepackage[style=caspervector,
     sorting=ecnyt,
     utf8,
@@ -65,6 +61,8 @@
 %\urlstyle{same}
 
 \input{definitions.tex}
+
+% I don't know what package conflict with fixdif
 \usepackage{fixdif}
 
 \title{曲面曲线论笔记}

@@ -47,12 +47,92 @@
     $\displaystyle\left.\frac{\partial}{\partial x^1}\right|_p,\cdots,\left.\frac{\partial}{\partial x^n}\right|_p$的对偶基.
 \end{proof}
 
-\begin{prop}
+\begin{prop}\label{local tensor field}
     设$A$是一个$(r,s)$-张量场 \rmparen{不一定是光滑的}, 那么$A$是光滑张量场当且仅当对任意坐标卡$(U,\varphi)$, $A$都具有
-    \[\sum_{\substack{i_1\cdots i_k\\j_1\cdots j_l}}A^{i_1\cdots i_k}_{j_1\cdots j_l}\frac{\partial}{\partial x^{i_1}}\otimes\cdots\otimes\frac{\partial}{\partial x^{i_k}}\otimes x^{j_1}_*\otimes\cdots\otimes x^{j_l}_*\]
+    \begin{equation}
+        \sum_{\substack{i_1,\cdots,i_k\\j_1,\cdots,j_l}}A^{i_1\cdots i_k}_{j_1\cdots j_l}\frac{\partial}{\partial x^{i_1}}\otimes\cdots\otimes\frac{\partial}{\partial x^{i_k}}\otimes x^{j_1}_*\otimes\cdots\otimes x^{j_l}_*\label{eq_local_tensorfield}
+    \end{equation}
     的形式, 其中$A^{i_1\cdots i_k}_{j_1\cdots j_l}\in C^\infty(M)$.
 \end{prop}
 \begin{proof}
     验证定义~\ref{smooth function 2}~即可.
-    对张量来说写出坐标卡的具体表达过于复杂, 我们把这个工作留给读者.
+    对于张量来说, 写出坐标卡的具体表达式太过于复杂, 我们把这个工作留给读者.
 \end{proof}
+
+考虑一个共变张量丛$T^{(0,s)}TM$, 我们猜测它可以由$s$个余向量场 (即$1$阶共变张量场) 在$C^\infty(M)$上做张量得到.
+同时我们也很希望余向量场是向量场的对偶, 即$T^{(0,1)}TM=\Hom_{C^\infty(M)}(TM,\mathbb{R})$.
+依照这种想法, 我们有如下的结论:
+
+\begin{prop}\label{field and map}
+    流形$M$上的任一$s$阶共变张量场$A$均对应了一个逐点定义的$k$重$C^\infty(M)$线性映射$a:\underbrace{\mfrakX(M)\times\cdots\mfrakX(M)}_{k\text{个}}\to C^\infty(M)$:
+    对任意$p\in M$, 取一个含$p$的坐标卡$(U,\varphi)$使得$A$具有~\eqref{eq_local_tensorfield}~的形式, 定义
+    \begin{align*}
+        a|_U&=\sum_{i_1,\cdots,i_k}A_{i_1\cdots i_k}x^{i_1}_*\otimes\cdots\otimes x^{i_k}_*\\
+        (X_1|_p,\cdots,X_k|_p)&\mapsto\sum_{i_1,\cdots,i_k}A_{i_1\cdots i_k}(p)x^{i_1}_*(X_1|_p)\cdots x^{i_k}_*(X_k|_p)
+    \end{align*}
+    进一步地, 这个对应是一一的.
+\end{prop}
+
+比较命题~\ref{field and map}~与开始的想法可以发现, 我们仅仅使用了最传统的多重线性映射的语言.
+这是因为第\ref{chapter_tensor}章中的张量与多重线性映射之间的一系列命题只在向量空间上成立, 而我们现在在处理环上的模, 因此我们就只能用多重线性映射来说这件事.
+
+我们需要以下一些引理.
+
+\begin{lem}\label{local operator}
+    设$f:\mfrakX(M)\to C^\infty(M)$是$C^\infty(M)$-线性的, 那么如果向量场$X$在某个开集$U$上恒为$0$, 则$f(X)$在$U$上也恒取$0$.
+\end{lem}
+\begin{proof}
+    设$p\in U$, 取$p$在$U$中的一个邻域$V$及一个冲击函数$h$, 使得$h$在$V$上恒取$1$, $\supp{h}\subset U$.
+    那么在$M$上$hX=0$, 从而有$f(hX)=0$.
+    而由$f$的$C^\infty(M)$-线性性, 有$hf(X)=0$, 在$V$上就有$f(X)=0$.
+    因此$f(X)(p)=0$, 由$p$的任意性可知$f(X)$在$U$上恒为$0$.
+\end{proof}
+
+\begin{lem}\label{point operator}
+    设$f:\mfrakX(M)\to C^\infty(M)$是$C^\infty(M)$-线性的, 则向量场$X$在某点$p$处为$0$时也有$f(X)(p)=0$.
+\end{lem}
+\begin{proof}
+    取一个包含$p$的坐标卡$(U,\varphi)$, 我们定义$f$在$U$上的\textit{限制}.
+    对一个向量场$Y\in\mfrakX(U)$, 按命题~\ref{vector field extension}~取一个向量场$\widetilde{Y}\in\mfrakX(M)$使得$\widetilde{Y}|_U=Y$,
+    \footnote{严格来说, \ref{vector field extension}~无法保证$Y$与$\widetilde{Y}$在整个$U$上相等, 我们需要利用流形的\textit{正规性} (\Parencite[定理4.81]{Lee_IntroTopoMani}) 来取一个更大的开集$V$包含$U$, 然后构造冲击函数完成证明.}
+    定义$f|_U(Y)=f(\widetilde{Y})$.
+    $f|_U$是良定义的, 因为引理~\ref{local operator}~保证了如果$Y_1|_U=Y_2|_U$, 那么一定有$f|_U(Y_1|_U)=f|_U(Y_2|_U)$.
+    由于$U$上存在局部自然标架场, 所以$\mfrakX(U)$是自由$C^\infty(M)$-模 (请回忆相关定义),
+    因此$f|_U$的作用可以被矩阵表示.
+    设$f|_U$的矩阵为$A$, 对任意一个$X|_U$, 设其坐标为$\alpha=(\alpha^1,\cdots,\alpha^n)^\top$.
+    那么有
+    \begin{align}
+        f(X)(p)&=f|_U(X|_U)(p)\\
+        &=A(\alpha^1(p),\cdots,\alpha^n(p))\\
+        &=A(0,\cdots,0)\\
+        &=0\qedhere
+    \end{align}
+\end{proof}
+
+\begin{col}
+    显然引理~\ref{local operator}~与引理~\ref{point operator}~均对多线性映射成立.
+\end{col}
+
+我们着手证明命题~\ref{field and map}.
+\begin{proof}[{\bf 命题~\ref{field and map}~的证明}]
+    显然这个对应是单射, 我们只需要证明它是满射.
+    设$a:\underbrace{\mfrakX(M)\times\cdots\mfrakX(M)}_{k\text{个}}\to C^\infty(M)$是$k$重线性映射.
+    在每一点$p$处我们定义一个$k$重线性映射$B(p):\underbrace{T_pM\times\cdots T_pM}_{k\text{个}}\to\mathbb{R}$如下:
+    对$v_1,v_2,\cdots,v_k\in T_pM$, 取向量场$X_1,\cdots,X_k$使得$X_i|_p=v_i,\ i=1,2,\cdots,k$ (存在性由向量场扩张引理保证),
+    则定义$B(p)(v_1,\cdots,v_k)=a(X_1|_p,\cdots,X_k|_p)$.
+    如果另有向量场$Y_1,\cdots,Y_k$满足$Y_i|_p=v_i,\ i=1,2,\cdots,k$, 那么考虑
+    \begin{align}
+        a(X_1,\cdots,X_k)-a(Y_1,\cdots,Y_k)&=\sum_{i=1}^k\left(a(X_1,\cdots,X_i,Y_{i+1},\cdots,Y_k)\right.\notag\\
+        &\qquad\left.-a(X_1,\cdots,Y_i,Y_{i+1},\cdots,Y_k)\right)\notag\\
+        &=\sum_{i=1}^ka(X_1,\cdots,X_i-Y_i,Y_{i+1},\cdots,Y_k)\label{eq_field and map}
+    \end{align}
+    注意到~\eqref{eq_field and map}~式的第$i$个分量在$p$处取$0$, 所以由引理~\ref{point operator}~知上式在$p$处取$0$, 即
+    \[a(X_1|_p,\cdots,X_k|_p)=a(Y_1|_p,\cdots,Y_k|_p)\]
+    从而$B(p)$是一个良定义的多重线性映射, 那么$B:M\to T^{(0,k)}TM$是一个$k$阶共变张量场.
+\end{proof}
+
+\section{Riemann度量}
+第\ref{chapter_manifolds}章与上一节的内容属于流形的\textit{微分拓扑}, 而我们在这一节将会引入我们在第~\ref{metric_first}~节提到的属于\textit{微分几何}的一个结构: \textit{Riemann度量}.
+
+Riemann度量是欧氏空间中内积的推广, Riemann度量让我们能够在流形上定义长度, 角度, 面积等等一系列几何量, 并给出较之前几章多得多的几何信息.
+同时, Riemann度量也使得\textit{等距变换群}有了意义, 从而我们进入了Erlangen纲领的轨道上, 正式开始了``几何学''的讨论.
