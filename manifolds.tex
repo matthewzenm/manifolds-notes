@@ -132,13 +132,13 @@ $k$维子流形的概念是一个局部长得像$\mathbb{R}^k$的空间.
 
 关于流形的定向有一个基础的结论:
 
-\begin{prop}
+\begin{prop}\label{2 orientations}
     一个连通的可定向流形恰好有两个定向.
 \end{prop}
 
 \begin{proof}
-    一个直接的证明可以看~\parencite[引理1.1.2]{Mei_Manifold}, 但是他使用了许多的拓扑论述.
-    我们不希望在这份笔记中出现太多拓扑, 在之后我们再用其他工具证明这个命题.
+    参阅~\parencite[引理1.1.2]{Mei_Manifold}. 
+    引文使用了许多的拓扑论述, 但我们不希望在这份笔记中出现太多拓扑, 所以我们不再深入讨论这个命题的证明.
 \end{proof}
 
 事实上确实存在不可定向的流形, 比如大家熟悉的M\"{o}bius带, 我们在之后再来讨论这个例子.\label{sect_of_mani}
@@ -151,7 +151,7 @@ $k$维子流形的概念是一个局部长得像$\mathbb{R}^k$的空间.
 \begin{defn}
     \begin{enumerate}[(1)]
         \item 流形$M$上的集合族$A$被称为\textbf{局部有限}的, 如果对任意$p\in M$都存在$p$的一个邻域$U$, 使得$U$仅与$A$中有限个集合的交非空.
-        \item 一个光滑函数$f\in C^\infty(M)$的\textbf{支集}是$f$所有零点的集合的闭包, 记为$\supp{f}:=\overline{\{p\in M|\ f(p)=0\}}$.
+        \item 一个光滑函数$f\in C^\infty(M)$的\textbf{支集}是$f$所有非零点的集合的闭包, 记为$\supp{f}:=\overline{\{p\in M|\ f(p)\not=0\}}$.
         \item 流形$M$的一个\textbf{单位分解}是指满足以下条件的一族光滑函数$\{f_k\}_{k\in\mathbb{N}}$:
         \begin{enumerate}
             \item 对任意$k\in\mathbb{N}$都有$0\leq f_k\leq 1$;
@@ -163,7 +163,7 @@ $k$维子流形的概念是一个局部长得像$\mathbb{R}^k$的空间.
 
 关于单位分解, 我们的结论是
 \begin{thm}[单位分解定理]\label{partition of unity}
-    设$\mscrU=\{U_\alpha\}_{\alpha\in A}$是流形$M$的一个开覆盖, 那么存在一个\textbf{从属于$\mscrU$的单位分解}$\{f_\alpha\}_{\alpha\in\mathbb{N}}$, 即对任意$\alpha\in A$都存在一个$k\in A$使得$\supp{f_k}\subset U_\alpha$.
+    设$\mscrU=\{U_\alpha\}_{\alpha\in A}$是流形$M$的一个开覆盖, 那么存在一个\textbf{从属于$\mscrU$的单位分解}$\{f_\alpha\}_{\alpha\in\mathbb{N}}$, 即对任意$k\in A$都存在一个$\alpha\in A$使得$\supp{f_k}\subset U_\alpha$.
 \end{thm}
 
 我们先约定一些记号, 然后依次建立一些引理.
@@ -248,7 +248,7 @@ $k$维子流形的概念是一个局部长得像$\mathbb{R}^k$的空间.
     \begin{align*}
         \theta_k:M&\to\mathbb{R}\\
         p&\mapsto\left\{\begin{array}{ll}
-            \vartheta\circ\varphi_k(p), & p\in V_k\\
+            \eta\circ\varphi_k(p), & p\in V_k\\
             0, & \text{其他情况}
         \end{array}\right.
     \end{align*}
@@ -277,7 +277,7 @@ $k$维子流形的概念是一个局部长得像$\mathbb{R}^k$的空间.
     那么定义$\displaystyle\psi=\sum_{k\in\mathbb{N}}f_{i_k}$, 由局部有限性, $\psi$在$A$的每一点上收敛, 且$\supp\psi\subset U$.
     断言$\psi$在$A$上恒为$1$.
     如果不是这样的话, 存在一个$p\in A$与一些不在$\mscrF$中的$\{f_{j_l}\}_{1\leq l \leq m}$使得
-    \[\sum_{k=1}^nf_{i_k}(p)+\sum_{l=1}^mf_{j_l}=1\]
+    \[\sum_{k=1}^nf_{i_k}(p)+\sum_{l=1}^mf_{j_l}(p)=1\]
     由于$\displaystyle\sum_{k=1}^nf_{i_k}(p)<1$, 存在一个$f_{j_l}(p)>0$, 那么$\supp{f_{j_l}}\cap A\neq 0$.
     但$\supp{f_{j_l}}\subset M\backslash\overline{A}$, 矛盾.
     所以$\psi$在$A$上恒为$1$.
@@ -868,7 +868,7 @@ $L_x$把一个$v\in\mathbb{R}^n$映到一个$L_xv\in\mathbb{R}^m$.
 
 这是我们翻来覆去嚼了很多定义之后遇到的第一个真正的``定理''.
 
-作为本章的结束, 我们来讨论在第~\ref{sect_of_mani}~节结尾处留下的问题, 即证明M\"{o}bius带是不可定向的.
+作为本章的结束, 我们来讨论在第~\ref{sect_of_mani}~节中间的问题, 即证明M\"{o}bius带是不可定向的.
 \begin{eg}
     M\"{o}bius带是把一个纸条扭转一次, 然后粘合两端得到的.
     比较自然的方法是使用商拓扑 (也叫``手术''), 但我们在这里直接一些, 把M\"{o}bius带看成直纹面写参数方程.

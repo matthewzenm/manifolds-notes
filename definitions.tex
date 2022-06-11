@@ -29,3 +29,22 @@
 \DeclareMathOperator{\grassmann}{Grm}
 \DeclareMathOperator{\supp}{supp}
 \DeclareMathOperator{\interior}{int}
+\def\form{\mathop\Omega\nolimits} % \DeclareMathOperator{\form}{\Omega} doesn't work
+\DeclareMathOperator{\Mat}{Mat}
+\newcommand{\norm}[1]{\Vert#1\Vert}
+
+% Theorem environments
+\renewcommand{\proofname}{{\bf 证明}}
+\theoremstyle{definition}
+\newtheorem{defn}{定义}[section]
+\newtheorem{sym}[defn]{记号}
+\newtheorem{eg}[defn]{例}
+\theoremstyle{plain}
+\newtheorem{thm}[defn]{定理}
+\newtheorem{lem}[defn]{引理}
+\newtheorem{col}[defn]{推论}
+\newtheorem{prop}[defn]{命题}
+\newtheorem*{pro}{问题}
+\theoremstyle{remark}
+\newtheorem{rem}[defn]{评注}
+\newtheorem{ex}[defn]{习题}

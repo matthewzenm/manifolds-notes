@@ -5,6 +5,7 @@
 \usepackage{graphicx}
 \usepackage[affil-it]{authblk}
 \usepackage{indentfirst}
+\usepackage{array}
 \usepackage[shortlabels]{enumitem}
 \setlist{nosep}
 
@@ -18,21 +19,6 @@
 \pgfplotsset{compat=1.17}
 \tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt
 \usetikzlibrary{cd}
-
-\renewcommand{\proofname}{{\bf 证明}}
-\theoremstyle{definition}
-\newtheorem{defn}{定义}[section]
-\newtheorem{sym}[defn]{记号}
-\newtheorem{eg}[defn]{例}
-\theoremstyle{plain}
-\newtheorem{thm}[defn]{定理}
-\newtheorem{lem}[defn]{引理}
-\newtheorem{col}[defn]{推论}
-\newtheorem{prop}[defn]{命题}
-\newtheorem*{pro}{问题}
-\theoremstyle{remark}
-\newtheorem{rem}[defn]{评注}
-\newtheorem{ex}[defn]{习题}
 
 \setmainfont{STIX Two Text}
 \setsansfont{Fira Math}
@@ -65,7 +51,7 @@
 % I don't know what package conflict with fixdif
 \usepackage{fixdif}
 
-\title{曲面曲线论笔记}
+\title{曲面曲线论笔记:\\{\itshape\Large 一份现代的初等微分几何介绍}}
 \author{魔法少女Alkali}
 \affil{北京师范大学数学科学学院}
 \date{最后编译时间: \today}

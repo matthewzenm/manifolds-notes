@@ -1,11 +1,10 @@
 \chapter{流形上的张量}\label{chapter_tensorfield}
 我们回到几何学, 这一章我们讨论上一章的代数工具在微分几何中的具体应用.
 我们首先会定义流形$M$上的张量场, 并讨论张量场与向量场的张量积之间的关系.
-其次我们会讨论流形上的Riemann度量, 从而向Riemann几何迈出微小的一步.
-这一节中我们也会引出单位分解定理, 并讨论它的应用.
-最后我们会讨论交错映射构成的张量场, 也就是微分形式, 我们会略微谈及它的应用.
+其次我们会讨论交错映射构成的张量场, 也就是微分形式, 我们会略微谈及它的应用.
+最后我们会讨论流形上的Riemann度量, 从而向Riemann几何迈出微小的一步.
 
-\section{张量场}
+\section{张量场}\label{section_tensorfield}
 \begin{defn}
     微分流形$M$上一点$p$的\textbf{余切空间}是这一点处切空间的对偶空间, 记为$T^*_pM:=(T_pM)^*$.
     $T^*_pM$中的元素称为\textbf{余向量}.
@@ -101,12 +100,12 @@
     因此$f|_U$的作用可以被矩阵表示.
     设$f|_U$的矩阵为$A$, 对任意一个$X|_U$, 设其坐标为$\alpha=(\alpha^1,\cdots,\alpha^n)^\top$.
     那么有
-    \begin{align}
+    \begin{align*}
         f(X)(p)&=f|_U(X|_U)(p)\\
         &=A(\alpha^1(p),\cdots,\alpha^n(p))\\
         &=A(0,\cdots,0)\\
         &=0\qedhere
-    \end{align}
+    \end{align*}
 \end{proof}
 
 \begin{col}
@@ -129,6 +128,251 @@
     注意到~\eqref{eq_field and map}~式的第$i$个分量在$p$处取$0$, 所以由引理~\ref{point operator}~知上式在$p$处取$0$, 即
     \[a(X_1|_p,\cdots,X_k|_p)=a(Y_1|_p,\cdots,Y_k|_p)\]
     从而$B(p)$是一个良定义的多重线性映射, 那么$B:M\to T^{(0,k)}TM$是一个$k$阶共变张量场.
+\end{proof}
+
+\section{微分形式}\label{section_forms}
+\begin{defn}
+    流形$M$上的一个\textbf{微分$k$-形式}是指$M$上的一个交错的$k$-阶共变张量场, 即一个光滑映射
+    \[\alpha:M\to\coprod_{p\in M}\left(\bigwedge\nolimits^kT_pM\right)\]
+    且满足$\pi\circ\alpha=1_M$.
+    微分$k$-形式也简称\textbf{$k$-形式}.
+\end{defn}
+
+\begin{sym}
+    我们把$M$上所有微分$k$-形式的集合记为$\form^k(M)$.
+    按照逐点定义的加法与数乘, $\form^k(M)$构成一个$C^\infty(M)$模, 这是我们在向量场处就熟知的.
+    与向量场不同的是, 微分形式之间还可以逐点定义楔积$\form^k(M)\times\form^l(m)\to\form^{k+1}(M)$, 这使得$\displaystyle C^\infty(M)\oplus\left(\bigoplus_{k\geq 1}\form^k(M)\right)$成为一个分次代数.
+\end{sym}
+
+我们在定义~\ref{dual map}~处定义了对偶空间之间的对偶映射, 而微分形式生活在余切空间 (的楔积) 之中, 所以我们想要将对偶映射推广到微分形式上.
+
+\begin{defn}\label{pullback_def}
+    设$f:M\to N$是流形间的光滑映射, 那么定义$f^*:\form^k(N)\to\form^k(M)$将$\omega$映为$f^*\omega$, 且$f^*\omega$满足
+    \begin{align*}
+        (f^*\omega)(v_1,\cdots,v_k)&=\omega(f_*(v_1),\cdots,f_*(v_k))
+    \end{align*}
+    $f^*$称为由$f$诱导的$N$到$M$的\textbf{拉回映射}.
+    此外, 为简便起见, 所有由$f$诱导的$\form^n(N)\to\form^n(M),\ n\in\mathbb{N}$的拉回映射都会使用同一个记号$f^*$.
+\end{defn}
+
+把向量空间看成最简单的流形, 那么定义~\ref{dual map}~可以看作是拉回映射的特例.
+
+\begin{prop}[拉回映射的性质]
+    设$M,N,P$是微分流形, 光滑映射$M\xrightarrow{f}N\xrightarrow{g}P$, 那么有以下命题成立:
+    \begin{enumerate}[{\rm 1.}]
+        \item \rmparen{$\mathbb{R}$-线性性}\ $f^*:\form^n(N)\to\form^n(M),\ n\in\mathbb{N}$都是$\mathbb{R}$-线性的;
+        \item \rmparen{函子性}\ 对$\omega\in\form^k(P)$, 有
+        \[(f\circ g)^*\omega=g^*(f^*\omega)\]
+        \item 设$h\in C^\infty(N)$, 那么有
+        \[f^*(h\omega)=(h\circ f)f^*\omega\]
+        \item 对形式$\omega,\eta$, 有
+        \[f^*(\omega\wedge\eta)=f^*\omega\wedge f^*\eta\]
+    \end{enumerate}
+\end{prop}
+\begin{proof}
+    简单计算.
+\end{proof}
+
+\begin{eg}\label{pullback of top}
+    设$M,N$都是$n$维流形, $f:M\to N$是光滑映射.
+    对一个$\omega\in\form^n(N)$, 设$\omega$在$N$的某个坐标卡$(V,\psi)$具有形式$hy^1_*\wedge\cdots\wedge y^n_*$, 其中$h\in C^\infty(N)$ (回忆命题~\ref{basis of exterior}).
+    我们考虑$\omega$的拉回.
+    在$M$对应的坐标卡$(U,\varphi)$下计算有
+    \begin{align*}
+        f^*\omega&=f^*(hy^1_*\wedge\cdots\wedge y^n_*)\\
+        &=(h\circ f)(y^1\circ f)_*\wedge\cdots\wedge(y^n\circ f)_*
+    \end{align*}
+    设$\displaystyle(y^i\circ f)_*:=\sum_{j}a^i_jx^j_*$, 那么矩阵
+    \[A=\begin{bmatrix}
+        a^1_1 & a^1_2 & \cdots & a^1_n\\
+        a^2_1 & a^2_2 & \cdots & a^2_n\\
+        \vdots & \vdots & \ddots & \vdots\\
+        a^n_1 & a^n_2 & \cdots & a^n_n
+    \end{bmatrix}\]
+    即为$f$在基$x^i_*$与$y^i_*$下的Jacobi矩阵, 从而有
+    \begin{align*}
+        f^*\omega&=(h\circ f)(y^1\circ f)_*\wedge\cdots\wedge(y^n\circ f)_*\\
+        &=(h\circ f)\left(\sum_{j}a^1_jx^j_*\right)\wedge\cdots\wedge\left(\sum_{j}a^n_jx^j_*\right)\\
+        &=(h\circ f)\det{A}x^1_*\wedge\cdots\wedge x^n_*\quad\text{(回忆命题~\ref{exitstence and uniqueness of determinant})}\\
+        &=(h\circ f)\det(\d{f})x^1_*\wedge\cdots\wedge x^n_*
+    \end{align*}
+\end{eg}
+
+微分形式最重要的一个运算是外微分运算.
+
+\begin{defn}
+    如果一族$\mathbb{R}$-线性映射$\d{}:\form^{k+1}(M)\to\form^k(M)$ (对每个$k\in\mathbb{N}$都用相同记号) 满足
+    \begin{enumerate}
+        \item $\d{}\circ\d=0$;
+        \item 对$\omega\in\form^k(M),\eta\in\form^l(M)$有$\d(\omega\wedge\eta)=\d\omega\wedge\eta+(-1)^k\omega\wedge\d\eta$;
+        \item 对任意$f\in C^\infty(M)$, $\d{f}$是$f$的微分 (张量场), 满足$\d{f}(X)=Xf$,
+    \end{enumerate}
+    那么称$\d$为$M$上的一个\textbf{外微分}.
+\end{defn}
+
+\begin{sym}
+    由于$x^i_*=\d{x^i}$, 我们从现在开始弃用$x^i_*\ (i=1,2,\cdots,n)$表示余标架场的记号, 全部使用$\d{x^i}\ (i=1,2,\cdots,n)$.
+
+    请时刻记住$\d{}$是一族映射.
+\end{sym}
+
+如同行列式, 我们也证明外微分是存在且唯一的.
+\begin{prop}\label{exterior differential}
+    每个流形$M$上存在唯一的一族外微分映射.
+\end{prop}
+\begin{proof}
+    对$h\in C^\infty(M)$, 定义$\d{h}=h_*$.
+    设$\omega\in\form^k(M)\ (k\geq 1)$, 取$M$的任一坐标卡$(U,\varphi)$, 设
+    \[\omega=\sum_{i_1,\cdots,i_k}A_{i_1,\cdots,i_k}\d x^{i_1}\wedge\cdots\wedge\d x^{i_k}\]
+    定义
+    \[\d\omega=\sum_{i_1,\cdots,i_k}\d{A_{i_1,\cdots,i_k}}\wedge\d x^{i_1}\wedge\cdots\wedge\d x^{i_k}\]
+    我们证明这个定义是相容的.
+    假设另一个坐标卡$(V,\psi)$与$U$交非空, 且在$(V,\psi)$上
+    \[\omega=\sum_{i_1,\cdots,i_k}B_{i_1,\cdots,i_k}\d y^{i_1}\wedge\cdots\wedge\d y^{i_k}\]
+    简记$\d x^{i_1,\cdots,i_k}:=\d x^{i_1}\wedge\cdots\wedge\d x^{i_k},\d y^{i_1,\cdots,i_k}:=\d y^{i_1}\wedge\cdots\wedge\d y^{i_k}$.
+    那么由相等可知
+    \begin{align*}
+        \varphi^*&\left(\sum_{i_1,\cdots,i_k}A_{i_1,\cdots,i_k}\d x^{i_1,\cdots,i_k}\right)=
+        \psi^*\left(\sum_{i_1,\cdots,i_k}B_{i_1,\cdots,i_k}\d y^{i_1,\cdots,i_k}\right)\\
+        \implies&\begin{array}{>{\displaystyle}r>{\displaystyle}l}\displaystyle
+            &\sum_{i_1,\cdots,i_k}A_{i_1,\cdots,i_k}\d x^{i_1,\cdots,i_k}\\
+            =&\sum_{i_1,\cdots,i_k}(\varphi^{-1}\circ\psi)^*B_{i_1,\cdots,i_k}(\varphi^{-1}\circ\psi)^*(\d y^{i_1,\cdots,i_k})
+        \end{array}\\
+        \implies&\begin{array}{>{\displaystyle}r>{\displaystyle}l}\displaystyle
+            &\sum_{i_1,\cdots,i_k}A_{i_1,\cdots,i_k}\d x^{i_1,\cdots,i_k}\\
+            =&\sum_{i_1,\cdots,i_k}\det{\d(\varphi^{-1}\circ\psi)}(B_{i_1,\cdots,i_k}\circ\psi\circ\varphi^{-1})\d x^{i_1,\cdots,i_k}
+        \end{array}
+    \end{align*}
+    最后一行是例~\ref{pullback of top}~的结果.
+    那么计算两个坐标卡上的外微分有
+    \[\begin{array}{>{\displaystyle}c>{\displaystyle}r>{\displaystyle}l}
+        &&\sum_{i_1,\cdots,i_k}\d{A_{i_1,\cdots,i_k}}\wedge \d x^{i_1,\cdots,i_k}\\
+        &=&\sum_{i_1,\cdots,i_k}\d\left(\det{\d(\varphi^{-1}\circ\psi)}B_{i_1,\cdots,i_k}\circ\psi\circ\varphi^{-1}\right)\wedge \d x^{i_1,\cdots,i_k}\\
+        &=&\sum_{i_1,\cdots,i_k}\det{\d(\varphi^{-1}\circ\psi)}\d{B_{i_1,\cdots,i_k}}\circ\psi_*\circ\varphi^{-1}_*\wedge \d x^{i_1,\cdots,i_k}\\
+        &=&\sum_{i_1,\cdots,i_k}(\varphi^{-1}\circ\psi)^*(\d{B_{i_1,\cdots,i_k}})\wedge(\varphi^{-1}\circ\psi)^*(\d y^{i_1,\cdots,i_k})\\
+        \implies&&(\varphi)^*\left(\sum_{i_1,\cdots,i_k}\d{A_{i_1,\cdots,i_k}}\wedge \d x^{i_1,\cdots,i_k}\right)\\
+        &=&(\psi)^*\left(\sum_{i_1,\cdots,i_k}\d{B_{i_1,\cdots,i_k}}\d y^{i_1,\cdots,i_k}\right)
+    \end{array}\]
+    从而外微分是相容的.
+
+    我们证明这个$\d{}$满足外微分的公理, 按我们的构造, 这只需要在一个坐标卡上考虑.
+    显然$\d{}$是$\mathbb{R}$-线性的.
+    我们验证$\d{}\circ\d=0$.
+    容易注意到对$f\in C^\infty(M)$有
+    \[\d{f}=\sum_{i}\frac{\partial f}{\partial x^i}\d{x^i}\]
+    对一个$\displaystyle\omega=\sum_{i_1,\cdots,i_k}A_{i_1,\cdots,i_k}\d{x^{i_1}}\wedge\cdots\wedge\d{x^{i_k}}$, 有
+    \begin{align*}
+        \d(\d\omega)&=\d\left(\sum_{i_1,\cdots,i_k}\d{A_{i_1,\cdots,i_k}}\wedge\d{x^{i_1}}\wedge\cdots\wedge\d{x^{i_k}}\right)\\
+        &=\d\left(\sum_{r,i_1,\cdots,i_k}\frac{\partial A_{i_1,\cdots,i_k}}{\partial x^r}\d{x^r}\wedge\d{x^{i_1}}\wedge\cdots\wedge\d{x^{i_k}}\right)\\
+        &=\sum_{r,s,i_1,\cdots,i_k}\frac{\partial^2 A_{i_1,\cdots,i_k}}{\partial x^r\partial x^s}\wedge\d{x^s}\wedge\d{x^r}\wedge\d{x^{i_1}}\wedge\cdots\wedge\d{x^{i_k}}
+    \end{align*}
+    而注意到系数$\dfrac{\partial^2 A_{i_1,\cdots,i_k}}{\partial x^r\partial x^s}$同时对应了$\d{x^s}\wedge\d{x^r}\wedge\cdots$与$\d{x^r}\wedge\d{x^s}\wedge\cdots$两个形式, 所以互相抵消, 有$\d(\d\omega)=0$.
+    其次对
+    \begin{gather*}
+        \omega=\sum_{i_1,\cdots,i_k}A_{i_1,\cdots,i_k}\d{x^{i_1,\cdots,i_k}}\\
+        \eta=\sum_{j_1,\cdots,j_l}B_{j_1,\cdots,j_l}\d{x^{j_1,\cdots,j_l}}
+    \end{gather*}
+    有
+    \begin{align*}
+        \d(\omega\wedge\eta)&=\d\left(\sum_{\substack{i_1,\cdots,i_k\\j_1,\cdots,j_l}}A_{i_1,\cdots,i_k}B_{j_1,\cdots,j_l}\d{x^{i_1,\cdots,i_k}}\wedge\d{x^{j_1,\cdots,j_l}}\right)\\
+        &\begin{array}{r>{\displaystyle}l}
+            =& \sum_{\substack{i_1,\cdots,i_k\\j_1,\cdots,j_l}}(B_{j_1,\cdots,j_l}\d{A_{i_1,\cdots,i_k}}+A_{i_1,\cdots,i_k}\d{B_{j_1,\cdots,j_l}})\wedge\\
+            &\wedge\d{x^{i_1,\cdots,i_k}}\wedge\d{x^{j_1,\cdots,j_l}}
+        \end{array}\\
+        &\begin{array}{r>{\displaystyle}l}
+            =&\sum_{\substack{i_1,\cdots,i_k\\j_1,\cdots,j_l}}B_{j_1,\cdots,j_l}\d{A_{i_1,\cdots,i_k}}\wedge\d{x^{i_1,\cdots,i_k}}\wedge\d{x^{j_1,\cdots,j_l}}\\
+            &+(-1)^k\sum_{\substack{i_1,\cdots,i_k\\j_1,\cdots,j_l}}A_{i_1,\cdots,i_k}\d{x^{i_1,\cdots,i_k}}\wedge\d{B_{j_1,\cdots,j_l}}\wedge\d{x^{j_1,\cdots,j_l}}
+        \end{array}\\
+        &=\d\omega\wedge\eta+(-1)^k\omega\wedge\d\eta
+    \end{align*}
+    其中第2个等号是Leibniz法则, 第3个等号是反交换律.
+    所以$\d{}$满足$\d(\omega\wedge\eta)=\d\omega\wedge\eta+(-1)^k\omega\wedge\d\eta$.
+    按定义$\d{}$一定满足$\d{f}(X)=Xf$.
+
+    以下我们证明外微分的唯一性.
+    只需要在一个坐标卡上证明任意外微分$\delta$都满足$\d{}$的定义, 我们对$k$使用归纳法.
+    $k=1$时, 由外微分的定义一定有$\delta:C^\infty\to\form^1(M)$与$\d{}:C^\infty\to\form^1(M)$相等.
+    那么$\delta{x^i}=\d{x^i}\ (i=1,2,\cdots,n)$余切向量场.
+    由$\mathbb{R}$-线性性, 只需考虑单项式即可, 那么考虑$f\d{x^i}$, 有
+    \begin{align*}
+        \delta(f\d{x^i})&=\d{f}\wedge\d{x^i}-f\delta(\delta{x^i})\\
+        &=\d{f}\wedge\d{x^i}
+    \end{align*}
+    所以$\delta:\form^1(M)\to\form^2(M)$与$\d{}:\form^1(M)\to\form^2(M)$相等.
+    假设命题在$k$处成立, 即$\delta:\form^{k-1}(M)\to\form^k(M)$与$\d{}:\form^{k-1}(M)\to\form^k(M)$相等.
+    考虑$\omega=f\d x^{i_1}\wedge\d x^{i_2}\wedge\cdots\wedge\d x^{i_{k+1}}$, 记$I$为取值为$1$的常值函数, 则
+    \begin{align*}
+        \d\omega&=\d((f\d x^{i_1})\wedge\d x^{i_2}\wedge\cdots\wedge\d x^{i_{k+1}})\\
+        &=\d(f\d x^{i_1})\wedge\d x^{i_2}\wedge\cdots\wedge\d x^{i_{k+1}}+f\d x^{i_1}\wedge\d(I\d x^{i_2}\wedge\cdots\wedge\d x^{i_{k+1}})\\
+        &=\d f\wedge\d x^{i_1}\wedge\d x^{i_2}\wedge\cdots\wedge\d x^{i_{k+1}}\quad(\d{I}=0)
+    \end{align*}
+    因此$\delta:\form^{k}(M)\to\form^{k+1}(M)$与$\d{}:\form^{k}(M)\to\form^{k+1}(M)$相等.
+    从而由归纳法可知$\delta=\d{}$, 即外微分一定是唯一的.
+\end{proof}
+
+命题~\ref{exterior differential}~同时给出了计算外微分的方法.
+此外, 在计算外微分时我们也会用到如下命题:
+
+\begin{prop}[外微分的自然性]
+    对任意光滑映射$f:M\to N$与$\omega\in\form^k(N)$, 都有$f^*\d\omega=\d(f^*\omega)$.
+\end{prop}
+\begin{proof}
+    仍然只需要考虑任意的一个坐标卡.
+    设$\displaystyle\omega=\sum_{i_1,\cdots,i_k}A_{i_1,\cdots,i_k}\d{y^{i_1}}\wedge\cdots\wedge\d{y^{i_k}}$, 那么有
+    \begin{align*}
+        f^*\d\omega&=f^*\left(\sum_{i_1,\cdots,i_k}\d{A_{i_1,\cdots,i_k}}\wedge\d{y^{i_1}}\wedge\cdots\wedge\d{y^{i_k}}\right)\\
+        &=\sum_{i_1,\cdots,i_k}\d{(A_{i_1,\cdots,i_k}\circ f)}\wedge\d{(y^{i_1}\circ f)}\wedge\cdots\wedge\d{(y^{i_k}\circ f)}\\
+        &=\d\left(\sum_{i_1,\cdots,i_k}(A_{i_1,\cdots,i_k}\circ f)\d{(y^{i_1}\circ f)}\wedge\cdots\wedge\d{(y^{i_k}\circ f)}\right)\\
+        &=\d\left(f^*\left(\sum_{i_1,\cdots,i_k}A_{i_1,\cdots,i_k}\d{y^{i_1}}\wedge\cdots\wedge\d{y^{i_k}}\right)\right)\\
+        &=\d(f^*\omega)\qedhere
+    \end{align*}
+\end{proof}
+
+最后我们讨论微分形式的一个简单应用: 我们可以使用微分形式判断流形是否可定向.
+
+\begin{prop}\label{orientable and n-form}
+    $n$维微分流形$M$可定向的充分必要条件是$M$上存在处处非零的$n$-形式.
+\end{prop}
+
+\begin{lem}\label{nowhere vanish}
+    设$M$是连通的微分流形, $f\in C^\infty(M)$处处非零, 那么$f$一定恒正或恒负.
+\end{lem}
+\begin{proof}
+    由于连续映射将连通集映为连通集~\Parencite[定理4.7]{Lee_IntroTopoMani}, 所以$f(M)\subset\mathbb{R}$一定是连通的.
+    如果$f(M)$中同时出现了正数与负数, 那么按连通性, 一定有$0\in f(M)$, 与假设矛盾.
+\end{proof}
+
+\begin{proof}[{\bf 命题~\ref{orientable and n-form}~的证明}]
+    {\itshape 必要性}. 我们取一组定向相同的图册$\{U_\alpha,\varphi_\alpha\}_{\alpha\in A}$, 并取一列从属于此图册的单位分解$\{f_k\}_{k\in\mathbb{N}}$.
+    设$\supp{f_k}\subset U_{\alpha_k}$, $U_{\alpha_k}$上的余向量场为$\d{x^i_k}$, 那么取
+    \[\omega_k|_p=\left\{\begin{array}{ll}
+        f_k(p)\d{x^1_k}|_p\wedge\cdots\wedge\d{x^n_k}|_p, & p\in U_{\alpha_k} \\
+        0, & \text{其他情况}
+    \end{array}\right.\]
+    并取
+    \[\omega=\sum_{k\in\mathbb{N}}\omega_k\]
+    由局部有限性知上式收敛.
+    对任意的一点$p\in M$, 设包含$p$的支集 (经过重排后) 为$\supp{f_1},\cdots,\supp{f_r}$.
+    那么在包含$\supp{f_1}$的坐标卡$(U_{\alpha_1},\varphi_{\alpha_1})$上有
+    \begin{align*}
+        \omega|_p&=\sum_{i=1}^r(\varphi_{\alpha_i}^{-1}\circ\varphi_{\alpha_1})^*(f_i\d{x^1_i}|_p\wedge\cdots\wedge\d{x^n_i}|_p)\\
+        &=\sum_{i=1}^r\det{\d(\varphi_{\alpha_1}^{-1}\circ\varphi_{\alpha_i})}(f_i\circ\varphi_{\alpha_1}^{-1}\circ\varphi_{\alpha_i})\d{x^1_1}|_p\wedge\cdots\wedge\d{x^n_1}|_p
+    \end{align*}
+    由于每个$\det{\d(\varphi_{\alpha_1}^{-1}\circ\varphi_{\alpha_i})}$与$f_i\circ\varphi_{\alpha_1}^{-1}\circ\varphi_{\alpha_i}$都是恒正的, 所以$\omega|_p\neq 0$.
+    又由于$p$的任意性, 可知$\omega$在$M$上恒非零.\\
+    {\itshape 充分性}. 设$\omega$是一个在$M$上恒非零的$n$-形式, 我们按如下方式构造一个图册$\mscrU$:
+    %对$M$的微分结构中的一个图册$(U_\alpha,\varphi_\alpha)$, $(U_\alpha,\varphi_\alpha)\in\mscrU$当且仅当存在恒正的$A_\alpha\in C^\infty(U_\alpha)$使得
+    对任意$p\in M$, 取一个包含$p$的坐标卡$(U_p,\varphi_p)$, 必要时将$U_p$缩小为$p$所在的连通分支, 那么在$U_p$上$\omega$可以表示为
+    \[\omega=A_p\d{x_p^1}\wedge\cdots\wedge\d{x_p^n}\]
+    由引理~\ref{nowhere vanish}~可知, $A_p$恒正或恒负.
+    如果恒负的话, 将$\varphi_p$复合一个对称变换可以使得$A_p$恒正.
+    取$\mscrU=\{(U_p,\varphi_p)|\ p\in M\}$, 那么$\mscrU$是一个图册.
+    我们证明$\mscrU$中的坐标卡可以决定一个定向.
+    对任意交非空的$(U_p,\varphi_p),(U_q,\varphi_q)\in\mscrU$, 设在$U_p\cap U_q$上$\omega$分别表示为$A_p\d{x_p^1}\wedge\cdots\wedge\d{x_p^n}$与$A_q\d{x_q^1}\wedge\cdots\wedge\d{x_q^n}$, 那么一定有
+    \[A_p\d{x_p^1}\wedge\cdots\wedge\d{x_p^n}=\det\d(\varphi_q^{-1}\circ\varphi_p)(A_q\circ\varphi_q^{-1}\circ\varphi_p)\d{x_p^1}\wedge\cdots\wedge\d{x_p^n}\]
+    从而
+    \[A_p=\det\d(\varphi_q^{-1}\circ\varphi_p)(A_q\circ\varphi_q^{-1}\circ\varphi_p)\]
+    但$A_p,A_q$都是恒正的, 所以一定有$\det\d(\varphi_q^{-1}\circ\varphi_p)>0$, 从而$M$是可定向的.
 \end{proof}
 
 \section{Riemann度量}

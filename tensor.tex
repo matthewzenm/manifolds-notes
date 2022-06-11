@@ -163,7 +163,7 @@ $N$是Abel加群$M$的子群, 所以存在一个商群$M/N$.
 \end{proof}
 
 对偶也可以应用在线性映射上:
-\begin{defn}
+\begin{defn}\label{dual map}
     对$f\in\Hom_k(V,W)$, 定义它的\textbf{对偶映射}为
     \begin{align*}
         f^*:W^*&\to V^*\\
@@ -588,9 +588,9 @@ $N$是Abel加群$M$的子群, 所以存在一个商群$M/N$.
 \end{proof}
 
 这件事情还可以由另一种方式得到:
-\begin{prop}
+\begin{prop}\label{basis of tensor product}
     设$V,W$是向量空间, 分别以$\{e_1,\cdots,e_m\}$与$\{g_1,\cdots,g_n\}$为一组基, 那么$\mathcal{B}:=\{e_i\otimes g_j|1\leq i\leq m,1\leq j\leq n\}$是$V\otimes W$的一组基.
-    从而可以推出$V,W$是$mn$维的.
+    从而可以推出$V\otimes W$是$mn$维的.
 \end{prop}
 \begin{proof}
     向量空间就是域上的自由模, 我们尝试通过处理泛性质来证明这个命题.
@@ -899,7 +899,7 @@ $N$是Abel加群$M$的子群, 所以存在一个商群$M/N$.
 
 这个命题的推广是
 \begin{prop}[反交换律]
-    设$\displaystyle x\in\bigwedge\nolimits^p,y\in\bigwedge\nolimits^q$, 那么有$x\wedge y=(-1)^{pq}y\wedge x$.
+    设$\displaystyle x\in\bigwedge\nolimits^pM,y\in\bigwedge\nolimits^qM$, 那么有$x\wedge y=(-1)^{pq}y\wedge x$.
 \end{prop}
 \begin{proof}这是一个反复交换的过程.
     设$x=x_1\wedge\cdots\wedge x_p,y=y_1\wedge\cdots\wedge y_q$, 则
@@ -934,7 +934,7 @@ $N$是Abel加群$M$的子群, 所以存在一个商群$M/N$.
 
 一个有益的练习是, 证明如果在$R$中$2=1+1$是单位的话, 交错与反对称是一回事.
 
-\begin{prop}
+\begin{prop}\label{uni_prop of ext_prod}
     设$M_1,M_2\cdots,M_n,N$是$R$-模, $n$-重线性映射$h$满足
     \begin{align*}
         h:M_1\times M_2\times\cdots\times M_n&\to M_1\wedge M_2\wedge\cdots\wedge M_n\\
@@ -984,3 +984,121 @@ $N$是Abel加群$M$的子群, 所以存在一个商群$M/N$.
     因此按照古典方法构造的外代数和我们定义的外代数是等同的.
     在下一章中, 我们会经常用到这一点的.
 \end{rem}
+
+\subsection*{行列式}
+我们在这一节通过外代数给行列式一种更加自然的诠释.
+
+记域$k$上的全体$n$阶方阵的空间为$\Mat_n(k)$.
+首先我们给出公理化的行列式定义:
+\begin{defn}
+    将域$k$上的$n\times n$矩阵视为$n$个列向量构成的序列, 那么\textbf{行列式}$\det:\Mat_n(k)\to k$是一个使得$\det I=1$的交错多重线性映射.
+\end{defn}
+
+类似命题~\ref{basis of tensor product}, 我们也可以证明
+\begin{prop}\label{basis of exterior}
+    设向量空间$V$有一组基$(e_1,\cdots,e_n)$, 则
+    \[\mathcal{B}=(e_{i_1}\wedge\cdots\wedge e_{i_k})_{1\leq i_1<\cdots<i_k\leq n}\]
+    是$\displaystyle\bigwedge\nolimits^kV$的一组基, 从而$\displaystyle\bigwedge\nolimits^kV$是$\displaystyle\binom{n}{k}$维的.
+\end{prop}
+\begin{proof}
+    简记$V$的$k$重Descartes积$V\times V\times\cdots\times V$为$V^k$.
+    设$\iota:\mathcal{B}\to\bigwedge\nolimits^k V$是嵌入映射, 我们证明$\mathcal{B}$满足自由模的泛性质.
+    为此, 给定一个向量空间$A$与映射$f:\mathcal{B}\to A$.
+    考虑一个任意的交错映射$h:V^k\to A$,
+    对$V$中任意$k$个元素$\displaystyle v_j=\sum_{i}a^i_je_i,\ j=1,\cdots,k$, 有
+    \begin{align*}
+        h(v_1,\cdots,v_k)&=h\left(\sum_{i_1}a^{i_1}_1e_{i_1},\cdots,\sum_{i_k}a^{i_k}_ke_{i_k}\right)\\
+        &=\sum_{i_1}a^{i_1}_1h\left(e_{i_1},\cdots,\sum_{i_k}a^{i_k}_ke_{i_k}\right)\\
+        &=\sum_{i_1,i_2}a^{i_1}_1a^{i_2}_2h\left(e_{i_1},e_{i_2,}\cdots,\sum_{i_k}a^{i_k}_ke_{i_k}\right)\\
+        &=\cdots\\
+        &=\sum_{i_1,\cdots,i_k}a^{i_1}_1\cdots a^{i_k}_kh(e_{i_1},\cdots,e_{i_k})
+    \end{align*}
+    由交错性, 当存在$i_j=i_l$时, $h(\cdots,e_{i_j},\cdots,e_{i_l},\cdots)=0$;
+    而对$e_{i_1},e_{i_2},\cdots,e_{i_k}$的任意排列, $h(e_{i_1},e_{i_2},\cdots,e_{i_k})$仅有符号不同, 且由排列的符号决定.
+    因此任意交错映射均由$(e_{i_1},e_{i_2},\cdots,e_{i_k})_{1\leq i_1<\cdots<i_k\leq n}$这$\displaystyle\binom{n}{k}$处的取值决定.
+    那么我们定义交错映射
+    \begin{align*}
+        \overline{f}:V^k\to& A\\
+        (e_{i_1},\cdots,e_{i_k})\mapsto& f(e_{i_1}\wedge\cdots\wedge e_{i_k})\\
+        &{\scriptstyle(1\leq i_1<\cdots<i_k\leq n)}
+    \end{align*}
+    由之前的讨论, $\overline{f}$的定义是良好的.
+    考虑以下图表:
+    \[\begin{tikzcd}[row sep=large]
+        \mathcal{B} \arrow[r, "\iota"] \arrow[dr, "f"'] & \bigwedge^k V \arrow[d, dashed, "\widetilde{f}"] & V^k \arrow[l, "h"'] \arrow[dl, "\overline{f}"]\\
+        & A &
+    \end{tikzcd}\]
+    由命题~\ref{uni_prop of ext_prod}~可知存在$\widetilde{f}$使得右侧小三角形交换.
+    我们验证左侧小三角形交换, 对任一$e_{i_1}\wedge\cdots\wedge e_{i_k}$有
+    \begin{align*}
+        (\widetilde{f}\circ\iota)(e_{i_1}\wedge\cdots\wedge e_{i_k})&=(\widetilde{f}\circ h)(e_{i_1},\cdots,e_{i_k})\\
+        &=\overline{f}(e_{i_1},\cdots,e_{i_k})\\
+        &=f(e_{i_1},\cdots,e_{i_k})
+    \end{align*}
+    所以左侧小三角形交换.
+    因此$\mathcal{B}$满足泛性质, 是$\displaystyle\bigwedge\nolimits^k V$的一组基.
+\end{proof}
+
+\begin{prop}\label{exitstence and uniqueness of determinant}
+    行列式存在且唯一.
+\end{prop}
+\begin{proof}
+    由命题~\ref{basis of exterior}~可知, 对$n$维向量空间$V$来说$\displaystyle\bigwedge\nolimits^k V$是$1$维的.
+    给定$V$的一组基$(e_1,\cdots,e_n)$, 对$f\in\End{V}$, 定义$\det{f}\in k$为满足
+    \[(\det{f})e_1\wedge\cdots\wedge e_n=f(e_1)\wedge\cdots\wedge f(e_n)\]
+    的唯一数.
+    特别地, 取$V=k^n$, 单位矩阵$I$给出$V$的一组基$e_i=(\cdots,0,\stackrel{\text{第}i\text{位}}{1},0,\cdots)^\top$.
+    对矩阵$A$, 取一个$f:k^n\to k$满足$f(v)=Av$, 那么定义$\det{A}=\det{f}$.
+    我们证明$\det$是一个行列式.
+    将$A$写成列向量分块的形式
+    \[A=\left[\begin{array}{c|c|c}A_1 & \cdots & A_n\end{array}\right]\]
+    那么$Ae_i=A_i$, 从而$\det{A}=A_1\wedge\cdots\wedge A_n$, 是交错多重线性的.
+    同时由定义, 可以知道$I$的分块即为$\left[\begin{array}{c|c|c}e_1 & \cdots & e_n\end{array}\right]$, 从而有$\det{I}=1$.\\
+    我们证明行列式是唯一的.
+    由命题~\ref{uni_prop of ext_prod}~可知, $k^n\times k^n\cdots\times k^n\to k$的交错多重线性映射与$\displaystyle\Hom_k\left(\bigwedge\nolimits^n k^n,k\right)$中的元素一一对应.
+    而$\displaystyle\bigwedge\nolimits^n k^n$是$1$维的, 与$k$同构, 所以$\displaystyle\Hom_k\left(\bigwedge\nolimits^n k^n,k\right)\cong k$, 且其中的元素相当于数乘作用:
+    \begin{align*}
+        a:\bigwedge\nolimits^n k^n&\to k\\
+        x&\mapsto ax
+    \end{align*}
+    而设$\delta$是行列式函数, 对应$d\in\displaystyle\Hom_k\left(\bigwedge\nolimits^n k^n,k\right)$, 那么一定有
+    \begin{align*}
+        1&=\delta(e_1\wedge\cdots\wedge e_n)\\
+        &=de_1\wedge\cdots\wedge e_n
+    \end{align*}
+    从而$d$的值由$e_1\wedge\cdots\wedge e_n$决定, 即由$h(I)$决定 ($h$是外代数的自然投影映射), 所以$d$的值是唯一的.
+    因此行列式也是唯一的.
+\end{proof}
+
+我们最后证明我们构造的行列式和熟知的行列式是一致的.
+为此, 我们证明$\det$可以按第一行展开.
+\begin{prop}
+    设$A=(a_{ij})_{1\leq i,j\leq n}$, $A_{ij}$是$A$划去第$i$行与第$j$列后得到的$(n-1)\times(n-1)$矩阵, 那么有
+    \[\det{A}=\sum_{i=1}^n(-1)^{i+1}a_{1i}\det{A_{1i}}\]
+\end{prop}
+读者应当能熟练证明这一性质与常见的由全展开给出的定义的等价性.
+\begin{proof}
+    将$A$按列分块, 并记
+    \begin{align*}
+        A_i & =  (a_{1i},0,\cdots,0)^\top + (0,a_{2i},\cdots,a_{ni})\\
+        & :=  T_i + R_i
+    \end{align*}
+    那么$\det{A}(e_1\wedge\cdots\wedge e_n)=(T_1+R_1)\wedge\cdots\wedge(T_n+R_n)$.
+    由交错性, 形如$\cdots\wedge T_i\wedge\cdots\wedge T_j\wedge\cdots$项均为$0$, 那么有
+    \begin{align*}
+        \det{A}(e_1\wedge\cdots\wedge e_n)&=(T_1+R_1)\wedge\cdots\wedge(T_n+R_n)\\
+        &=\sum_{i=1}^n R_1\wedge\cdots\wedge T_i\wedge\cdots\wedge R_n\\
+        &=\sum_{i=1}^n (-1)^{i+1}T_i\wedge R_1\wedge\cdots\wedge\widehat{R_i}\wedge\cdots\wedge R_n\\
+        &=\sum_{i=1}^n (-1)^{i+1}a_{1i}e_1\wedge R_1\wedge\cdots\wedge\widehat{R_i}\wedge\cdots\wedge R_n
+    \end{align*}
+    记$R_i'$为$R_i$去掉第一个分量, $e_i'\ (2\leq i\leq n)$为$e_i$去掉第一个分量, 那么有
+    \[\det{A_{1i}}e_2'\wedge\cdots\wedge e_n'=R_1'\wedge\cdots\wedge\widehat{R_i'}\wedge\cdots\wedge R_n'\]
+    又由于$R_i$的坐标中不含$e_i$, 所以展开结果与上式相同, 一定有
+    \[R_1\wedge\cdots\wedge\widehat{R_i}\wedge\cdots\wedge R_n=\det{A_{1i}}e_2\wedge\cdots\wedge e_n\]
+    综上有
+    \begin{align*}
+        \det{A}(e_1\wedge\cdots\wedge e_n)&=\sum_{i=1}^n (-1)^{i+1}a_{1i}e_1\wedge R_1\wedge\cdots\wedge\widehat{R_i}\wedge\cdots\wedge R_n\\
+        &=\sum_{i=1}^n (-1)^{i+1}a_{1i}e_1\wedge(\det{A_{1i}}e_2\wedge\cdots\wedge e_n)\\
+        &=\sum_{i=1}^n(-1)^{i+1}a_{1i}\det{A_{1i}}(e_1\wedge\cdots\wedge e_n)\qedhere
+    \end{align*}
+\end{proof}
