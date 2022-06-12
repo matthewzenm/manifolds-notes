@@ -1,0 +1,48 @@
+% This package is used to configurate font and page settings for book "Notes on Curves and Surfaces" only
+% The author does not provide or maintain this package to any other usage scenario.
+%
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{pagesetting}[2022/6/13 Configurate font and page settings for this book]
+
+\RequirePackage[twoside=true]{geometry}
+\RequirePackage[heading,fontset=none]{ctex}
+\RequirePackage{amsmath}
+\RequirePackage{amsthm}
+\RequirePackage{amssymb}
+\RequirePackage{unicode-math}
+\newif\ifbigpaper
+
+\DeclareOption{a4paper}{\bigpapertrue}
+\DeclareOption{b5paper}{\bigpaperfalse}
+\DeclareOption*{\PackageError{pagesetting}{%
+    No option specified.
+}{
+    Use either option 'a4paper' or 'b5paper'.
+}}
+\ProcessOptions\relax
+
+\ifbigpaper
+\geometry{paper=a4paper}
+\setmainfont{CMU Serif}
+\setsansfont{CMU Sans Serif}
+\setmonofont{CMU Typewriter Text}
+\setmathfont{Latin Modern Math}
+\setmathfont{TeX Gyre Pagella Math}[range=bb]
+\setCJKmainfont[BoldFont={FZCSJ.otf},
+    ItalicFont={FZKTJ.otf},
+    BoldItalicFont={FZCKJ.otf}]{FZSSJ.otf}
+\setCJKsansfont{FZHTJ.otf} % Maybe unused
+\setCJKmonofont{FZFSJ.otf} % Maybe unused
+\else
+\geometry{paper=b5paper}
+\setmainfont{STIX Two Text}
+\setsansfont{TeX Gyre Heros}
+\setmonofont{Fira Mono}
+\setmathfont{STIX Two Math}
+\setmathfont{TeX Gyre Pagella Math}[range={bb,frak}]
+\setCJKmainfont[BoldFont={FZCSJ.otf},
+    ItalicFont={FZKTJ.otf},
+    BoldItalicFont={FZCKJ.otf}]{FZSSJ.otf}
+\setCJKsansfont{FZHTJ.otf} % Maybe unused
+\setCJKmonofont{FZFSJ.otf} % Maybe unused
+\fi

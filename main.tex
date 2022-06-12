@@ -1,7 +1,6 @@
 \documentclass[11pt]{book}
 
-\usepackage[paper=b5paper,twoside=true]{geometry}
-\usepackage[heading,fontset=none]{ctex}
+\usepackage[b5paper]{pagesetting}
 \usepackage{graphicx}
 \usepackage[affil-it]{authblk}
 \usepackage{indentfirst}
@@ -9,9 +8,6 @@
 \usepackage[shortlabels]{enumitem}
 \setlist{nosep}
 
-\usepackage{amsmath}
-\usepackage{amsthm}
-\usepackage{amssymb}
 \usepackage{autobreak}
 \usepackage{pgfplots}
 \numberwithin{equation}{section}
@@ -19,18 +15,6 @@
 \pgfplotsset{compat=1.17}
 \tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt
 \usetikzlibrary{cd}
-
-\setmainfont{STIX Two Text}
-\setsansfont{Fira Math}
-\setmonofont{Fira Mono}
-\usepackage{unicode-math}
-\setmathfont{STIX Two Math}
-\setmathfont{TeX Gyre Pagella Math}[range={bb,\mfrakX}]
-\setCJKmainfont[BoldFont={FZCSJ.otf},
-    ItalicFont={FZKTJ.otf},
-    BoldItalicFont={FZCKJ.otf}]{FZSSJ.otf}
-\setCJKsansfont{FZHTJ.otf} % Maybe unused
-\setCJKmonofont{FZFSJ.otf} % Maybe unused
 
 \usepackage[style=caspervector,
     sorting=ecnyt,
@@ -61,7 +45,7 @@
     \vspace*{13cm}
     \thispagestyle{empty}
     \begin{figure}[ht]
-        \includegraphics[width=0.4\textwidth]{by-sa.pdf}\hspace{0.05\textwidth}
+        \includegraphics[width=0.4\textwidth]{figures/by-sa.pdf}\hspace{0.05\textwidth}
         \begin{minipage}[b]{0.54\textwidth} % 这个数字是我跟xetex斗智斗勇整出来的
         \small
         本作品采用知识共享署名-相同方式共享 4.0 国际 (CC BY-SA 4.0) 协议进行共享.

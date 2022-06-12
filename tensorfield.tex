@@ -375,8 +375,18 @@
     但$A_p,A_q$都是恒正的, 所以一定有$\det\d(\varphi_q^{-1}\circ\varphi_p)>0$, 从而$M$是可定向的.
 \end{proof}
 
-\section{Riemann度量}
-第\ref{chapter_manifolds}章与上一节的内容属于流形的\textit{微分拓扑}, 而我们在这一节将会引入我们在第~\ref{metric_first}~节提到的属于\textit{微分几何}的一个结构: \textit{Riemann度量}.
+\section{Riemann流形}
+第\ref{chapter_manifolds}章与第~\ref{section_tensorfield}, \ref{section_forms}~节的内容属于流形的\textit{微分拓扑}, 而我们在这一节将会引入我们在第~\ref{metric_first}~节提到的属于\textit{微分几何}的一个结构: \textit{Riemann度量}.
 
 Riemann度量是欧氏空间中内积的推广, Riemann度量让我们能够在流形上定义长度, 角度, 面积等等一系列几何量, 并给出较之前几章多得多的几何信息.
 同时, Riemann度量也使得\textit{等距变换群}有了意义, 从而我们进入了Erlangen纲领的轨道上, 正式开始了``几何学''的讨论.
+
+\begin{defn}
+    流形$M$上的一个\textbf{Riemann度量张量} (也简称为\textit{度量张量}或\textit{度量}) 是$M$上的一个对称, 正定的$2$阶共变张量场, 通常记为$\langle\quad,\quad\rangle$.
+    一个流形与其上的一个度量$(M,\langle\quad,\quad\rangle)$被称为一个\textbf{Riemann流形}.
+\end{defn}
+
+\begin{rem}
+    在许多采用经典Riemann几何语言的教材上 (如~\parencites{doCarmo_DiffForm}{Tu_DiffGeo}~等), Riemann流形有一个等价的定义:
+    Riemann流形$(M,\langle\quad,\quad\rangle)$是一个流形$M$与在其每一点的切空间$T_pM$上光滑地指派的一个内积$\langle\quad,\quad\rangle_p$, 光滑意为对任意$X,Y\in\mfrakX(M)$都有$\langle X,Y\rangle\in C^\infty(M)$.
+\end{rem}
