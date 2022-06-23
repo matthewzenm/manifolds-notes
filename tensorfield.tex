@@ -63,7 +63,7 @@
 依照这种想法, 我们有如下的结论:
 
 \begin{prop}\label{field and map}
-    流形$M$上的任一$s$阶共变张量场$A$均对应了一个逐点定义的$k$重$C^\infty(M)$线性映射$a:\underbrace{\mfrakX(M)\times\cdots\mfrakX(M)}_{k\text{个}}\to C^\infty(M)$:
+    流形$M$上的任一$s$阶共变张量场$A$均对应了一个逐点定义的$k$重$C^\infty(M)$线性映射$a:\underbrace{\mathfrak{X}(M)\times\cdots\mathfrak{X}(M)}_{k\text{个}}\to C^\infty(M)$:
     对任意$p\in M$, 取一个含$p$的坐标卡$(U,\varphi)$使得$A$具有~\eqref{eq_local_tensorfield}~的形式, 定义
     \begin{align*}
         a|_U&=\sum_{i_1,\cdots,i_k}A_{i_1\cdots i_k}x^{i_1}_*\otimes\cdots\otimes x^{i_k}_*\\
@@ -78,7 +78,7 @@
 我们需要以下一些引理.
 
 \begin{lem}\label{local operator}
-    设$f:\mfrakX(M)\to C^\infty(M)$是$C^\infty(M)$-线性的, 那么如果向量场$X$在某个开集$U$上恒为$0$, 则$f(X)$在$U$上也恒取$0$.
+    设$f:\mathfrak{X}(M)\to C^\infty(M)$是$C^\infty(M)$-线性的, 那么如果向量场$X$在某个开集$U$上恒为$0$, 则$f(X)$在$U$上也恒取$0$.
 \end{lem}
 \begin{proof}
     设$p\in U$, 取$p$在$U$中的一个邻域$V$及一个冲击函数$h$, 使得$h$在$V$上恒取$1$, $\supp{h}\subset U$.
@@ -88,15 +88,15 @@
 \end{proof}
 
 \begin{lem}\label{point operator}
-    设$f:\mfrakX(M)\to C^\infty(M)$是$C^\infty(M)$-线性的, 则向量场$X$在某点$p$处为$0$时也有$f(X)(p)=0$.
+    设$f:\mathfrak{X}(M)\to C^\infty(M)$是$C^\infty(M)$-线性的, 则向量场$X$在某点$p$处为$0$时也有$f(X)(p)=0$.
 \end{lem}
 \begin{proof}
     取一个包含$p$的坐标卡$(U,\varphi)$, 我们定义$f$在$U$上的\textit{限制}.
-    对一个向量场$Y\in\mfrakX(U)$, 按命题~\ref{vector field extension}~取一个向量场$\widetilde{Y}\in\mfrakX(M)$使得$\widetilde{Y}|_U=Y$,
+    对一个向量场$Y\in\mathfrak{X}(U)$, 按命题~\ref{vector field extension}~取一个向量场$\widetilde{Y}\in\mathfrak{X}(M)$使得$\widetilde{Y}|_U=Y$,
     \footnote{严格来说, \ref{vector field extension}~无法保证$Y$与$\widetilde{Y}$在整个$U$上相等, 我们需要利用流形的\textit{正规性} (\Parencite[定理4.81]{Lee_IntroTopoMani}) 来取一个更大的开集$V$包含$U$, 然后构造冲击函数完成证明.}
     定义$f|_U(Y)=f(\widetilde{Y})$.
     $f|_U$是良定义的, 因为引理~\ref{local operator}~保证了如果$Y_1|_U=Y_2|_U$, 那么一定有$f|_U(Y_1|_U)=f|_U(Y_2|_U)$.
-    由于$U$上存在局部自然标架场, 所以$\mfrakX(U)$是自由$C^\infty(M)$-模 (请回忆相关定义),
+    由于$U$上存在局部自然标架场, 所以$\mathfrak{X}(U)$是自由$C^\infty(M)$-模 (请回忆相关定义),
     因此$f|_U$的作用可以被矩阵表示.
     设$f|_U$的矩阵为$A$, 对任意一个$X|_U$, 设其坐标为$\alpha=(\alpha^1,\cdots,\alpha^n)^\top$.
     那么有
@@ -115,7 +115,7 @@
 我们着手证明命题~\ref{field and map}.
 \begin{proof}[{\bf 命题~\ref{field and map}~的证明}]
     显然这个对应是单射, 我们只需要证明它是满射.
-    设$a:\underbrace{\mfrakX(M)\times\cdots\mfrakX(M)}_{k\text{个}}\to C^\infty(M)$是$k$重线性映射.
+    设$a:\underbrace{\mathfrak{X}(M)\times\cdots\mathfrak{X}(M)}_{k\text{个}}\to C^\infty(M)$是$k$重线性映射.
     在每一点$p$处我们定义一个$k$重线性映射$B(p):\underbrace{T_pM\times\cdots T_pM}_{k\text{个}}\to\mathbb{R}$如下:
     对$v_1,v_2,\cdots,v_k\in T_pM$, 取向量场$X_1,\cdots,X_k$使得$X_i|_p=v_i,\ i=1,2,\cdots,k$ (存在性由向量场扩张引理保证),
     则定义$B(p)(v_1,\cdots,v_k)=a(X_1|_p,\cdots,X_k|_p)$.
@@ -388,5 +388,5 @@ Riemann度量是欧氏空间中内积的推广, Riemann度量让我们能够在�
 
 \begin{rem}
     在许多采用经典Riemann几何语言的教材上 (如~\parencites{doCarmo_DiffForm}{Tu_DiffGeo}~等), Riemann流形有一个等价的定义:
-    Riemann流形$(M,\langle\quad,\quad\rangle)$是一个流形$M$与在其每一点的切空间$T_pM$上光滑地指派的一个内积$\langle\quad,\quad\rangle_p$, 光滑意为对任意$X,Y\in\mfrakX(M)$都有$\langle X,Y\rangle\in C^\infty(M)$.
+    Riemann流形$(M,\langle\quad,\quad\rangle)$是一个流形$M$与在其每一点的切空间$T_pM$上光滑地指派的一个内积$\langle\quad,\quad\rangle_p$, 光滑意为对任意$X,Y\in\mathfrak{X}(M)$都有$\langle X,Y\rangle\in C^\infty(M)$.
 \end{rem}
