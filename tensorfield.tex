@@ -375,14 +375,14 @@
     但$A_p,A_q$都是恒正的, 所以一定有$\det\d(\varphi_q^{-1}\circ\varphi_p)>0$, 从而$M$是可定向的.
 \end{proof}
 
-\section{Riemann流形}
+\section{Riemann度量}
 第\ref{chapter_manifolds}章与第~\ref{section_tensorfield}, \ref{section_forms}~节的内容属于流形的\textit{微分拓扑}, 而我们在这一节将会引入我们在第~\ref{metric_first}~节提到的属于\textit{微分几何}的一个结构: \textit{Riemann度量}.
 
 Riemann度量是欧氏空间中内积的推广, Riemann度量让我们能够在流形上定义长度, 角度, 面积等等一系列几何量, 并给出较之前几章多得多的几何信息.
 同时, Riemann度量也使得\textit{等距变换群}有了意义, 从而我们进入了Erlangen纲领的轨道上, 正式开始了``几何学''的讨论.
 
 \begin{defn}
-    流形$M$上的一个\textbf{Riemann度量张量} (也简称为\textit{度量张量}或\textit{度量}) 是$M$上的一个对称, 正定的$2$阶共变张量场, 通常记为$\langle\quad,\quad\rangle$.
+    流形$M$上的一个\textbf{Riemann度量张量} (也简称为\textit{度量张量}或\textit{度量}) 是$M$上的一个对称, 正定的$2$阶共变张量场, 通常记为$\langle\quad,\quad\rangle$ (省略下标).
     一个流形与其上的一个度量$(M,\langle\quad,\quad\rangle)$被称为一个\textbf{Riemann流形}.
 \end{defn}
 
@@ -390,3 +390,102 @@ Riemann度量是欧氏空间中内积的推广, Riemann度量让我们能够在�
     在许多采用经典Riemann几何语言的教材上 (如~\parencites{doCarmo_DiffForm}{Tu_DiffGeo}~等), Riemann流形有一个等价的定义:
     Riemann流形$(M,\langle\quad,\quad\rangle)$是一个流形$M$与在其每一点的切空间$T_pM$上光滑地指派的一个内积$\langle\quad,\quad\rangle_p$, 光滑意为对任意$X,Y\in\mathfrak{X}(M)$都有$\langle X,Y\rangle\in C^\infty(M)$.
 \end{rem}
+
+我们需要证明Riemann流形的存在性.
+\begin{thm}[Riemann度量的存在性]
+    对任意微分流形$M$, 均存在$M$上的$2$阶共变张量场$\langle\quad,\quad\rangle$使得$(M,\langle\quad,\quad\rangle)$构成一个Riemann流形.
+\end{thm}
+\begin{proof}
+    设$\{U_\alpha\}_{\alpha\in A}$是$M$的一组开覆盖, $\{f_k\}_{k\in\mathbb{N}}$是从属于这组开覆盖的单位分解.
+    设$\supp{f_k}\subset U_k$.
+    对每个$k\in\mathbb{N}$, 定义$U_k$上的二阶共变张量场
+    \[r_k\left(\sum_{i}a^i\frac{\partial}{\partial x^i},\sum_{i}b^i\frac{\partial}{\partial x^i}\right)=\sum_ia^ib^i\]
+    那么$r_k$实际上就是$U_k$上的一个度量.
+    将其延拓为整个$M$上的二阶共变张量场
+    \[\langle\quad,\quad\rangle_k|_p=\begin{cases}
+        f_kr_k|_p, & p\in U_k\\
+        0, & \text{其他情况}
+    \end{cases}\]
+    由单位分解的性质, $\langle\quad,\quad\rangle_k$光滑, 并且是对称且非负定的.
+    定义
+    \[\langle\quad,\quad\rangle=\sum_k\langle\quad,\quad\rangle_k\]
+    由单位分解的性质, $\langle\quad,\quad\rangle$在每一点处收敛且光滑, 同时还是对称的.
+    而对任意一点$p\in M$, 存在$k$使得$f_k\neq 0$, 那么$p\in\supp{f_k}\subset U_k$, 对非零的$v\in T_pM$一定有
+    \begin{align*}
+        \langle v,v\rangle&\geq\langle v,v\rangle_k\\
+        &=f_kr_k(v,v)\\
+        &>0
+    \end{align*}
+    因此$\langle\quad,\quad\rangle$是正定的, 从而是一个度量.
+\end{proof}
+
+\begin{sym}
+    \begin{itemize}
+        \item 在一个坐标卡$(U,\varphi)$上, $T^{(0,2)}TU$是$\{\d{x}^i\otimes\d{x}^j\}_{1\leq i,j\leq n}$上的自由模, 那么我们把度量作为双线性函数在这组基下的矩阵记为$(g_{ij})$, 称为\textbf{度量系数矩阵}.
+        \item 此外, 对$2$维Riemann流形而言, 传统上会将度量记为$\d{s}^2$, 同时还会记$g_{11}=E$, $g_{12}=g_{21}=F$, $g_{22}=G$, 即
+        \[\d{s}^2=E\d{x}\otimes\d{x}+F(\d{x}\otimes\d{y}+\d{y}\otimes\d{x})+G\d{y}\otimes\d{y}\]
+        一个非常传统 (来自Gauss时代) 的写法是$\d{s}^2=E\d{x}^2+2F\d{x}\d{y}+G\d{y}^2$, 这在现在看来已经没有什么道理了.
+    \end{itemize}
+\end{sym}
+
+在有了度量的概念之后, 我们可以像解析几何中一样定义向量的长度与夹角, 还可以判断两个Riemann流形什么时候``一样''.
+
+\begin{defn}
+    对Riemann流形$(M,\langle\quad,\quad\rangle)$, $p\in M$以及$v,w\in T_pM$, 定义$v$的\textbf{长度} (或\textbf{模长}) 为$|v|=\sqrt{\langle v,v\rangle}$, 以及$v$与$w$的\textbf{夹角}为
+    \[\cos\angle(v,w)=\frac{\langle v,w\rangle}{|v||w|}\]
+    特别地, 当$\langle v,w\rangle=0$时, 称$v$与$w$\textbf{正交}.
+\end{defn}
+
+\begin{defn}
+    设$(M,\langle\quad,\quad\rangle_M),(N,\langle\quad,\quad\rangle_N)$是Riemann流形, $f:M\to N$是微分同胚, 如果有
+    \[\langle\quad,\quad\rangle_M=f^*\langle\quad,\quad\rangle_N\]
+    成立, 那么称$f$为$M$到$N$的\textbf{等距同胚}.
+\end{defn}
+
+我们给出一些Riemann度量的例子.
+
+\begin{eg}
+    \begin{enumerate}[(1)]
+        \item 在赋予了标准微分结构的$\mathbb{R}^n$上, 定义度量$g_{ij}=\delta_{ij}$, 这称为\textbf{欧氏度量}.
+        \item 设$M$是微分流形, $(N,\langle\quad,\quad\rangle)$是Riemann流形, $f:M\to N$是浸入.
+        由于$f_*$是单射, 简单的线性代数表明$f^*\langle\quad,\quad\rangle$是正定的, 从而构成$M$上的一个度量.
+        这个度量称为\textbf{拉回度量}.
+        特别地, 如果$M$是$N$的子流形, 那么拉回度量也成为\textbf{$M$继承自$N$的度量}.
+        \item 对曲面 ($\mathbb{R}^3$的$2$维子流形) 来说, 继承自$\mathbb{R}^3$的度量一般称为\textbf{第一基本形式}.
+        这个词也指某个坐标卡上度量的表达式$\d{s}^2$.
+        例如, 我们计算环面的一个浸入 (可以通过缩小定义域使得它成为子流形, 但这无关紧要)
+        \[r(u,v)=(\cos{u}(a+b\cos{v}),\sin{u}(a+b\cos{v}),b\sin{v}),\ a>b>0\]
+        的第一基本形式.
+        我们有
+        \[r_*|_{(u,v)}=\begin{bmatrix}
+            -\sin{u}(a+b\cos{v}) & \cos{u}(a+b\cos{v}) & 0\\
+            -b\cos{u}\sin{v} & -b\sin{u}\sin{v} & b\cos{v}
+        \end{bmatrix}\]
+        那么度量系数矩阵为
+        \begin{align*}
+            \begin{bmatrix}
+                g_{11} & g_{12}\\ g_{21} & g_{22}
+            \end{bmatrix}&=\begin{bmatrix}
+                -\sin{u}(a+b\cos{v}) & \cos{u}(a+b\cos{v}) & 0\\
+                -b\cos{u}\sin{v} & -b\sin{u}\sin{v} & b\cos{v}
+            \end{bmatrix}\\
+            &\cdot\begin{bmatrix}
+                1 & & \\ & 1 & \\ & & 1
+            \end{bmatrix}\begin{bmatrix}
+                -\sin{u}(a+b\cos{v}) & -b\cos{u}\sin{v} \\
+                \cos{u}(a+b\cos{v}) & -b\sin{u}\sin{v} \\
+                0 & b\cos{v}
+            \end{bmatrix}\\
+            &=\begin{bmatrix}
+                (a+b\cos{v})^2 & \\ & b^2
+            \end{bmatrix}
+        \end{align*}
+        也即第一基本形式为$\d{s}^2=(a+b\cos{v})^2\d{x}\otimes\d{x}+b^2\d{y}\otimes\d{y}$.
+        \item 考虑上半平面$\mathbb{H}=\{(x,y)\in\mathbb{R}^2|\ y>0\}$, 设其微分结构继承自$\mathbb{R}^2$的标准微分结构.
+        此时$\mathbb{H}$作为$\mathbb{R}^2$的子流形, 可以继承$\mathbb{R}^2$的欧氏度量;
+        另一方面, 在$\mathbb{H}$上也可以赋予度量
+        \[\d{s}^2=\frac{1}{y^2}(\d{x}\otimes\d{x}+\d{y}\otimes\d{y})\]
+        此时的$(\mathbb{H},\d{s}^2)$称为\textbf{Poincar\'{e}上半平面}, 之后我们会通过计算\textit{Gauss曲率}证明Poincar\'{e}上半平面与继承欧氏度量的上半平面不等距同胚, 从而这是两个``不同''的Riemann流形.
+        这也说明了同一个微分流形上可以有互不等距同胚的度量.
+    \end{enumerate}
+\end{eg}

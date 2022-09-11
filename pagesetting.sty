@@ -35,9 +35,11 @@
 \setCJKmonofont{FZFSJ.otf} % Maybe unused
 \else
 \geometry{paper=b5paper}
-\setmainfont{STIX Two Text}
-\setsansfont{TeX Gyre Heros}
-\setmonofont{Fira Mono}
+\setmainfont[Extension={.otf},
+    UprightFont={*-Regular},
+    BoldFont={*-Bold},
+    ItalicFont={*-Italic},
+    BoldItalicFont={*-BoldItalic}]{STIXTwoText}
 \setmathfont{STIX Two Math}
 \setmathfont{TeX Gyre Pagella Math}[range={bb,frak}]
 \setCJKmainfont[BoldFont={FZCSJ.otf},
