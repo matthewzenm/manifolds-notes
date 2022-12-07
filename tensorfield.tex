@@ -489,3 +489,29 @@ Riemann度量是欧氏空间中内积的推广, Riemann度量让我们能够在�
         这也说明了同一个微分流形上可以有互不等距同胚的度量.
     \end{enumerate}
 \end{eg}
+
+\subsection*{曲面上度量的特殊参数}
+在$2$维的Riemann流形, 也就是曲面上, Riemann度量的度量系数矩阵在某些坐标卡下可以有很好的形式.
+我们主要讨论的是\textit{正交参数}与\textit{等温参数}, 它们的定义我们将会在下面给出.
+
+\begin{thm}[等温参数]\label{isothermal}
+    设$p$在曲面$(S,\langle\quad,\quad\rangle)$上, 那么存在包含$p$的坐标卡$(U,\varphi)$使得度量$\langle\quad,\quad\rangle$在这个坐标卡为
+    \[\d{s}^2=\lambda(x,y)(\d{x^2}+\d{y^2})\]
+    这个坐标卡的逆称为\textbf{等温参数}.
+\end{thm}
+\begin{proof}
+    我们的工具无法处理这个问题, 证明参见~\parencite{Chern_isothermal}.
+\end{proof}
+
+由定理~\ref{isothermal}~可以立刻推出
+
+\begin{col}[正交参数]\label{orthothm}
+    设$p$在曲面$(S,\langle\quad,\quad\rangle)$上, 那么存在包含$p$的坐标卡$(U,\varphi)$使得度量$\langle\quad,\quad\rangle$在这个坐标卡为
+    \[\d{s}^2=E(x,y)\d{x^2}+G(x,y)\d{y^2}\]
+    这个坐标卡的逆称为\textbf{正交参数}.
+\end{col}
+
+讨论更高维的参数是困难的.
+对于等温参数而言, 曲面上局部存在等温参数已经是最好的结果;
+而对正交参数而言, 论文~\parencite{DeTurkYang_orthogonal}~中证明了对$3$维的Riemann流形局部存在正交参数, 但$4$维及以上是不一定能做到这一点的.
+更多的内容参阅Math Stackexchange上的讨论~\parencite{Kohan_Parameter}.
